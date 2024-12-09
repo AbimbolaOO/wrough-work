@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import HorizontalDotsMenuIcon from "../Icons/HorizontalDotsMenuIcon";
-import ProfileIcon from "../Icons/ProfileIcon";
-import FolderIcon from "../Icons/FolderIcon";
-import DoubleCheckIcon from "../Icons/DoubleCheckIcon";
-import TrashIcon from "../Icons/TrashIcon";
-import FullScreenModal from "../Modals/FullScreenModal";
-import PopupProfile from "../PopupProfile/PopupProfile";
-import { jobAppDataType } from "../../models/jobApp/jobApp.model";
-import { calculateTimeAgo } from "../../utils/utils";
-import ReminderIcon from "../Icons/ReminderIcon";
-import PhoneIcon from "../Icons/PhoneIcon";
+import React, { useEffect, useRef, useState } from 'react';
+
+import styled from '@emotion/styled';
+
+import { jobAppDataType } from '../../models/jobApp/jobApp.model';
+import { calculateTimeAgo } from '../../utils/utils';
+import DoubleCheckIcon from '../Icons/DoubleCheckIcon';
+import FolderIcon from '../Icons/FolderIcon';
+import HorizontalDotsMenuIcon from '../Icons/HorizontalDotsMenuIcon';
+import PhoneIcon from '../Icons/PhoneIcon';
+import ProfileIcon from '../Icons/ProfileIcon';
+import ReminderIcon from '../Icons/ReminderIcon';
+import TrashIcon from '../Icons/TrashIcon';
+import FullScreenModal from '../OldModals/FullScreenModal';
+import PopupProfile from '../PopupProfile/PopupProfile';
 
 interface ViewAllAppsCardProps extends jobAppDataType {
   imgSrc?: string;
@@ -31,13 +33,13 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
   userId,
   accepted,
 }) => {
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const [activeButton, setActiveButton] = useState<string>("Experience");
+  const [activeButton, setActiveButton] = useState<string>('Experience');
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = event.target.value;
@@ -55,10 +57,10 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
       setIsModalOpen(false);
     };
 
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isModalOpen]);
 
@@ -80,7 +82,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
       <UpSection>
         <div>
           <div>
-            <img src={imgSrc} alt="" />
+            <img src={imgSrc} alt='' />
           </div>
           <p>
             <span>
@@ -89,7 +91,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
             <br />
             <small>
               <span>Applied </span>
-              {createdAt ? <>{calculateTimeAgo(createdAt)} ago</> : "N/A"}
+              {createdAt ? <>{calculateTimeAgo(createdAt)} ago</> : 'N/A'}
             </small>
           </p>
         </div>
@@ -100,7 +102,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
           <PopUp onClick={(e) => e.stopPropagation()} ref={modalRef}>
             <p>
               {accepted ? (
-                <span className="accept">
+                <span className='accept'>
                   <ReminderIcon /> Send reminder
                 </span>
               ) : (
@@ -111,7 +113,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
             </p>
             <p>
               {accepted ? (
-                <span className="accept">
+                <span className='accept'>
                   <PhoneIcon /> Contact locum
                 </span>
               ) : (
@@ -126,7 +128,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
       <DownSection>
         {interview && !accepted ? (
           <p>
-            <input type="checkbox" />
+            <input type='checkbox' />
             <span>Pick this candidate</span>
           </p>
         ) : accepted ? (
@@ -135,7 +137,7 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
           <div>
             <p
               onClick={() => {
-                setActiveButton("Experience");
+                setActiveButton('Experience');
                 setProfileOpen(!profileOpen);
               }}
             >
@@ -143,15 +145,15 @@ const ViewAllAppsCard: React.FC<ViewAllAppsCardProps> = ({
             </p>
             <p
               onClick={() => {
-                setActiveButton("Licenses");
+                setActiveButton('Licenses');
                 setProfileOpen(!profileOpen);
               }}
             >
-              {" "}
+              {' '}
               <FolderIcon />
             </p>
             <StyledDateInput
-              type="date"
+              type='date'
               value={selectedDate}
               onChange={handleDateChange}
             />
@@ -302,7 +304,7 @@ const StyledDateInput = styled.input`
   &::before {
     position: absolute;
     top: 1%;
-    content: "";
+    content: '';
     display: block;
     width: 20px;
     height: 20px;

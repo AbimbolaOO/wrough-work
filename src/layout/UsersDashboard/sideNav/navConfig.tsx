@@ -6,34 +6,34 @@ import {
   APPLICATION,
   DASHBOARD,
   LOCUMJOBS,
-  UERS_SETTINGS,
+  USERS_SETTINGS,
 } from '../../../routes/routeConstants';
 
 interface INavConfig {
   title: string;
   path: string;
-  icon: (isVisible: boolean) => JSX.Element;
+  icon: React.ReactNode;
 }
 
 export const navConfig: INavConfig[] = [
   {
     title: 'Dashboard',
     path: DASHBOARD,
-    icon: (isVisible) => <FourCubes isVisible={isVisible} />,
+    icon: <FourCubes />,
   },
   {
     title: 'Locum Jobs',
     path: LOCUMJOBS,
-    icon: (isVisible) => <JobsIcon isVisible={isVisible} />,
+    icon: <JobsIcon />,
   },
   {
     title: 'Applications',
     path: APPLICATION,
-    icon: (isVisible) => <PlaneIcon isVisible={isVisible} />,
+    icon: <PlaneIcon />,
   },
   {
     title: 'Settings',
-    path: UERS_SETTINGS,
-    icon: (isVisible) => <SettingsIcon isVisible={isVisible} />,
+    path: USERS_SETTINGS,
+    icon: <SettingsIcon />,
   },
 ];

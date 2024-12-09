@@ -1,6 +1,6 @@
-import { NavLink as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from 'react-router-dom';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const InternalNavLink = styled(RouterLink)`
   text-decoration: none;
@@ -26,25 +26,12 @@ interface INavItem {
   icon: React.ReactNode;
   children: string;
   path: string;
-  clicked?: (() => void) | false;
 }
 
-export const NavBoxItem: React.FC<INavItem> = ({
-  icon,
-  path,
-  clicked,
-  children,
-}) => {
-  const handleClick = () => {
-    if (clicked && typeof clicked === "function") {
-      clicked();
-    }
-  };
-
+export const NavBoxItem: React.FC<INavItem> = ({ icon, path, children }) => {
   return (
     <NavigationBoxLink
-      onClick={handleClick}
-      className={(navData) => (navData.isActive ? "active" : "")}
+      className={(navData) => (navData.isActive ? 'active' : '')}
       to={path}
     >
       {icon}
@@ -52,7 +39,6 @@ export const NavBoxItem: React.FC<INavItem> = ({
     </NavigationBoxLink>
   );
 };
-
 export const NavigationBoxLink = styled(RouterLink)`
   text-decoration: none;
   color: ${({ theme }) => theme.palette.greyGrey2};
@@ -73,18 +59,6 @@ export const NavigationBoxLink = styled(RouterLink)`
   &.active {
     background-color: #2858d128;
     color: ${({ theme }) => theme.palette.mainBlue};
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 23.92px;
-    width: fit-content;
-
-    &.active {
-      background-color: inherit;
-      color: ${({ theme }) => theme.palette.mainBlue};
-    }
   }
 `;
 

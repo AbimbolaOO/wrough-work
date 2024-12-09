@@ -14,15 +14,15 @@ export const HEALTH_SIGNUP = '/account/signup/health-signup';
 export const DASHBOARD = 'dashboard';
 export const LOCUMJOBS = 'locum-jobs';
 export const APPLICATION = 'application';
-export const UERS_SETTINGS = 'settings';
-export const NOTIFICATIONS = 'notificatons';
+export const USERS_SETTINGS = 'settings';
+export const NOTIFICATIONS = 'notifications';
 export const BOOKMARKS = 'bookmarks';
 export const VIEW_ALL_POSTED_JOBS = 'dashboard/view-all-posted-jobs';
 export const VIEW_ALL_APPLICANTS = 'dashboard/view-all-applicants';
 // Users Dashboard routes
 export const USERS_DASHBOARD = 'dashboard';
-export const MANAGE_POSTED_JOBS = 'managepostedjobs';
-export const VIEW_ALL_APPS = 'viewallapps';
+export const MANAGE_POSTED_JOBS = 'manage-posted-jobs';
+export const VIEW_ALL_APPS = 'view-all-apps';
 
 // NotFound
 export const NOTFOUND = '404';

@@ -1,7 +1,8 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 
 import AuthLayout from '../layout/Auth/AuthLayout';
-import UsersDashboardLayout from '../layout/UsersDashboard/UsersDashboardLayout';
+import DashboardLayout from '../layout/UsersDashboard/DashboardLayout';
+// import UsersDashboardLayout from '../layout/UsersDashboard/UsersDashboardLayout';
 import EnterNewPassword from '../pages/Auth/ForgotPassword/EnterNewPassWord';
 import ForgotPassword from '../pages/Auth/ForgotPassword/ForgotPassword';
 import ForgotPasswordSuccess from '../pages/Auth/ForgotPassword/ForgotPasswordSuccess';
@@ -32,7 +33,7 @@ import {
   SIGNIN,
   SIGNUP,
   SIGNUP_OTP,
-  UERS_SETTINGS,
+  USERS_SETTINGS,
   VIEW_ALL_APPS,
 } from './routeConstants';
 
@@ -40,13 +41,13 @@ export default function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <UsersDashboardLayout />,
+      element: <DashboardLayout />,
       children: [
         { path: '/', element: <Navigate to={DASHBOARD} /> },
         { path: DASHBOARD, element: <DashboardHome /> },
         { path: LOCUMJOBS, element: <LocumJobs /> },
         { path: APPLICATION, element: <Application /> },
-        { path: UERS_SETTINGS, element: <Settings /> },
+        { path: USERS_SETTINGS, element: <Settings /> },
         { path: NOTIFICATIONS, element: <Notifications /> },
         { path: BOOKMARKS, element: <Bookmarks /> },
         { path: MANAGE_POSTED_JOBS, element: <ManagePostedJobs /> },

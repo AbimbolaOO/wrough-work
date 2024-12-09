@@ -9,7 +9,7 @@ import RichTextDisplay from '../../utils/RichTextDisplay';
 import { truncateText } from '../../utils/utils';
 import BriefcaseIcon from '../Icons/BriefcaseIcon';
 import TrashIcon from '../Icons/TrashIcon';
-import InteractiveModal from '../Modals/InteractiveModal';
+import InteractiveModal from '../OldModals/InteractiveModal';
 
 interface IManageJobsCard {
   job: JobPostingDataTypeGet;

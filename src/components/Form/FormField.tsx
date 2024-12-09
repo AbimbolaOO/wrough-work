@@ -1,10 +1,10 @@
-import { useField } from "formik";
-import React, { useState } from "react";
+import { useField } from 'formik';
+import React, { useState } from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import CanceledEyeIcon from "../Icons/CanceledEyeIcon";
-import EyeIcon from "../Icons/EyeIcon";
+import CanceledEyeIcon from '../Icons/CanceledEyeIcon';
+import EyeIcon from '../Icons/EyeIcon';
 
 export interface IInputField {
   label?: any;
@@ -21,7 +21,7 @@ export interface IInputField {
 }
 
 export const SelectField: React.FC<
-  Omit<IInputField, "placeholder" | "type">
+  Omit<IInputField, 'placeholder' | 'type'>
 > = ({ label, lpiSrc, rpiSrc, className, ...props }) => {
   const [field, meta] = useField(props);
   return (
@@ -29,8 +29,8 @@ export const SelectField: React.FC<
       <InputLabel htmlFor={props.name || props.id}>{label}</InputLabel>
       <InputContainer>
         <Select {...field} {...props} />
-        {lpiSrc ? <LeftPlaceHolderCardIcon alt="icon" src={lpiSrc} /> : null}
-        {rpiSrc ? <RightPlaceHolderCardIcon alt="icon" src={rpiSrc} /> : null}
+        {lpiSrc ? <LeftPlaceHolderCardIcon alt='icon' src={lpiSrc} /> : null}
+        {rpiSrc ? <RightPlaceHolderCardIcon alt='icon' src={rpiSrc} /> : null}
       </InputContainer>
       {meta.touched && meta.error ? (
         <FieldErrorInfo>{meta.error}</FieldErrorInfo>
@@ -56,11 +56,11 @@ export const TextInputField: React.FC<IInputField> = ({
         <Input
           {...field}
           {...props}
-          className={className ? className : ""}
+          className={className ? className : ''}
           readOnly={read}
         />
-        {lpiSrc ? <LeftPlaceHolderCardIcon alt="icon" src={lpiSrc} /> : null}
-        {rpiSrc ? <RightPlaceHolderCardIcon alt="icon" src={rpiSrc} /> : null}
+        {lpiSrc ? <LeftPlaceHolderCardIcon alt='icon' src={lpiSrc} /> : null}
+        {rpiSrc ? <RightPlaceHolderCardIcon alt='icon' src={rpiSrc} /> : null}
       </InputContainer>
       {meta.touched && meta.error ? (
         <FieldErrorInfo>{meta.error}</FieldErrorInfo>
@@ -85,11 +85,11 @@ export const TextAreaInputField: React.FC<IInputField> = ({
         <TextArea
           {...field}
           {...props}
-          className={className ? className : ""}
+          className={className ? className : ''}
           rows={7}
         />
-        {lpiSrc ? <LeftPlaceHolderCardIcon alt="icon" src={lpiSrc} /> : null}
-        {rpiSrc ? <RightPlaceHolderCardIcon alt="icon" src={rpiSrc} /> : null}
+        {lpiSrc ? <LeftPlaceHolderCardIcon alt='icon' src={lpiSrc} /> : null}
+        {rpiSrc ? <RightPlaceHolderCardIcon alt='icon' src={rpiSrc} /> : null}
       </InputContainer>
       {meta.touched && meta.error ? (
         <FieldErrorInfo>{meta.error}</FieldErrorInfo>
@@ -98,15 +98,15 @@ export const TextAreaInputField: React.FC<IInputField> = ({
   );
 };
 
-export const Checkbox: React.FC<Pick<IInputField, "name" | "children">> = ({
+export const Checkbox: React.FC<Pick<IInputField, 'name' | 'children'>> = ({
   children,
   ...props
 }) => {
-  const [field, meta] = useField({ ...props, type: "checkbox" });
+  const [field, meta] = useField({ ...props, type: 'checkbox' });
   return (
     <CheckboxWrapper>
-      <label className="checkbox">
-        <input type="checkbox" {...field} {...props} />
+      <label className='checkbox'>
+        <input type='checkbox' {...field} {...props} />
         {children}
       </label>
       {meta.touched && meta.error ? (
@@ -142,7 +142,7 @@ export const UploadField: React.FC<IUploadField> = ({
     <InputWrapper className={className}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <InputContainer>
-        <Input id={name} name={name} type="file" onChange={handleChange} />
+        <Input id={name} name={name} type='file' onChange={handleChange} />
         {children}
       </InputContainer>
       {meta.touched && meta.error ? (
@@ -173,10 +173,10 @@ export const PasswordInputField: React.FC<IInputField> = ({
         <Password
           {...field}
           {...props}
-          type={showPassword ? "text" : "password"}
-          className={className ? className : ""}
+          type={showPassword ? 'text' : 'password'}
+          className={className ? className : ''}
         />
-        {lpiSrc && <PasswordLeftIcon alt="icon" src={lpiSrc} />}
+        {lpiSrc && <PasswordLeftIcon alt='icon' src={lpiSrc} />}
         <PasswordToggleIcon onClick={togglePasswordVisibility}>
           {showPassword ? <CanceledEyeIcon /> : <EyeIcon />}
         </PasswordToggleIcon>
@@ -199,7 +199,7 @@ export const DateInputField: React.FC<IInputField> = ({
   const [field, meta, helpers] = useField(props);
 
   const formatDate = (date: Date) => {
-    return date.toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
+    return date.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -220,12 +220,12 @@ export const DateInputField: React.FC<IInputField> = ({
         <Input
           {...field}
           {...props}
-          type="date"
+          type='date'
           onChange={handleChange}
-          className={className ? className : ""}
+          className={className ? className : ''}
         />
-        {lpiSrc ? <LeftPlaceHolderCardIcon alt="icon" src={lpiSrc} /> : null}
-        {rpiSrc ? <RightPlaceHolderCardIcon alt="icon" src={rpiSrc} /> : null}
+        {lpiSrc ? <LeftPlaceHolderCardIcon alt='icon' src={lpiSrc} /> : null}
+        {rpiSrc ? <RightPlaceHolderCardIcon alt='icon' src={rpiSrc} /> : null}
       </InputContainer>
       {meta.touched && meta.error ? (
         <FieldErrorInfo>{meta.error}</FieldErrorInfo>
@@ -310,7 +310,7 @@ const CheckboxWrapper = styled.div`
     cursor: pointer;
   }
 
-  & > label > input[type="checkbox"] {
+  & > label > input[type='checkbox'] {
     color: red;
     margin-right: 10px;
     cursor: pointer;
@@ -335,16 +335,6 @@ export const FieldErrorInfo = styled.div`
 
 export const InputWrapper = styled.div`
   width: 100%;
-  & .jobdate {
-    width: 12rem;
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    & .jobdate {
-      width: 10rem;
-    }
-  }
 `;
 
 export const InputLabel = styled.label`
@@ -423,11 +413,10 @@ export const Input = styled.input<IInput>`
 
 const TextArea = styled.textarea<IInput>`
   width: 100%;
-  max-width: 35rem;
   border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   border-radius: 4px;
-  padding: ${({ lpiSrc, rpiSrc }) => (lpiSrc || rpiSrc ? "5rem" : "1rem")};
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : "left")};
+  padding: ${({ lpiSrc, rpiSrc }) => (lpiSrc || rpiSrc ? '5rem' : '1rem')};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
   font-weight: 300;
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-size: 1.125rem;

@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import CompanyLogo from "../../../components/CompanyLogo/CompanyLogo";
-import LogoutIcon from "../../../components/Icons/LogoutIcon";
-import { NavBoxItem } from "../../../components/Link/Link";
-import useOnLogout from "../../../hooks/auth/useOnLogout";
-import { navConfig } from "./navConfig";
-import CloseIcon from "../../../components/Icons/CloseIcon";
+import CompanyLogo from '../../../components/CompanyLogo/CompanyLogo';
+import LogoutIcon from '../../../components/Icons/LogoutIcon';
+import { NavBoxItem } from '../../../components/Link/Link';
+import useOnLogout from '../../../hooks/auth/useOnLogout';
+import { navConfig } from './navConfig';
 
 const Nav = ({
   isVisible,
@@ -17,25 +16,27 @@ const Nav = ({
   const { logoutUser } = useOnLogout();
 
   return (
-    <Container isVisible={isVisible}>
-      <div>
+    <Container>
+      <div className='logo'>
         <CompanyLogo />
-        <CloseContainer>
-          <CloseIcon onClick={onClose} />
-        </CloseContainer>
       </div>
-      <NavbtnsSection>
+
+      <NavBtnSection>
         {navConfig.map((nav) => (
-          <NavBoxItem
-            path={nav.path}
-            key={nav.title}
-            icon={nav.icon(isVisible)}
-            clicked={isVisible && onClose}
-          >
+          // <NavBoxItem
+          //   path={nav.path}
+          //   key={nav.title}
+          //   icon={nav.icon(isVisible)}
+          //   clicked={isVisible && onClose}
+          // >
+          //   {nav.title}
+          // </NavBoxItem>
+
+          <NavBoxItem path={nav.path} key={nav.title} icon={nav.icon}>
             {nav.title}
           </NavBoxItem>
         ))}
-      </NavbtnsSection>
+      </NavBtnSection>
 
       <LogoutBox onClick={() => logoutUser()}>
         {!isVisible && <LogoutIcon />} Logout
@@ -46,9 +47,9 @@ const Nav = ({
 
 export default Nav;
 
-const Container = styled.nav<{ isVisible: boolean }>`
-  // border: 2px solid blue;
-  padding: 2rem 2rem 3.75rem 2rem;
+const Container = styled.nav`
+  /* border: 2px solid blue; */
+  padding: 52px 32px 72px;
   display: flex;
   background-color: white;
 
@@ -63,37 +64,14 @@ const Container = styled.nav<{ isVisible: boolean }>`
   }
 
   & > div {
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    top: ${({ isVisible }) => (isVisible ? "0" : "-100%")};
-    // transition: top 0.05s ease-in-out;
-    padding: 0;
-    height: 327px;
-    gap: 0;
-
-    & > div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem;
-    }
+    margin-left: 24px;
   }
 `;
 
-const NavbtnsSection = styled.section`
+const NavBtnSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    gap: 0;
-  }
 `;
 
 const LogoutBox = styled.div`
@@ -110,15 +88,5 @@ const LogoutBox = styled.div`
     width: fit-content;
     font-size: 14px;
     color: ${({ theme }) => theme.palette.blackBlack2};
-  }
-`;
-
-const CloseContainer = styled.div`
-  display: none;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    display: block;
-    width: 24px;
   }
 `;

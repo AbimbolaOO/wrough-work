@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import InteractiveModal from '../../../../../../components/Modals/InteractiveModal';
+import InteractiveModal from '../../../../../../components/OldModals/InteractiveModal';
 import { ExperienceDataType } from '../../../../../../models/settings/profileSettings/experience.model';
 
 function getFirstAlphabets(input: string): string {

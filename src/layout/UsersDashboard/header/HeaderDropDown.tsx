@@ -1,20 +1,21 @@
-import styled from "@emotion/styled";
+import { useEffect, useState } from 'react';
 
-import { HoverDropDown } from "../../../components/DropDown/DropDown";
-import DownArrowIcon from "../../../components/Icons/DownArrowIcon";
-import IconImg from "../../../components/Img/IconImg";
-import { InternalNavLink } from "../../../components/Link/Link";
-import useOnLogout from "../../../hooks/auth/useOnLogout";
-import { headerConfig } from "./headerConfig";
-import useGetUserData from "../../../hooks/getData/useGetUserData";
-import FullScreenModal from "../../../components/Modals/FullScreenModal";
-import { useEffect, useState } from "react";
-import PopupProfile from "../../../components/PopupProfile/PopupProfile";
+import styled from '@emotion/styled';
+
+import { HoverDropDown } from '../../../components/DropDown/DropDown';
+import DownArrowIcon from '../../../components/Icons/DownArrowIcon';
+import IconImg from '../../../components/Img/IconImg';
+import { InternalNavLink } from '../../../components/Link/Link';
+import FullScreenModal from '../../../components/OldModals/FullScreenModal';
+import PopupProfile from '../../../components/PopupProfile/PopupProfile';
+import useOnLogout from '../../../hooks/auth/useOnLogout';
+import useGetUserData from '../../../hooks/getData/useGetUserData';
+import { headerConfig } from './headerConfig';
 
 const DropDownLabel = () => {
   return (
     <DropDownLabelContainer>
-      <IconImg src="/static/img/PlaceholderUserImage.png" />
+      <IconImg src='/static/img/PlaceholderUserImage.png' />
       <DownArrowIcon />
     </DropDownLabelContainer>
   );
@@ -37,14 +38,14 @@ const HeaderDropDown = () => {
     <HoverDropDown label={<DropDownLabel />}>
       <Container>
         <HoverDropDownContentCell>
-          <IconImg src="/static/img/PlaceholderUserImage.png" />
+          <IconImg src='/static/img/PlaceholderUserImage.png' />
           <UserInfoArea>
             <p>{userData?.firstName}</p>
             <Description>Teir 2 account</Description>
           </UserInfoArea>
         </HoverDropDownContentCell>
         {headerConfig.map((data, index) => {
-          if (data.title === "Logout") {
+          if (data.title === 'Logout') {
             return (
               <HoverDropDownContentCell
                 onClick={() => logoutUser()}
@@ -54,7 +55,7 @@ const HeaderDropDown = () => {
               </HoverDropDownContentCell>
             );
           }
-          if (data.title === "View Profile") {
+          if (data.title === 'View Profile') {
             return (
               <HoverDropDownContentCell onClick={() => showModal()} key={index}>
                 {data.icon} <p>{data.title}</p>
@@ -79,7 +80,7 @@ const HeaderDropDown = () => {
           <PopupProfile forApplicant={false} />
         </FullScreenModal>
       ) : (
-        ""
+        ''
       )}
     </HoverDropDown>
   );

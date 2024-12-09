@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import ViewAllAppsCard from '../../../../components/Card/ViewAllAppsCard';
 import BriefcaseIcon from '../../../../components/Icons/BriefcaseIcon';
 import LeftArrowButtonIcon from '../../../../components/Icons/LeftArrowButtonIcon';
-import FullScreenModal from '../../../../components/Modals/FullScreenModal';
+import FullScreenModal from '../../../../components/OldModals/FullScreenModal';
 // import { truncateText } from "../../../../utils/utils";
 import useGetAllAppsSingleJob from '../../../../hooks/getData/useGetAllAppsSingleJob';
 import useGetSingleJob from '../../../../hooks/getData/useGetSingleJob';

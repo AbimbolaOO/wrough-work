@@ -1,23 +1,25 @@
-import { useState } from "react";
-import styled from "@emotion/styled";
-import { FormComponent } from "../../../components/Form/FormComponent";
+import { useState } from 'react';
+
+import styled from '@emotion/styled';
+
+import ValidatingFormSubmitButton from '../../../components/Button/FormSubmitButton';
+import { FormComponent } from '../../../components/Form/FormComponent';
 import {
-  JobPostingSchemaPost,
-  jobPostingInitialValues,
+  DateInputField,
+  SelectField,
+  TextInputField,
+} from '../../../components/Form/FormField';
+import { FormikToggleCheckbox } from '../../../components/Form/FormikToggleCheckbox';
+import usePatchSingleJob from '../../../hooks/patchData/usePatchSingleJob';
+import usePostJob from '../../../hooks/postData/usePostJob';
+import {
   JobPostingDataType,
   JobPostingDataTypeGet,
-} from "../../../models/jobPosting/jobPosting.model";
-import ValidatingFormSubmitButton from "../../../components/Button/FormSubmitButton";
-import {
-  TextInputField,
-  SelectField,
-  DateInputField,
-} from "../../../components/Form/FormField";
-import PostJobDescription from "./OptionalHeaderContent/PostJobDescription";
-import { FormikToggleCheckbox } from "../../../components/Form/FormikToggleCheckbox";
-import usePostJob from "../../../hooks/postData/usePostJob";
-import usePatchSingleJob from "../../../hooks/patchData/usePatchSingleJob";
-import { formatDate } from "../../../utils/utils";
+  jobPostingInitialValues,
+  JobPostingSchemaPost,
+} from '../../../models/jobPosting/jobPosting.model';
+import { formatDate } from '../../../utils/utils';
+import PostJobDescription from './OptionalHeaderContent/PostJobDescription';
 
 interface PostJobFormProps {
   editData?: JobPostingDataTypeGet | null;
@@ -47,7 +49,7 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
       resetForm();
       if (onSuccess) onSuccess(); // Call onSuccess after the job creation is successful
     } catch (error) {
-      console.error("Job creation failed", error);
+      console.error('Job creation failed', error);
     }
   };
 
@@ -75,10 +77,10 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
         resetForm();
         if (onSuccess) onSuccess(); // Call onSuccess after job update is successful
       } catch (error) {
-        console.error("Job update failed", error);
+        console.error('Job update failed', error);
       }
     } else {
-      console.error("Job ID is missing");
+      console.error('Job ID is missing');
     }
   };
 
@@ -93,35 +95,35 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
         }}
         schema={JobPostingSchemaPost} // Use JobPostingSchemaGet for fetching, JobPostingSchemaPost for editing/posting
         onSubmit={editData ? handleEditSubmit : handleSubmit}
-        className={"flex jobform"}
+        className={'flex jobform'}
         data={
           editData && {
             ...editData,
-            jobStartDate: formatDate(editData?.jobStartDate || ""),
-            jobEndDate: formatDate(editData?.jobEndDate || ""),
-            expiryDate: formatDate(editData?.expiryDate || ""),
+            jobStartDate: formatDate(editData?.jobStartDate || ''),
+            jobEndDate: formatDate(editData?.jobEndDate || ''),
+            expiryDate: formatDate(editData?.expiryDate || ''),
             jobDescription:
-              typeof editData?.jobDescription === "object"
-                ? editData?.jobDescription?.jobDescription || ""
-                : editData?.jobDescription || "",
+              typeof editData?.jobDescription === 'object'
+                ? editData?.jobDescription?.jobDescription || ''
+                : editData?.jobDescription || '',
           }
         }
       >
         <FieldGroup>
-          <TextInputField label={"Job Title:"} name="title" type="text" />
+          <TextInputField label={'Job Title:'} name='title' type='text' />
           <TextInputField
-            label={"Institution Name"}
-            name="institutionName"
-            type="text"
+            label={'Institution Name'}
+            name='institutionName'
+            type='text'
           />
         </FieldGroup>
-        <FieldGroup className="small-gap">
+        <FieldGroup className='small-gap'>
           <ExperienceInput
-            label={"Years Of Experience"}
-            name="yearsOfExperience"
-            rpiSrc="/static/svg/downArrowIcon.svg"
+            label={'Years Of Experience'}
+            name='yearsOfExperience'
+            rpiSrc='/static/svg/downArrowIcon.svg'
           >
-            <option value="" disabled></option>
+            <option value='' disabled></option>
             {Array.from({ length: 10 }, (_, i) => (
               <option key={i + 1} value={i + 1}>
                 {i + 1}
@@ -129,26 +131,26 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
             ))}
           </ExperienceInput>
           <DoubleInput>
-            <TextInputField label={"Salary"} name="pay" type="number" />
+            <TextInputField label={'Salary'} name='pay' type='number' />
             <StyledSelect
-              label={"pay interval"}
-              name="payInterval"
-              rpiSrc="/static/svg/downArrowIcon.svg"
+              label={'pay interval'}
+              name='payInterval'
+              rpiSrc='/static/svg/downArrowIcon.svg'
             >
-              <option value="" disabled>
+              <option value='' disabled>
                 Per Hour
               </option>
-              <option value="HOURLY">Per Hour</option>
-              <option value="DAILY">Per Day</option>
-              <option value="WEEKLY">Per Week</option>
-              <option value="MONTHLY">Per Month</option>
+              <option value='HOURLY'>Per Hour</option>
+              <option value='DAILY'>Per Day</option>
+              <option value='WEEKLY'>Per Week</option>
+              <option value='MONTHLY'>Per Month</option>
             </StyledSelect>
           </DoubleInput>
           <Wide>
             <TextInputField
-              label={"Job Location"}
-              name="location"
-              type="text"
+              label={'Job Location'}
+              name='location'
+              type='text'
             />
           </Wide>
         </FieldGroup>
@@ -156,37 +158,37 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
           <StyledLabel>
             Job Description <br />
             <StyledPostJobDescription
-              name="jobDescription"
-              initialValue={editData?.jobDescription?.jobDescription || ""}
+              name='jobDescription'
+              initialValue={editData?.jobDescription?.jobDescription || ''}
             />
           </StyledLabel>
         </FieldGroup>
-        <FieldGroup className="last">
+        <FieldGroup className='last'>
           <p>
             <FormikToggleCheckbox
-              name="isPublished"
+              name='isPublished'
               controller={handlePublish}
             ></FormikToggleCheckbox>
             <span>Publish</span>
           </p>
           <DateInputField
-            className="jobdate"
-            label={"Start Date"}
-            name="jobStartDate"
-            type="date"
-            placeholder="e"
+            className='jobdate'
+            label={'Start Date'}
+            name='jobStartDate'
+            type='date'
+            placeholder='e'
           ></DateInputField>
           <DateInputField
-            className="jobdate"
-            label={"End Date"}
-            name="jobEndDate"
-            type="date"
+            className='jobdate'
+            label={'End Date'}
+            name='jobEndDate'
+            type='date'
           ></DateInputField>
           <DateInputField
-            className="jobdate"
-            label={"Expiry Date"}
-            name="expiryDate"
-            type="date"
+            className='jobdate'
+            label={'Expiry Date'}
+            name='expiryDate'
+            type='date'
           ></DateInputField>
         </FieldGroup>
         <PostButton loading={loading || patchLoading}>Next</PostButton>
@@ -264,20 +266,10 @@ const DoubleInput = styled.div`
 
 const ExperienceInput = styled(SelectField)`
   width: 158px;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
 
 const Wide = styled.div`
   width: 355px;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
 
 const StyledSelect = styled(SelectField)`
