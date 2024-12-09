@@ -1,8 +1,8 @@
-import { useFormikContext } from "formik";
-import React from "react";
+import { useFormikContext } from 'formik';
+import React from 'react';
 
-import { LoadingOutlined } from "@ant-design/icons";
-import styled from "@emotion/styled";
+import { LoadingOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled';
 
 interface IValidatingFormSubmitButton {
   loading?: boolean;
@@ -15,11 +15,11 @@ const ValidatingFormSubmitButton: React.FC<IValidatingFormSubmitButton> = ({
   children,
   className,
 }) => {
-  const { errors, dirty, isValid } = useFormikContext<any>();
-  console.log(errors);
+  const { dirty, isValid } = useFormikContext<any>();
+
   return (
     <FormSubmitButton
-      type="submit"
+      type='submit'
       className={className}
       disabled={isValid && dirty ? false : true}
     >
@@ -72,6 +72,11 @@ export const FormSubmitButton = styled.button`
     padding: 0.5rem 4rem;
     font-weight: 500;
     font-size: 14px;
+  }
+
+  &.right-mt {
+    margin-top: 32px;
+    margin-left: auto;
   }
 
   // Mobile-specific styles

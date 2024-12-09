@@ -182,8 +182,8 @@ const Del = styled.p`
   padding-bottom: 5px;
   border-radius: 2px;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.palette.stateColourRed};
-  color: ${({ theme }) => theme.palette.stateColourRed};
+  border: 1px solid ${({ theme }) => theme.palette.stateColorRed};
+  color: ${({ theme }) => theme.palette.stateColorRed};
   background-color: inherit;
   bottom: 15px;
   right: 150px;

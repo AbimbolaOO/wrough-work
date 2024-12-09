@@ -384,6 +384,7 @@ export const Input = styled.input<IInput>`
     outline: none;
     border-color: ${({ theme }) => theme.palette.greyGrey1};
   }
+
   &:hover {
     cursor: text;
   }
@@ -398,6 +399,7 @@ export const Input = styled.input<IInput>`
       font-size: 15px;
     }
   }
+
   &.read {
     color: ${({ theme }) => theme.palette.greyGrey2};
   }
@@ -411,7 +413,7 @@ export const Input = styled.input<IInput>`
   }
 `;
 
-const TextArea = styled.textarea<IInput>`
+export const TextArea = styled.textarea<IInput>`
   width: 100%;
   border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   border-radius: 4px;

@@ -16,9 +16,10 @@ declare module '@emotion/react' {
       stateColorYellow: string;
       stateColorGreen: string;
       borderColor: string;
-      stateColourRed: string;
+      stateColorRed: string;
       white: string;
-      lightLemon:string;
+      lightLemon: string;
+      highlightColor: string;
     };
   }
 }
@@ -38,10 +39,11 @@ export const theme: Theme = {
     stateColorYellow: '#E2B93B',
     stateColorGreen: '#27AE60',
     borderColor: '#cdcdd0',
-    stateColourRed: '#E01D1D',
+    stateColorRed: '#E01D1D',
     purplePurple1: '#2857D1',
     white: '#FFF',
-    lightLemon:'#DBFDE9',
+    lightLemon: '#DBFDE9',
+    highlightColor: '#F6F6F6',
   },
 };
 

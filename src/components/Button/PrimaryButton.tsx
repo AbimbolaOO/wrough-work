@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import ArrowIcon from "../Icons/ArrowIcon";
-import DangerIcon from "../Icons/DangerIcon";
-import { IButton } from "./interface";
+import ArrowIcon from '../Icons/ArrowIcon';
+import DangerIcon from '../Icons/DangerIcon';
+import { IButton } from './interface';
 
 export const PrimaryButton: React.FC<IButton> = ({
   children,
@@ -13,9 +13,9 @@ export const PrimaryButton: React.FC<IButton> = ({
   click,
 }) => {
   return (
-    <StyledButton className={className ? className : ""} onClick={click}>
-      {children} {arrowIcon && <ArrowIcon />}{" "}
-      {className?.includes("danger") && <DangerIcon />}
+    <StyledButton className={className ? className : ''} onClick={click}>
+      {children} {arrowIcon && <ArrowIcon />}{' '}
+      {className?.includes('danger') && <DangerIcon />}
     </StyledButton>
   );
 };
@@ -83,8 +83,8 @@ const StyledButton = styled.button`
   }
 
   &.danger {
-    border: 1px solid ${({ theme }) => theme.palette.stateColourRed};
-    color: ${({ theme }) => theme.palette.stateColourRed};
+    border: 1px solid ${({ theme }) => theme.palette.stateColorRed};
+    color: ${({ theme }) => theme.palette.stateColorRed};
   }
 
   &.nowrap {

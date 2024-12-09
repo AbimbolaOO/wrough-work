@@ -27,7 +27,8 @@ const ModalContainer = styled.div`
   width: 100vw;
   height: 100vh;
   isolation: isolate;
-  background: rgba(142, 125, 125, 0.448);
+  /* background: rgba(142, 125, 125, 0.448); */
+  background: rgba(79, 79, 79, 0.6);
   /* background-color: red; */
   display: grid;
   justify-content: center;

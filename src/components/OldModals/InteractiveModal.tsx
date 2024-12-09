@@ -1,6 +1,7 @@
-import React from "react";
-import toast, { Toast } from "react-hot-toast";
-import styled from "@emotion/styled";
+import React from 'react';
+import toast, { Toast } from 'react-hot-toast';
+
+import styled from '@emotion/styled';
 
 // Define the types for the props
 interface InteractiveModalProps {
@@ -46,7 +47,7 @@ const InteractiveModal: React.FC<InteractiveModalProps> = ({
   };
 
   return (
-    <p onClick={showModal} style={{ cursor: "pointer" }}>
+    <p onClick={showModal} style={{ cursor: 'pointer' }}>
       {triggerElement}
     </p>
   );
@@ -67,7 +68,7 @@ const ButtonContainer = styled.div`
 
 const ConfirmButton = styled.button`
   padding: 5px 10px;
-  background-color: ${({ theme }) => theme.palette.stateColourRed};
+  background-color: ${({ theme }) => theme.palette.stateColorRed};
   color: white;
   border: none;
   cursor: pointer;

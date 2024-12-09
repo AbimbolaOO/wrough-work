@@ -21,7 +21,7 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ children }) => {
       }}
     >
       <IconContainer onClick={onClickCancel}>
-        <CloseIcon /> Close
+        <CloseIcon />
       </IconContainer>
 
       {children}
@@ -51,10 +51,10 @@ const Container = styled.div`
 
 const IconContainer = styled.div`
   display: flex;
-  gap: 6px;
+  /* gap: 6px; */
   align-self: flex-end;
 
-  margin-right: -46px;
+  /* margin-right: -46px; */
   cursor: pointer;
 
   & > svg {

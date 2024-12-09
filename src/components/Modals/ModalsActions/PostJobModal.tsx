@@ -2,28 +2,46 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import usePostJob from '../../../hooks/postData/usePostJob';
+import useCreateJobPost from '../../../hooks/dashboard/jobs/useCreateJobPost';
 import {
-  JobPostingDataType,
-  jobPostingInitialValues,
-  JobPostingSchemaPost,
-} from '../../../models/jobPosting/jobPosting.model';
+  CreateJobPostDataType,
+  createJobPostInitialValues,
+  CreateJobPostSchema,
+} from '../../../models/dashboard/jobs/createJobPost.model';
+import FormSubmitButton from '../../Button/FormSubmitButton';
 import { CustomCheckbox } from '../../Form/CustomCheckBox';
+import { CustomTwoValDropDown } from '../../Form/CustomTwoValDropDown';
 import { FormComponent } from '../../Form/FormComponent';
-import { TextAreaInputField, TextInputField } from '../../Form/FormField';
+import { TextInputField } from '../../Form/FormField';
+import NumberOnlyInputField from '../../Form/NumberOnlyInputField';
+import RichTextInputField from '../../Form/RichTextInputField';
 import ModalContainer from '../ModalContainer';
 
+const salaryInterval: Record<string, string> = {
+  'Per Hour': 'HOURLY',
+  'Per Day': 'DAILY',
+  'Per Week': 'WEEKLY',
+  'Per Month': 'MONTHLY',
+  'Per Year': 'YEARLY',
+};
+
 const PostJobModal = () => {
-  const { loading, postJob } = usePostJob();
-  const handleSubmit = (values: JobPostingDataType, actions: any) => {
-    alert(JSON.stringify(values));
+  const { loading, createJobPost } = useCreateJobPost();
+  const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
+    createJobPost(
+      {
+        ...values,
+        payInterval: salaryInterval[values.payInterval],
+      },
+      actions.resetForm
+    );
   };
 
   return (
     <ModalContainer>
       <FormComponent
-        initialValues={jobPostingInitialValues}
-        schema={JobPostingSchemaPost}
+        initialValues={createJobPostInitialValues}
+        schema={CreateJobPostSchema}
         onSubmit={handleSubmit}
       >
         <Row className='two-even'>
@@ -42,41 +60,41 @@ const PostJobModal = () => {
             type='text'
           />
         </Row>
+
         <Row className='three'>
-          <TextInputField
+          <NumberOnlyInputField
             label='Years of Experience'
             placeholder=''
             name='yearsOfExperience'
             id='yearsOfExperience'
             type='text'
           />
-          <TextInputField
+          <CustomTwoValDropDown
             label='Salary'
             placeholder=''
             name='pay'
             id='pay'
-            type='text'
+            optionData={Object.keys(salaryInterval)}
+            optionName='payInterval'
           />
           <TextInputField
             label='Job Location'
             placeholder=''
-            name='name'
-            id='name'
+            name='location'
+            id='location'
             type='text'
           />
         </Row>
-        <TextAreaInputField
+
+        <RichTextInputField
           label='Job Description'
           placeholder=''
-          name='name'
-          id='name'
+          name='jobDescription'
+          id='jobDescription'
           type='text'
         />
-        <Row className='four'>
-          <CustomCheckbox name='isPublished' className='column'>
-            Publish
-          </CustomCheckbox>
 
+        <Row className='four'>
           <TextInputField
             label='Start Date'
             placeholder=''
@@ -98,6 +116,17 @@ const PostJobModal = () => {
             id='expiryDate'
             type='date'
           />
+          {/* <CustomCheckbox name='isPublished' className='column'>
+            Publish
+          </CustomCheckbox> */}
+        </Row>
+
+        <Row className='flex'>
+          <CustomCheckbox name='isPublished'>Publish</CustomCheckbox>
+
+          <FormSubmitButton loading={loading} className='small'>
+            Create
+          </FormSubmitButton>
         </Row>
       </FormComponent>
     </ModalContainer>
@@ -109,20 +138,22 @@ export default PostJobModal;
 const Row = styled.div`
   display: grid;
   width: 100%;
-  /* border: 1px solid red; */
   gap: 16px;
 
   &.two-even {
     grid-template-columns: 1fr 1fr;
-    /* gap: 64px; */
   }
 
   &.three {
     grid-template-columns: 1fr 2fr 2fr;
-    /* gap: 38px; */
   }
   &.four {
-    grid-template-columns: 100px 1fr 1fr 1fr;
-    /* gap: 16px; */
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &.flex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
   }
 `;
