@@ -15,7 +15,6 @@ interface SelectDropDownProps {
   className?: string;
   readonly?: boolean;
   optionData: string[];
-  setIsEditing: (...args: any) => void;
 }
 // Type definition
 export enum OptionReducerActionType {
@@ -42,7 +41,6 @@ function selectOptionsReducer(
 
 const SelectDropDown: React.FC<SelectDropDownProps> = ({
   className,
-  setIsEditing,
   optionData = [],
   ...props
 }) => {
@@ -66,7 +64,6 @@ const SelectDropDown: React.FC<SelectDropDownProps> = ({
 
   const handleSelectFieldClick = (e: any) => {
     setDidTouchSelectField(true);
-    setIsEditing(true);
   };
 
   const handleOptionClick = (e: any) => {
@@ -77,11 +74,6 @@ const SelectDropDown: React.FC<SelectDropDownProps> = ({
 
   const handIconClick = (e: any) => {
     setDidTouchSelectField(!didTouchSelectField);
-  };
-
-  const handleFormBlur = () => {
-    setIsEditing(false);
-    return handleBlur({ target: { name: props.name } });
   };
 
   const [state, dispatch] = useReducer(selectOptionsReducer, {
@@ -106,7 +98,7 @@ const SelectDropDown: React.FC<SelectDropDownProps> = ({
         value={selectFieldValue}
         name={props.name}
         id={props.name}
-        onBlur={handleFormBlur}
+        onBlur={handleBlur}
         onClick={handleSelectFieldClick}
         className={didTouchSelectField ? 'active' : ''}
         readOnly

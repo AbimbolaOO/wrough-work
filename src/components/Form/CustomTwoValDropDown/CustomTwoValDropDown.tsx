@@ -1,5 +1,5 @@
 import { useField, useFormikContext } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styled from '@emotion/styled';
 
@@ -28,8 +28,7 @@ const CustomTwoValDropDown: React.FC<CustomTwoValDropDownProps> = ({
   ...props
 }) => {
   const [field, meta, helper] = useField(props);
-  const { errors, handleBlur } = useFormikContext<any>();
-  const [isEditing, setIsEditing] = useState(false);
+  const { errors } = useFormikContext<any>();
 
   const handleChange = (e: any) => {
     const { value } = e.target;
@@ -41,11 +40,6 @@ const CustomTwoValDropDown: React.FC<CustomTwoValDropDownProps> = ({
     }
   };
 
-  const handleFormBlur = () => {
-    setIsEditing(false);
-    return handleBlur({ target: { name: props.name } });
-  };
-
   return (
     <InputWrapper className={className}>
       {label && (
@@ -53,14 +47,12 @@ const CustomTwoValDropDown: React.FC<CustomTwoValDropDownProps> = ({
           {label}
         </InputLabel>
       )}
-      <FieldRow isEditing={isEditing}>
+      <FieldRow>
         <WrapInput
           {...field}
           {...props}
           value={field?.value ?? ''}
           onChange={(e) => handleChange(e)}
-          onClick={(e) => setIsEditing(true)}
-          onBlur={(e) => handleFormBlur()}
         />
         <DividerLine />
         <SelectDropDown
@@ -68,7 +60,6 @@ const CustomTwoValDropDown: React.FC<CustomTwoValDropDownProps> = ({
           name={optionName}
           id={optionName}
           placeholder={dropdownPlaceholder}
-          setIsEditing={setIsEditing}
         />
       </FieldRow>
 
@@ -87,16 +78,16 @@ const CustomTwoValDropDown: React.FC<CustomTwoValDropDownProps> = ({
 
 export default CustomTwoValDropDown;
 
-const FieldRow = styled.div<{ isEditing: boolean }>`
+const FieldRow = styled.div`
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
-  /* gap: 12px; */
-  /* border: 1px solid ${({ theme }) => theme.palette.greyGrey3}; */
-  border: 1px solid
-    ${({ theme, isEditing }) =>
-      isEditing ? theme.palette.greyGrey1 : theme.palette.greyGrey3};
+  border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   border-radius: 4px;
+
+  &:focus-within {
+    border: 1px solid ${({ theme }) => theme.palette.greyGrey1};
+  }
 `;
 
 const DividerLine = styled.div`
