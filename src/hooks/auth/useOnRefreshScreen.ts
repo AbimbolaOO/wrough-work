@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { ILocumUserData } from '../../models/auth/signIn.model';
 import { authActions } from '../../redux/slices/authSlice';
 import { useAppDisPatch } from '../../redux/store';
-import { ACCOUNT, SIGNIN, SIGNUP_OTP} from '../../routes/routeConstants';
+import { ACCOUNT, SIGNIN, SIGNUP_OTP } from '../../routes/routeConstants';
 
 const useOnRefreshScreen = () => {
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string>();
   const navigate = useNavigate();
   const dispatch = useAppDisPatch();
 
@@ -28,6 +29,7 @@ const useOnRefreshScreen = () => {
       dispatch(
         authActions.setAuthentication({ authData, isAuthenticated: true })
       );
+      setUserId(authData?.id);
     } else {
       setLoading(false);
       navigate(`/${ACCOUNT}/${SIGNIN}`, { replace: true });
@@ -37,6 +39,7 @@ const useOnRefreshScreen = () => {
   return {
     onRefreshScreen,
     loading,
+    userId
   };
 };
 

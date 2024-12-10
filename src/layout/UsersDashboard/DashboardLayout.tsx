@@ -5,12 +5,16 @@ import styled from '@emotion/styled';
 
 import LoadScreen from '../../components/Card/LoadScreen';
 import useOnRefreshScreen from '../../hooks/auth/useOnRefreshScreen';
+import useDashboardLoading from '../../hooks/dashboard/dashboardLoading/useDashboardLoading';
 import DashboardHeader from './header/DashboardHeader';
 import SettingsHeader from './SettingsHeader';
 import Nav from './sideNav/Nav';
 
 const DashboardLayout = () => {
-  const { onRefreshScreen, loading } = useOnRefreshScreen();
+  const { onRefreshScreen, loading, userId } = useOnRefreshScreen();
+  const { getDashboardLoadingData, loading: dashboardDataLoading } =
+    useDashboardLoading();
+
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split('/');
@@ -26,9 +30,14 @@ const DashboardLayout = () => {
     onRefreshScreen();
   }, [onRefreshScreen]);
 
-  console.log('Loading...', loading);
-  if (loading) {
-    console.log('Loading3...', loading);
+  useEffect(() => {
+    if (userId) {
+      getDashboardLoadingData(userId);
+    }
+    // eslint-disable-next-line
+  }, [userId]);
+
+  if (loading || !userId || dashboardDataLoading) {
     return <LoadScreen />;
   }
 
@@ -60,7 +69,6 @@ const Container = styled.div`
 const Section = styled.section`
   width: 100%;
   height: fit-content;
-  /* border: 2px solid red; */
 
   & > * {
     padding-left: 54px;

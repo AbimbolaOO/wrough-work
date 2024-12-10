@@ -19,42 +19,42 @@ const SignupOtp = () => {
   const location = useLocation();
   const email = location?.state?.data;
 
-  const { signupVerficationOtp, loading: otpLoading } =
+  const { signupVerificationOtp, loading: otpLoading } =
     useSignupUserVerificationOtp();
 
-  const { resendSignupVerficationOtp, loading: otpResendLoading } =
+  const { resendSignupVerificationOtp, loading: otpResendLoading } =
     useResendUserSignupVerificationOtp();
 
   const onSubmit = (values: VerifySignUpOtpDataType) => {
-    signupVerficationOtp(values, email);
+    signupVerificationOtp(values, email);
   };
 
   const handleOtpResend = () => {
-    resendSignupVerficationOtp(email);
+    resendSignupVerificationOtp(email);
   };
 
   return (
-    <Formtainer header="Check your Email">
+    <Formtainer header='Check your Email'>
       <FormComponent
         initialValues={verifySignUpOtpInitialValues}
         schema={verifySignUpOtpSchema}
         onSubmit={onSubmit}
         className={'column'}
       >
-        <FeildBox>
+        <FieldBox>
           <Label>
             {`We have sent a verification code to your email address: ${email.obfuscateEmail()}`}
           </Label>
-          <OTPInputField label="" name="otp" />
-        </FeildBox>
+          <OTPInputField label='' name='otp' />
+        </FieldBox>
         <P>
           Didn't get the code?
-          <Button onClick={handleOtpResend} className="regular">
+          <Button onClick={handleOtpResend} className='regular'>
             Click to resend {otpResendLoading && <LoadingOutlined />}
           </Button>
         </P>
 
-        <ValidatingFormSubmitButton className="fillParent" loading={otpLoading}>
+        <ValidatingFormSubmitButton className='fillParent' loading={otpLoading}>
           Verify
         </ValidatingFormSubmitButton>
       </FormComponent>
@@ -64,7 +64,7 @@ const SignupOtp = () => {
 
 export default SignupOtp;
 
-const FeildBox = styled.div`
+const FieldBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

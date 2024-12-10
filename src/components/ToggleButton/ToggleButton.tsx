@@ -1,9 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 
-export const ToggleButton: React.FC<IToggleButton> = ({ controller }) => {
+interface IToggleButton {
+  controller: (...args: any) => void;
+  defaultState?: boolean;
+}
+
+export const ToggleButton: React.FC<IToggleButton> = ({
+  controller,
+  defaultState,
+}) => {
   const [isOn, setIsOn] = useState(false);
+
+  useEffect(() => {
+    if (defaultState) {
+      setIsOn(defaultState);
+    }
+  }, [defaultState]);
 
   const handleToggle = () => {
     controller();
@@ -53,7 +67,3 @@ const MovingCircle = styled.div`
     background-color: #27ae60;
   }
 `;
-
-interface IToggleButton {
-  controller: (...args: any) => void;
-}

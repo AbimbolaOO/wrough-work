@@ -26,3 +26,5 @@ try.sh
 .dist
 dist
 sample.tsx
+.vscode
+tt.py

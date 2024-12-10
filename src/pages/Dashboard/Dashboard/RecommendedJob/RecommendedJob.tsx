@@ -8,7 +8,7 @@ import useGetAllJobs from '../../../../hooks/getData/useGetAllJobs';
 import useGetUserId from '../../../../hooks/id/useGetUserId';
 
 const RecommendedJob = () => {
-  const { loading, allJobsData } = useGetAllJobs();
+  const { allJobsData } = useGetAllJobs();
 
   const { userId } = useGetUserId();
 
@@ -17,7 +17,6 @@ const RecommendedJob = () => {
       className='biggerPadding'
       label='Recommended Jobs '
       emptyViewNote='You currently don’t have any recommendation'
-      isEmpty={loading}
     >
       <Container>
         {allJobsData

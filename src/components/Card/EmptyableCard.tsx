@@ -1,14 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import Img from "../Img/Img";
+import Img from '../Img/Img';
 
 interface IEmptyableCard {
   label: string | React.ReactNode;
   children?: React.ReactNode;
   emptyViewNote: string | React.ReactNode; //| any;
-  isEmpty: boolean;
   className?: string;
   viewAllClick?: any;
 }
@@ -16,10 +15,10 @@ const EmptyableCard: React.FC<IEmptyableCard> = ({
   label,
   emptyViewNote,
   children,
-  isEmpty,
   className,
   viewAllClick,
 }) => {
+  const isEmpty = React.Children.count(children) === 0;
   return (
     <Container>
       <Label>
@@ -30,7 +29,7 @@ const EmptyableCard: React.FC<IEmptyableCard> = ({
         {isEmpty ? (
           <EmptyWrapper>
             <EmptyWrapperImage>
-              <Img src="/static/gif/happyAnimal.gif" alt="no content" />
+              <Img src='/static/gif/happyAnimal.gif' alt='no content' />
             </EmptyWrapperImage>
             <P>{emptyViewNote}</P>
           </EmptyWrapper>

@@ -2,32 +2,28 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from '../../models/https';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';
 import useHttps from '../useHttps';
 
 const useResendUserSignupVerificationOtp = () => {
   const request = useHttps();
   const [loading, setLoading] = useState(false);
 
-  const onResendSignupVerficationOtpError = (
+  const onResendSignupVerificationOtpError = (
     err: AxiosError<ErrorHttpResponse>
   ) => {
     console.log('onLoginError');
     toast.error(err?.response?.data?.message ?? 'Something went wrong');
   };
 
-  const onResendSignupVerficationOtp = ({
+  const onResendSignupVerificationOtp = ({
     message,
   }: SuccessHttpResponse<any>) => {
-    console.log('onResendSignupVerficationOtp -->>', message);
+    console.log('onResendSignupVerificationOtp -->>', message);
     toast.success(message);
   };
 
-  const resendSignupVerficationOtp = (email: string) => {
+  const resendSignupVerificationOtp = (email: string) => {
     const url: HttpConfig = {
       url: `auth-service/users/signup/resend-otp`,
       method: 'post',
@@ -36,15 +32,15 @@ const useResendUserSignupVerificationOtp = () => {
 
     request(
       url,
-      onResendSignupVerficationOtp,
+      onResendSignupVerificationOtp,
       setLoading,
-      onResendSignupVerficationOtpError
+      onResendSignupVerificationOtpError
     );
   };
 
   return {
     loading,
-    resendSignupVerficationOtp,
+    resendSignupVerificationOtp,
   };
 };
 

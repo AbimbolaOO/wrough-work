@@ -6,7 +6,7 @@ const LoadScreen = () => {
   return (
     <Container>
       <div>
-        <Img src="/static/img/largeCompanyLogo.png" alt="company logo" />
+        <Img src='/static/svg/companyLogo.svg' alt='company logo' />
         <ProgressBar>
           <Background></Background>
           <LoadingIndicator></LoadingIndicator>
@@ -42,6 +42,10 @@ const ProgressBar = styled.div`
   border-radius: 4px;
   overflow: hidden;
 
+  @media (max-width: 480px) {
+    width: 70vw;
+  }
+
   & > * {
     grid-column: 1;
     grid-row: 1;
@@ -56,7 +60,7 @@ const Background = styled.div`
 const LoadingIndicator = styled.div`
   background-color: ${({ theme }) => theme.palette.mainBlue};
   animation-name: loader-motion;
-  animation-duration: 1s;
+  animation-duration: 3s;
   transform-origin: left;
   animation-fill-mode: backwards;
   animation-timing-function: linear;

@@ -3,22 +3,33 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import StatsCard from '../../../../components/Card/StatsCard';
+import { useAppSelector } from '../../../../redux/store';
 
 const ApplicationStatistics = () => {
+  const jobsApplicationStats = useAppSelector(
+    (state) => state.jobsApplicationStats
+  );
+
   const statsData = [
     {
       title: 'Total Applications',
-      data: 0,
+      data:
+        jobsApplicationStats.ACCEPTED +
+        jobsApplicationStats.INTERVIEW +
+        jobsApplicationStats.REJECTED +
+        jobsApplicationStats.SCREENING +
+        jobsApplicationStats.SUBMITTED,
     },
     {
       title: 'Active Applications',
-      data: 0,
+      data: jobsApplicationStats.SCREENING,
     },
     {
       title: 'Pending Applications',
-      data: 0,
+      data: jobsApplicationStats.SUBMITTED,
     },
   ];
+
   return (
     <Container>
       <Header>Application Statistics</Header>

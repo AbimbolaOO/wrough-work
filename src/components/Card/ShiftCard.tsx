@@ -1,33 +1,30 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import Img from "../Img/Img";
-import { jobAppDataType } from "../../models/jobApp/jobApp.model";
-import { truncateText } from "../../utils/utils";
-import RichTextDisplay from "../../utils/RichTextDisplay";
+import { IActiveShifts } from '../../models/dashboard/jobs/getActiveShifts.model';
+import RichTextDisplay from '../../utils/RichTextDisplay';
+import { truncateText } from '../../utils/utils';
+import Img from '../Img/Img';
 
-const ShiftCard: React.FC<Partial<jobAppDataType>> = ({ status, job }) => {
-  const {
-    title = "N/A",
-    jobDescription = { jobDescription: "No description available" },
-    jobStartDate = "N/A",
-    jobEndDate = "N/A",
-    pay = 0,
-    payInterval = "none",
-  } = job || {};
+interface ShiftCardProps {
+  job: IActiveShifts;
+}
 
+const ShiftCard: React.FC<ShiftCardProps> = ({ job }) => {
   return (
     <Container>
       <UpperSection>
         <ImageContainer>
-          <Img src="/static/gif/happyAnimal.gif" alt="shift location image" />
+          <Img src='/static/gif/happyAnimal.gif' alt='shift location image' />
         </ImageContainer>
         <div>
-          <UpperSectionTitle>{title}</UpperSectionTitle>
+          <UpperSectionTitle>{job?.job?.title ?? ''}</UpperSectionTitle>
           <UpperSectionDescription>
             <RichTextDisplay
-              richTextContent={truncateText(jobDescription.jobDescription)}
+              richTextContent={truncateText(
+                job.job?.jobDescription?.jobDescription
+              )}
             />
           </UpperSectionDescription>
         </div>
@@ -39,15 +36,20 @@ const ShiftCard: React.FC<Partial<jobAppDataType>> = ({ status, job }) => {
         </FlexContainer>
         <FlexContainer>
           <BottomSectionData>
-            {jobStartDate ? new Date(jobStartDate).toLocaleDateString() : "N/A"}
-            -{jobEndDate ? new Date(jobEndDate).toLocaleDateString() : "N/A"}
+            {job.job?.jobStartDate
+              ? new Date(job.job?.jobStartDate).toLocaleDateString()
+              : 'N/A'}
+            &dash;
+            {job.job?.jobEndDate
+              ? new Date(job.job?.jobEndDate).toLocaleDateString()
+              : 'N/A'}
           </BottomSectionData>
           <BottomSectionData>
-            {pay.toLocaleString("en-NG", {
-              style: "currency",
-              currency: "NGN",
-            })}{" "}
-            {payInterval}
+            {job.job?.pay.toLocaleString('en-NG', {
+              style: 'currency',
+              currency: 'NGN',
+            })}{' '}
+            {job.job?.payInterval}
           </BottomSectionData>
         </FlexContainer>
       </BottomSection>
@@ -101,11 +103,6 @@ const BottomSectionLabel = styled.div`
   font-weight: 400;
   line-height: normal;
   color: ${({ theme }) => theme.palette.greyGrey2};
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
 `;
 
 const BottomSectionData = styled.div`
@@ -113,11 +110,6 @@ const BottomSectionData = styled.div`
   font-weight: 400;
   line-height: normal;
   color: ${({ theme }) => theme.palette.blackBlackMain};
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
 `;
 
 const FlexContainer = styled.div`

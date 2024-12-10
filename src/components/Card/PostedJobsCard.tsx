@@ -1,14 +1,16 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Img from "../Img/Img";
-import { ToggleButton } from "../ToggleButton/ToggleButton";
-import { JobPostingDataTypeGet } from "../../models/jobPosting/jobPosting.model";
-import { truncateText } from "../../utils/utils";
-import RichTextDisplay from "../../utils/RichTextDisplay";
+import React from 'react';
+
+import styled from '@emotion/styled';
+
+import { IGetCreatedJobs } from '../../models/dashboard/jobs/getCreatedJobs.model';
+import RichTextDisplay from '../../utils/RichTextDisplay';
+import { truncateText } from '../../utils/utils';
+import Img from '../Img/Img';
+import { ToggleButton } from '../ToggleButton/ToggleButton';
 
 // The component expects an array of jobs
 interface IPostedJobsCard {
-  job: JobPostingDataTypeGet; // Change to accept a single job
+  job: IGetCreatedJobs; // Change to accept a single job
 }
 
 const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
@@ -16,7 +18,7 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
     <Container>
       <UpperSection>
         <ImageContainer>
-          <Img src={""} alt="job" />
+          <Img src={''} alt='job' />
         </ImageContainer>
         <div>
           <UpperSectionTitle>{job.title}</UpperSectionTitle>
@@ -26,7 +28,10 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
             />
           </UpperSectionDescription>
         </div>
-        <ToggleButton controller={() => console.log("Toggle")} />
+        <ToggleButton
+          controller={() => console.log('Toggle')}
+          defaultState={job.isPublished}
+        />
       </UpperSection>
       <BottomSection>
         <FlexContainer>
@@ -37,16 +42,15 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
           <BottomSectionData>
             {job.jobStartDate
               ? new Date(job.jobStartDate).toLocaleDateString()
-              : "N/A"}{" "}
-            -
+              : 'N/A'}{' '}
             {job.jobEndDate
               ? new Date(job.jobEndDate).toLocaleDateString()
-              : "N/A"}
+              : 'N/A'}
           </BottomSectionData>
           <BottomSectionData>
-            {job.pay.toLocaleString("en-NG", {
-              style: "currency",
-              currency: "NGN",
+            {job.pay.toLocaleString('en-NG', {
+              style: 'currency',
+              currency: 'NGN',
             })}
           </BottomSectionData>
         </FlexContainer>
@@ -124,7 +128,7 @@ const BottomSectionData = styled.div`
   line-height: normal;
   color: ${({ theme }) => theme.palette.blackBlackMain};
 
-    //mobile-specific styles
+  //mobile-specific styles
   @media (max-width: 768px) {
     font-size: 12px;
   }

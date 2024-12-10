@@ -13,7 +13,7 @@ const useCreateJobPost = () => {
 
   const onCreateJobPostError = (err: AxiosError<ErrorHttpResponse>) => {
     toast.error(
-      err?.response?.data?.message ?? 'Something went wrong while creating rack'
+      err?.response?.data?.message ?? 'Something went wrong while creating job'
     );
   };
 

@@ -4,11 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import { VerifySignUpOtpDataType } from '../../models/auth/verifySignUpOtp.model';
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from '../../models/https';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';
 import { ACCOUNT, SIGNIN } from '../../routes/routeConstants';
 import useHttps from '../useHttps';
 
@@ -22,13 +18,13 @@ const useSignupUserVerificationOtp = () => {
     toast.error(err?.response?.data?.message ?? 'Something went wrong');
   };
 
-  const onSignupVerficationOtp = (_: SuccessHttpResponse<any>) => {
+  const onSignupVerificationOtp = (_: SuccessHttpResponse<any>) => {
     navigate(`/${ACCOUNT}/${SIGNIN}`, {
       replace: true,
     });
   };
 
-  const signupVerficationOtp = (
+  const signupVerificationOtp = (
     data: VerifySignUpOtpDataType,
     email: string
   ) => {
@@ -41,12 +37,12 @@ const useSignupUserVerificationOtp = () => {
       },
     };
 
-    request(url, onSignupVerficationOtp, setLoading, onSignUpError);
+    request(url, onSignupVerificationOtp, setLoading, onSignUpError);
   };
 
   return {
     loading,
-    signupVerficationOtp,
+    signupVerificationOtp,
   };
 };
 
