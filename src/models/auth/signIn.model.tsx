@@ -35,8 +35,8 @@ interface IExperiences {
   otherQualification: string;
   qualificationCertificate?: string | null;
   yearOfQualification: string;
-  createdAt: string;
-  updatedAt: string;
+  startDate: string;
+  endDate: string;
   id: string;
 }
 
