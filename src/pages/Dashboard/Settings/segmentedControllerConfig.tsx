@@ -1,4 +1,4 @@
-export const setmentedControllerConfig = [
+export const segmentedControllerConfig = [
   { title: 'Profile' },
   { title: 'Password' },
   { title: 'Notification' },

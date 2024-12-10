@@ -11,14 +11,14 @@ import NotificationSettings from './NotificationSettings/NotificationSettings';
 import PasswordSettings from './PasswordSettings/PasswordSettings';
 import PrivacySettings from './PrivacySettings/PrivacySettings';
 import ProfileSettings from './ProfileSettings/ProfileSettings';
-import { setmentedControllerConfig } from './setmentedControllerConfig';
+import { segmentedControllerConfig } from './segmentedControllerConfig';
 
 const Settings = () => {
   return (
     <Container className='default-margin'>
       <SegmentedView>
         <SegmentedViewController
-          segmentedViewControllerTitle={setmentedControllerConfig}
+          segmentedViewControllerTitle={segmentedControllerConfig}
         />
         <SegmentedViewData>
           <div>
@@ -45,18 +45,8 @@ const Container = styled.div`
   display: grid;
   background-color: white;
   gap: 1rem;
-  padding: 2rem;
+  padding: 32px;
   border-radius: 0.75rem;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    overflow: hidden;
-    padding: 1rem;
-
-    & > div {
-      // border: 1px solid red;
-      width: 100%;
-      overflow: hidden;
-    }
-  }
+  margin-top: 32px;
+  margin-bottom: 54px;
 `;

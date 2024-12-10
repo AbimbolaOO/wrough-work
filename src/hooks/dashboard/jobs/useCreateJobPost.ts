@@ -9,7 +9,6 @@ import useHttps from '../../useHttps';
 const useCreateJobPost = () => {
   const request = useHttps();
   const [loading, setLoading] = useState(false);
-  const [resetInputFields, setResetInputFields] = useState(false);
 
   const onCreateJobPostError = (err: AxiosError<ErrorHttpResponse>) => {
     toast.error(
@@ -21,7 +20,6 @@ const useCreateJobPost = () => {
     data,
     message,
   }: SuccessHttpResponse<any>) => {
-    setResetInputFields(true);
     toast.success(message);
     resetFormFn();
   };
@@ -37,8 +35,7 @@ const useCreateJobPost = () => {
     request(url, onCreateJobPostSuccess(resetFormFn), setLoading, onCreateJobPostError);
   };
 
-  return { createJobPost, loading, resetInputFields };
-
+  return { createJobPost, loading };
 };
 
 export default useCreateJobPost;

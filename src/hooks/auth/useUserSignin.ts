@@ -3,15 +3,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  ILocumUserData,
-  LocumSignInDataType,
-} from '../../models/auth/signIn.model';
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from '../../models/https';
+import { ILocumUserData, LocumSignInDataType } from '../../models/auth/signIn.model';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';
 import { authActions } from '../../redux/slices/authSlice';
 import { useAppDisPatch } from '../../redux/store';
 import useHttps from '../useHttps';
@@ -26,7 +19,6 @@ const useUserSignin = () => {
     dispatch(
       authActions.setAuthentication({ authData: data, isAuthenticated: true })
     );
-    toast.success('Signed In');
     localStorage.setItem('authData', JSON.stringify(data));
     navigate('/', { replace: true });
   };

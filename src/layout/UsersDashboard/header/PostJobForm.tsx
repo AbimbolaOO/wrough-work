@@ -96,18 +96,18 @@ const PostJobForm: React.FC<PostJobFormProps> = ({ editData, onSuccess }) => {
         schema={JobPostingSchemaPost} // Use JobPostingSchemaGet for fetching, JobPostingSchemaPost for editing/posting
         onSubmit={editData ? handleEditSubmit : handleSubmit}
         className={'flex jobform'}
-        data={
-          editData && {
-            ...editData,
-            jobStartDate: formatDate(editData?.jobStartDate || ''),
-            jobEndDate: formatDate(editData?.jobEndDate || ''),
-            expiryDate: formatDate(editData?.expiryDate || ''),
-            jobDescription:
-              typeof editData?.jobDescription === 'object'
-                ? editData?.jobDescription?.jobDescription || ''
-                : editData?.jobDescription || '',
-          }
-        }
+        // data={
+        //   editData && {
+        //     ...editData,
+        //     jobStartDate: formatDate(editData?.jobStartDate || ''),
+        //     jobEndDate: formatDate(editData?.jobEndDate || ''),
+        //     expiryDate: formatDate(editData?.expiryDate || ''),
+        //     jobDescription:
+        //       typeof editData?.jobDescription === 'object'
+        //         ? editData?.jobDescription?.jobDescription || ''
+        //         : editData?.jobDescription || '',
+        //   }
+        // }
       >
         <FieldGroup>
           <TextInputField label={'Job Title:'} name='title' type='text' />

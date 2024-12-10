@@ -9,7 +9,7 @@ import {
 } from '../../../../../components/SegmentedView/SegmentedViewLite';
 import Experiences from './ Experiences/ Experiences';
 import BasicInformation from './BasicInformation/BasicInformation';
-import { setmentedControlConfData } from './setmentedControlConfData';
+import { segmentedControlConfData } from './segmentedControlConfData';
 import Verification from './Verification/Verification';
 
 const ProfileSettingsBottomSection = () => {
@@ -17,7 +17,7 @@ const ProfileSettingsBottomSection = () => {
     <Container>
       <SegmentedViewLite>
         <SegmentedViewControllerLite
-          segmentedViewControllerTitle={setmentedControlConfData}
+          segmentedViewControllerTitle={segmentedControlConfData}
         />
         <SegmentedViewDataLite>
           <div>

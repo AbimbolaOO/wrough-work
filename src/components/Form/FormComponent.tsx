@@ -9,7 +9,7 @@ interface IFormComponent {
   onSubmit: any;
   children: any;
   className?: any;
-  data?: any; // Add userData as an optional prop
+  autoComplete?: string;
 }
 
 export const FormComponent: React.FC<IFormComponent> = ({
@@ -18,27 +18,58 @@ export const FormComponent: React.FC<IFormComponent> = ({
   onSubmit,
   children,
   className,
-  data, // Accept userData prop
+  autoComplete = 'on',
 }) => {
-  // Merge initialValues with userData if userData exists
-  const mergedInitialValues = {
-    ...initialValues,
-    ...data,
-    yearsOfExperience:
-      data?.yearsOfExperience?.toString() || initialValues.yearsOfExperience,
-  };
-
   return (
     <Formik
-      initialValues={mergedInitialValues} // Use the merged values
+      initialValues={initialValues}
       validationSchema={schema}
       onSubmit={onSubmit}
-      enableReinitialize={true} // Ensure the form reinitializes when userData changes
+      enableReinitialize={true}
     >
-      <StyledForm className={className}>{children}</StyledForm>
+      <StyledForm className={className} autoComplete={autoComplete}>
+        {children}
+      </StyledForm>
     </Formik>
   );
 };
+
+// interface IFormComponent {
+//   initialValues: any;
+//   schema: any;
+//   onSubmit: any;
+//   children: any;
+//   className?: any;
+//   data?: any; // Add userData as an optional prop
+// }
+
+// export const FormComponent: React.FC<IFormComponent> = ({
+//   initialValues,
+//   schema,
+//   onSubmit,
+//   children,
+//   className,
+//   data, // Accept userData prop
+// }) => {
+//   // Merge initialValues with userData if userData exists
+//   const mergedInitialValues = {
+//     ...initialValues,
+//     ...data,
+//     yearsOfExperience:
+//       data?.yearsOfExperience?.toString() || initialValues.yearsOfExperience,
+//   };
+
+//   return (
+//     <Formik
+//       initialValues={mergedInitialValues} // Use the merged values
+//       validationSchema={schema}
+//       onSubmit={onSubmit}
+//       enableReinitialize={true} // Ensure the form reinitializes when userData changes
+//     >
+//       <StyledForm className={className}>{children}</StyledForm>
+//     </Formik>
+//   );
+// };
 
 const StyledForm = styled(Form)`
   display: grid;

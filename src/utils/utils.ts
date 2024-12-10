@@ -96,3 +96,35 @@ export const formatDate = (dateString: string | Date | null) => {
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
+
+// export const formatPhoneNumberInputField = (phoneNumber: string): string => {
+//   const cleaned = phoneNumber.replace(/\D/g, '');
+
+//   let formattedNumber = cleaned.startsWith('234')
+//     ? '0' + cleaned.slice(3)
+//     : cleaned;
+
+//   if (!formattedNumber.startsWith('0')) {
+//     formattedNumber = '0' + formattedNumber;
+//   }
+
+//   return formattedNumber.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+// };
+
+export const formatPhoneNumberInputField = (phoneNumber: string): string => {
+  // Remove all non-digit characters
+  const cleaned = phoneNumber.replace(/\D/g, '');
+
+  // Check if the number includes the country code
+  if (cleaned.startsWith('234')) {
+    // Format with country code
+    return `+234-${cleaned.slice(3, 7)}-${cleaned.slice(7, 10)}-${cleaned.slice(10, 14)}`;
+  } else if (cleaned.length >= 10) { // Ensure we have at least 10 digits for local numbers
+    // Format without country code, assuming it starts with '0'
+    return cleaned.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
+  } else {
+    // If the number is too short, return as is
+    return cleaned;
+  }
+};
+

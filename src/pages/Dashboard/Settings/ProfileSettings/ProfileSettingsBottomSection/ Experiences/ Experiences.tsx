@@ -120,7 +120,7 @@ const Experiences = () => {
           schema={ExperienceSchema}
           onSubmit={handleSubmit}
           className='customFormLayout respondflex'
-          data={editing && editData}
+          // data={editing && editData}
         >
           <TextInputField label='Title' name='title' type='text' />
 

@@ -19,6 +19,10 @@ const authSlice = createSlice({
       state.authData = action.payload.authData;
       state.isAuthenticated = action.payload.isAuthenticated;
     },
+
+    setAuthData(state, action: PayloadAction<ILocumUserData>) {
+      state.authData = action.payload;
+    },
     reset: () => initialState,
   },
 });

@@ -56,7 +56,8 @@ export interface ILocumUserData {
   birthday?: string | null;
   state?: string | null;
   country?: string | null;
-  yearOfExpirence: number;
+  yearsOfExperience: number;
+  occupation?: string | null;
   bio?: string | null;
   profileImage?: string | null;
   isVerified: boolean;

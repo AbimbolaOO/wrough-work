@@ -43,6 +43,7 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
             {job.jobStartDate
               ? new Date(job.jobStartDate).toLocaleDateString()
               : 'N/A'}{' '}
+            <span>&mdash;</span>{' '}
             {job.jobEndDate
               ? new Date(job.jobEndDate).toLocaleDateString()
               : 'N/A'}
