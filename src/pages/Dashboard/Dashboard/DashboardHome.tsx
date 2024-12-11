@@ -14,7 +14,7 @@ const DashboardHome = () => {
 
   return (
     <Container className='default-margin'>
-      {!authData?.isVerified && <Banner />}
+      {!authData?.verification && <Banner />}
       <ApplicationStatistics />
       <ContentGrid>
         <ActiveShifts />

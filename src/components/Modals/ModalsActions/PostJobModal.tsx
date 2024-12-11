@@ -1,3 +1,5 @@
+import 'quill/dist/quill.snow.css';
+
 import React from 'react';
 
 import styled from '@emotion/styled';

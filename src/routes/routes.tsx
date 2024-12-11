@@ -2,7 +2,6 @@ import { Navigate, useRoutes } from 'react-router-dom';
 
 import AuthLayout from '../layout/Auth/AuthLayout';
 import DashboardLayout from '../layout/UsersDashboard/DashboardLayout';
-// import UsersDashboardLayout from '../layout/UsersDashboard/UsersDashboardLayout';
 import EnterNewPassword from '../pages/Auth/ForgotPassword/EnterNewPassWord';
 import ForgotPassword from '../pages/Auth/ForgotPassword/ForgotPassword';
 import ForgotPasswordSuccess from '../pages/Auth/ForgotPassword/ForgotPasswordSuccess';
@@ -13,7 +12,6 @@ import Application from '../pages/Dashboard/Application/Application';
 import Bookmarks from '../pages/Dashboard/Bookmarks/Bookmarks';
 import DashboardHome from '../pages/Dashboard/Dashboard/DashboardHome';
 import ManagePostedJobs from '../pages/Dashboard/Dashboard/ManageJobs/ManagePostedJobs';
-import ViewAllApps from '../pages/Dashboard/Dashboard/ViewAllApps/ViewAllApps';
 import LocumJobs from '../pages/Dashboard/LocumJobs/LocumJobs';
 import Notifications from '../pages/Dashboard/Notifications/Notifications';
 import Settings from '../pages/Dashboard/Settings/Settings';
@@ -34,7 +32,6 @@ import {
   SIGNUP,
   SIGNUP_OTP,
   USERS_SETTINGS,
-  VIEW_ALL_APPS,
 } from './routeConstants';
 
 export default function Router() {
@@ -51,9 +48,6 @@ export default function Router() {
         { path: NOTIFICATIONS, element: <Notifications /> },
         { path: BOOKMARKS, element: <Bookmarks /> },
         { path: MANAGE_POSTED_JOBS, element: <ManagePostedJobs /> },
-        { path: `${VIEW_ALL_APPS}/:jobId`, element: <ViewAllApps /> },
-        // { path: VIEW_ALL_POSTED_JOBS, element: <ViewAllPostedJobs /> },
-        // { path: VIEW_ALL_APPLICANTS, element: <ViewAllApplicants /> },
 
         { path: NOTFOUND, element: <NotFound404 /> },
         { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },

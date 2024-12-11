@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import Img from '../../../../components/Img/Img';
 import { useAppSelector } from '../../../../redux/store';
-import { ACCOUNT, SIGNUP_OTP } from '../../../../routes/routeConstants';
+import { USERS_SETTINGS } from '../../../../routes/routeConstants';
 
 const Banner = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Banner = () => {
         </p>
         <Navigation
           onClick={() =>
-            navigate(`/${ACCOUNT}/${SIGNUP_OTP}`, {
+            navigate(`/${USERS_SETTINGS}`, {
               replace: true,
               state: { data: authData?.email },
             })
