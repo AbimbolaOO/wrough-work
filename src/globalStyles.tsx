@@ -8,10 +8,11 @@ declare module '@emotion/react' {
       blackBlack3: string;
       greyGrey1: string;
       greyGrey2: string;
+      greyGrey3: string;
+      greyGrey4: string;
       mainBlue: string;
       mainPurple: string;
       purplePurple1: string;
-      greyGrey3: string;
       backgroundColor: string;
       stateColorYellow: string;
       stateColorGreen: string;
@@ -32,9 +33,10 @@ export const theme: Theme = {
     blackBlack3: '#333',
     greyGrey1: '#4F4F4F',
     greyGrey2: '#828282',
+    greyGrey3: '#BDBDBD',
+    greyGrey4: '#F8F8F8',
     mainBlue: '#2857D1',
     mainPurple: '#7A40F2F2',
-    greyGrey3: '#BDBDBD',
     backgroundColor: '#F2F8FD',
     stateColorYellow: '#E2B93B',
     stateColorGreen: '#27AE60',

@@ -25,6 +25,8 @@ interface IVerification {
   primaryDegreeCertificate: string;
   validationNumber: string;
   status: string;
+  updatedAt: string;
+  createdAt: string;
 }
 
 interface IExperiences {

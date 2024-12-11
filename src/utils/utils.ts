@@ -95,28 +95,20 @@ export const expired = (date: string | Date): boolean => {
   return inputDate < currentDate;
 };
 
-export const formatDate = (dateString: string | Date | null) => {
+export const formatDate = (dateString: string | Date | null, reverse: boolean = false) => {
   if (!dateString) return "";
+
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
+
+  if (reverse) {
+    return `${day}-${month}-${year}`;
+  }
   return `${year}-${month}-${day}`;
 };
 
-// export const formatPhoneNumberInputField = (phoneNumber: string): string => {
-//   const cleaned = phoneNumber.replace(/\D/g, '');
-
-//   let formattedNumber = cleaned.startsWith('234')
-//     ? '0' + cleaned.slice(3)
-//     : cleaned;
-
-//   if (!formattedNumber.startsWith('0')) {
-//     formattedNumber = '0' + formattedNumber;
-//   }
-
-//   return formattedNumber.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
-// };
 
 export const formatPhoneNumberInputField = (phoneNumber: string): string => {
   // Remove all non-digit characters
