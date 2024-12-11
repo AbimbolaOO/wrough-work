@@ -16,7 +16,7 @@ const LocumJobs = () => {
   };
 
   return (
-    <Container className='default-margin'>
+    <Container>
       {isMobileVisible ? (
         <Back onClick={handleBack}>
           <ChevronLeftIcon />
@@ -42,11 +42,6 @@ export default LocumJobs;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    align-items: center;
-  }
 `;
 
 const JobViewArea = styled.div`

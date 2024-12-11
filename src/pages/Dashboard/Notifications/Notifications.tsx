@@ -2,15 +2,15 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import Banner from '../../../components/Banner/Banner';
+import PageBanner from '../../../components/Banner/PageBanner';
 import NotificationList from './NotificationList/NotificationList';
 
 const Notifications = () => {
   return (
     <Container>
-      <Banner
-        title='Applications'
-        description='Welcome to your application Dashboards'
+      <PageBanner
+        label='Notifications'
+        description='Welcome to your notification dashboard'
       />
       <NotificationList />
     </Container>
@@ -19,4 +19,8 @@ const Notifications = () => {
 
 export default Notifications;
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;

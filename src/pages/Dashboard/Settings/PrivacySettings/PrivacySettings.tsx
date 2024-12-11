@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const PrivacySettings = () => {
   return (
@@ -14,10 +14,10 @@ const PrivacySettings = () => {
       <p>
         This Privacy Policy outlines how Locumspace ("we," "us," or "our")
         collects, uses, discloses, and protects your personal information when
-        you use our website located at{" "}
-        <a href="http://locumspace.co" target="_blank" rel="noreferrer">
+        you use our website located at{' '}
+        <a href='http://locumspace.co' target='_blank' rel='noreferrer'>
           locumspace.co
-        </a>{" "}
+        </a>{' '}
         (the "Website") and our mobile application called Locumspace (the
         "App"). This Privacy Policy is compliant with global standards and the
         National Data Protection Act of Nigeria 2023 ("NDPA 2023").
@@ -119,8 +119,8 @@ const PrivacySettings = () => {
       <h2>Contact Us</h2>
       <p>
         If you have any questions, concerns, or requests regarding this Privacy
-        Policy or your personal information, please contact us at{" "}
-        <a href="mailto:info@locumspace.co">info@locumspace.co</a>.
+        Policy or your personal information, please contact us at{' '}
+        <a href='mailto:info@locumspace.co'>info@locumspace.co</a>.
       </p>
 
       <h2>Information about General Data Protection Regulation (GDPR)</h2>
@@ -209,8 +209,8 @@ const PrivacySettings = () => {
       <h2>Contact Us</h2>
       <p>
         Don't hesitate to contact us if you have any questions. <br />
-        <strong>Via Email:</strong>{" "}
-        <a href="mailto:info@locumspace.co">info@locumspace.co</a>
+        <strong>Via Email:</strong>{' '}
+        <a href='mailto:info@locumspace.co'>info@locumspace.co</a>
       </p>
     </Container>
   );
@@ -230,14 +230,13 @@ const Container = styled.div`
     margin: 1rem;
   }
 
-  // Mobile-specific styles
-  @media (max-width: 768px) {
+  @media (max-width: 884px) {
     font-size: 14px;
     & > h2 {
-      margin: 0;
+      margin: 8px;
     }
     & > p {
-      margin: 0;
+      margin: 8px;
     }
   }
 `;

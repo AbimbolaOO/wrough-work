@@ -10,7 +10,7 @@ const Application = () => {
     <Container>
       <PageBanner
         label='Applications'
-        description='Welcome to your application Dashboards'
+        description='Welcome to your application dashboard'
       />
       <ApplicationSegment />
     </Container>

@@ -24,7 +24,7 @@ const Settings = () => {
     <Wrapper>
       <PageBanner
         label='Setting'
-        description='Welcome to your application Dashboards'
+        description='Welcome to your settings dashboard'
       />
       <Container>
         <SegmentedView>
