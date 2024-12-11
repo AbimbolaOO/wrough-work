@@ -13,8 +13,13 @@ const AllApplications = () => {
   const { jobData, page } = useAppSelector((state) => state.jobApplications);
 
   useEffect(() => {
-    console.log('page--->>', page);
-    getJobApplications();
+    // console.log('jobData--><>>', jobData);
+    //! Comeback here and look at this implementation
+    if (!jobData.length) {
+      getJobApplications();
+    }
+
+    // eslint-disable-next-line
   }, [page]);
 
   return (

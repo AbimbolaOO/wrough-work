@@ -22,8 +22,8 @@ const activeJobApplicationsSlice = createSlice({
     reducers: {
         activeJobApplications(state, action: PayloadAction<IJobApplicationQuery>) {
             state.page = action.payload.page;
-            state.perPage = action.payload.page;
-            state.jobData = action.payload.jobData;
+            state.perPage = action.payload.perPage;
+            state.jobData = [...action.payload.jobData];
         },
     },
 });

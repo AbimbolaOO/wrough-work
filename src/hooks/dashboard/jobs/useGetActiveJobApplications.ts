@@ -3,15 +3,15 @@ import { useState } from 'react';
 
 import { IJobApplications } from '../../../models/dashboard/jobs/getAllJobApplications.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../../models/https';
-import { useAppSelector } from '../../../redux/store';
-// import { useAppDisPatch } from '../../../redux/store';
+import { activeJobApplicationsActions } from '../../../redux/slices/activeJobApplicationsSlice';
+import { useAppDisPatch, useAppSelector } from '../../../redux/store';
 import useHttps from '../../useHttps';
 
 const useGetActiveJobApplications = () => {
   const request = useHttps();
   const [loading, setLoading] = useState(false);
   const { authData } = useAppSelector((state) => state.auth);
-  // const dispatch = useAppDisPatch();
+  const dispatch = useAppDisPatch();
 
   const onGetActiveJobApplicationsError = (err: AxiosError<ErrorHttpResponse>) => {
     console.error(err?.message ?? "Something when wrong while fetching active jobs");
@@ -21,11 +21,11 @@ const useGetActiveJobApplications = () => {
     data,
     message,
   }: SuccessHttpResponse<IJobApplications[]>) => {
-    // dispatch(jobActiveShiftActions.getJobActiveShift(data));
+    dispatch(activeJobApplicationsActions.activeJobApplications({ page: 1, perPage: 10, jobData: data }));
   };
 
 
-  const getActiveJobApplications = (page?: string) => {
+  const getActiveJobApplications = (filter?: string) => {
     const url: HttpConfig = {
       url: `jobs-service/jobs/institutions/${authData?.id}/jobs`,
       method: 'get',

@@ -9,7 +9,7 @@ interface IJobApplicationQuery {
 }
 
 const initialState: IJobApplicationQuery = {
-    page: 0,
+    page: 1,
     perPage: 10,
     jobData: []
 };
@@ -22,8 +22,8 @@ const jobApplicationsSlice = createSlice({
     reducers: {
         getJobApplications(state, action: PayloadAction<IJobApplicationQuery>) {
             state.page = action.payload.page;
-            state.perPage = action.payload.page;
-            state.jobData = action.payload.jobData;
+            state.perPage = action.payload.perPage;
+            state.jobData = [...action.payload.jobData];
         },
     },
 });

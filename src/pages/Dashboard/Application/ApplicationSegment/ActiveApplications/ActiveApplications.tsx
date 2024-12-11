@@ -15,7 +15,11 @@ const ActiveApplications = () => {
   );
 
   useEffect(() => {
-    getActiveJobApplications();
+    //! Comeback here and look at this implementation
+    if (!jobData.length) {
+      getActiveJobApplications();
+    }
+    // eslint-disable-next-line
   }, [page]);
 
   return (
