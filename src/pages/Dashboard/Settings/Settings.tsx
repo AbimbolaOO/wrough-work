@@ -8,38 +8,57 @@ import {
   SegmentedViewData,
 } from '../../../components/SegmentedView/SegmentedView';
 import NotificationSettings from './NotificationSettings/NotificationSettings';
-import PasswordSettings from './PasswordSettings/PasswordSettings';
 import PrivacySettings from './PrivacySettings/PrivacySettings';
 import ProfileSettings from './ProfileSettings/ProfileSettings';
-import { segmentedControllerConfig } from './segmentedControllerConfig';
+
+const segmentedControllerConfig = [
+  { title: 'Profile' },
+  // { title: 'Password' },
+  { title: 'Notification' },
+  { title: 'Privacy' },
+];
 
 const Settings = () => {
   return (
-    <Container className='default-margin'>
-      <SegmentedView>
-        <SegmentedViewController
-          segmentedViewControllerTitle={segmentedControllerConfig}
-        />
-        <SegmentedViewData>
-          <div>
-            <ProfileSettings />
-          </div>
-          <div>
+    <Wrapper>
+      <SettingsBanner>
+        <div className='label'>Settings</div>
+        <div className='description'>
+          Welcome to your application Dashboards
+        </div>
+      </SettingsBanner>
+      <Container>
+        <SegmentedView>
+          <SegmentedViewController
+            segmentedViewControllerTitle={segmentedControllerConfig}
+          />
+          <SegmentedViewData>
+            <div>
+              <ProfileSettings />
+            </div>
+            {/* <div>
             <PasswordSettings />
-          </div>
-          <div>
-            <NotificationSettings />
-          </div>
-          <div>
-            <PrivacySettings />
-          </div>
-        </SegmentedViewData>
-      </SegmentedView>
-    </Container>
+          </div> */}
+            <div>
+              <NotificationSettings />
+            </div>
+            <div>
+              <PrivacySettings />
+            </div>
+          </SegmentedViewData>
+        </SegmentedView>
+      </Container>
+    </Wrapper>
   );
 };
 
 export default Settings;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
 
 const Container = styled.div`
   display: grid;
@@ -47,6 +66,28 @@ const Container = styled.div`
   gap: 1rem;
   padding: 32px;
   border-radius: 0.75rem;
-  margin-top: 32px;
   margin-bottom: 54px;
+`;
+
+const SettingsBanner = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: -54px;
+  margin-right: -54px;
+  padding: 18px 54px;
+
+  & > .label {
+    color: ${({ theme }) => theme.palette.blackBlackMain};
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 35.88px;
+  }
+
+  & > .description {
+    color: ${({ theme }) => theme.palette.greyGrey1};
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+  }
 `;

@@ -1,157 +1,127 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
-import { PrimaryButton } from '../../../../../components/Button';
-import Img from '../../../../../components/Img/Img';
-import useGetUserData from '../../../../../hooks/getData/useGetUserData';
-import usePutUserProfilePic from '../../../../../hooks/putData/usePutUserProfilePic';
+import { FormComponent } from '../../../../../components/Form/FormComponent';
+import { InputWrapper } from '../../../../../components/Form/FormField';
+import ImageUploadButton from '../../../../../components/Form/ImageUploadButton';
+import useUploadProfileImage from '../../../../../hooks/dashboard/settings/profilesetting/useUploadProfileImage';
+import {
+  ProfileImageDataType,
+  ProfileImageSchema,
+  profileImageValues,
+} from '../../../../../models/dashboard/settings/profileSettings/profileImage.model';
+import { useAppSelector } from '../../../../../redux/store';
 
 const ProfileSettingsTopSection = () => {
-  const { userData } = useGetUserData();
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const { putProfilePic } = usePutUserProfilePic();
+  const { authData } = useAppSelector((state) => state.auth);
+  const { uploadProfileImage, loading } = useUploadProfileImage();
+  const [defaultImgUrl, setDefaultImgUrl] = useState<string | null>(
+    authData?.profileImage ?? '/static/svg/profilePlaceholder.svg'
+  );
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-    }
-  };
-
-  const handleUploadClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleSaveClick = () => {
-    if (selectedFile) {
-      putProfilePic({ profileImage: selectedFile });
-    }
+  const handleSubmit = (values: ProfileImageDataType) => {
+    console.log('LOL');
+    uploadProfileImage(values);
   };
 
   return (
     <Container>
-      <StyledImg>
-        <Img
-          src={
-            previewUrl ||
-            userData?.profileImage ||
-            '/static/img/profilePlaceHolder.png'
-          }
-          alt='profileImg'
-        />
-      </StyledImg>
-      <ProfileTopSectionTextArea>
-        <h2>
-          {userData ? (
-            `${userData.firstName} ${userData.lastName}`
-          ) : (
-            <LoadingOutlined />
-          )}
-        </h2>
-        <p>{userData ? `${userData.email}` : <LoadingOutlined />}</p>
-        <Wrapper>
-          <PrimaryButton
-            className='grey contentFit nowrap respondsmall'
-            click={handleUploadClick}
-          >
-            Upload Profile Picture
-          </PrimaryButton>
-          <FileInput
-            type='file'
-            accept='image/*'
-            ref={fileInputRef}
-            onChange={handleFileSelect}
-          />
-          {selectedFile && (
-            <PrimaryButton
-              className='grey contentFit respondsmall'
-              click={handleSaveClick}
-            >
-              Save
-            </PrimaryButton>
-          )}
-        </Wrapper>
-      </ProfileTopSectionTextArea>
+      <FormComponent
+        initialValues={profileImageValues}
+        schema={ProfileImageSchema}
+        onSubmit={handleSubmit}
+      >
+        <InputWrapper>
+          <InputContainer>
+            <ImageContainer>
+              {loading && (
+                <div className='loadingIcon'>
+                  <LoadingOutlined />
+                </div>
+              )}
+              <Img src={`${defaultImgUrl}`} alt='profile image' />
+            </ImageContainer>
+            <TextArea>
+              <div className='name'>Abimbola Olayemi</div>
+              <div className='email'>abimbolaolayemiwhyte@gmail.com</div>
+
+              <ImageUploadButton
+                id='profileImage'
+                name='profileImage'
+                defaultImgUrl={defaultImgUrl}
+                setDefaultImgUrl={setDefaultImgUrl}
+              />
+            </TextArea>
+          </InputContainer>
+        </InputWrapper>
+      </FormComponent>
     </Container>
   );
 };
 
 export default ProfileSettingsTopSection;
 
-// Styled Components
-
 const Container = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
   padding: 1.25rem;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    gap: 0.5rem;
-    padding: 1rem;
-  }
 `;
 
-const ProfileTopSectionTextArea = styled.div`
+export const InputContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  & > h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: auto;
-    flex-grow: 1;
-    gap: 0;
-
-    & > h2 {
-      font-size: 16px;
-    }
-
-    & > p {
-      font-size: 14px;
-    }
-  }
+  gap: 32px;
+  align-items: center;
 `;
 
-const FileInput = styled.input`
-  display: none;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-const StyledImg = styled.div`
+const ImageContainer = styled.div`
+  display: grid;
+  place-content: center;
   width: 150px;
   height: 150px;
   border-radius: 4px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & > img {
-    width: 100%;
-    height: auto;
-    object-size: contain;
+
+  & > * {
+    grid-column: 1;
+    grid-row: 1;
+    border-radius: 4px;
   }
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 50px;
-    height: 50px;
+  & > .loadingIcon {
+    border: 2px solid red;
+    display: grid;
+    place-content: center;
+    color: ${({ theme }) => theme.palette.mainBlue};
+  }
+`;
+
+const Img = styled.img`
+  object-fit: fill;
+  object-position: center center;
+`;
+
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & > .name {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35.88px;
+    color: ${({ theme }) => theme.palette.blackBlackMain};
+  }
+
+  & > .email {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26.91px;
+    color: ${({ theme }) => theme.palette.greyGrey1};
+  }
+
+  & > :last-of-type {
+    margin-top: 10px;
   }
 `;

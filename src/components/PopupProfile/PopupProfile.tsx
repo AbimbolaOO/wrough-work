@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import useGetUserData from "../../hooks/getData/useGetUserData";
-import useGetExperience from "../../hooks/getData/useGetExperience";
-import useGetVerification from "../../hooks/getData/useGetVerification";
-import { LoadingOutlined } from "@ant-design/icons";
-import { calculateTimeAgo } from "../../utils/utils";
+import React, { useEffect, useState } from 'react';
+
+import { LoadingOutlined } from '@ant-design/icons';
+import styled from '@emotion/styled';
+
+import useGetExperience from '../../hooks/getData/useGetExperience';
+import useGetUserData from '../../hooks/getData/useGetUserData';
+import useGetVerification from '../../hooks/getData/useGetVerification';
+import { calculateTimeAgo } from '../../utils/utils';
 
 interface PopupProfileProps {
   selectedButton?: string; // Prop for determining the initially selected button
@@ -17,9 +19,9 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
   forApplicant = false, // Default, value of forApplicant is false
   applicantId,
 }) => {
-  const colors = ["#2857d1", "#27AE60"]; // Predefined colors for dynamic background
+  const colors = ['#2857d1', '#27AE60']; // Predefined colors for dynamic background
 
-  const [activeButton, setActiveButton] = useState<string>("Experience"); // State to track which tab is active
+  const [activeButton, setActiveButton] = useState<string>('Experience'); // State to track which tab is active
   const [showButtons, setShowButtons] = useState<boolean>(forApplicant); // Show buttons if it's for an applicant
   const { userData, loading } = useGetUserData(applicantId); // Fetch user profile data
 
@@ -29,13 +31,13 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
   // TODO: Find a better way to handle this logic if possible
   const { verificationData } = useGetVerification(
     applicantId
-      ? userData?.verification?.id ?? " " // If `applicantId` exists and `userData?.verification?.id` is undefined, pass "  ", otherwise pass the ID
+      ? userData?.verification?.id ?? ' ' // If `applicantId` exists and `userData?.verification?.id` is undefined, pass "  ", otherwise pass the ID
       : userData?.verification?.id || undefined // If no `applicantId`, pass `userData?.verification?.id` or undefined
   );
 
   // Set active button based on selectedButton prop or default to "Experience"
   useEffect(() => {
-    setActiveButton(selectedButton || "Experience");
+    setActiveButton(selectedButton || 'Experience');
   }, [selectedButton]);
 
   // Toggle buttons visibility when forApplicant changes
@@ -53,8 +55,8 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
 
   // Generate a random color (used for dynamic backgrounds)
   const getRandomColor = () => {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
+    const letters = '0123456789ABCDEF';
+    let color = '#';
     for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
@@ -63,7 +65,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
 
   // Get the initials from the user's name or company name
   function getFirstAlphabets(input: string): string {
-    const words = input.split(" ");
+    const words = input.split(' ');
     let result: string;
     if (words.length === 1) {
       const firstLetter = words[0][0].toUpperCase();
@@ -74,7 +76,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
       const secondAlphabet = words[1][0].toUpperCase();
       result = firstAlphabet + secondAlphabet;
     } else {
-      throw new Error("The input string must contain at least one word.");
+      throw new Error('The input string must contain at least one word.');
     }
     return result;
   }
@@ -88,7 +90,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
         <div>
           <div>
             <div>
-              <img src="/static/img/profileAppDum.jpg" alt="" />
+              <img src='/static/img/profileAppDum.jpg' alt='' />
             </div>
             <p>
               <span>
@@ -120,24 +122,24 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                 {userData?.birthday ? (
                   <>{calculateTimeAgo(userData?.birthday)}</>
                 ) : (
-                  "N/A"
+                  'N/A'
                 )}
               </span>
             </p>
             <p>
-              {" "}
+              {' '}
               <span>Years of Experience</span>
               <br />
               <span>{userData?.yearsOfExperience} years</span>
             </p>
             <p>
-              {" "}
+              {' '}
               <span>Location</span>
               <br />
               <span>{userData?.state} Nigeria</span>
             </p>
             <p>
-              {" "}
+              {' '}
               <span>Availability</span>
               <br />
               <span>Full Time</span>
@@ -161,9 +163,9 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
           <ul>
             <li>
               <Button
-                isActive={activeButton === "Experience"}
+                isActive={activeButton === 'Experience'}
                 onClick={() => {
-                  handleButtonClick("Experience");
+                  handleButtonClick('Experience');
                 }}
               >
                 Experience
@@ -171,9 +173,9 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
             </li>
             <li>
               <Button
-                isActive={activeButton === "Education"}
+                isActive={activeButton === 'Education'}
                 onClick={() => {
-                  handleButtonClick("Education");
+                  handleButtonClick('Education');
                 }}
               >
                 Education
@@ -181,9 +183,9 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
             </li>
             <li>
               <Button
-                isActive={activeButton === "Licenses"}
+                isActive={activeButton === 'Licenses'}
                 onClick={() => {
-                  handleButtonClick("Licenses");
+                  handleButtonClick('Licenses');
                 }}
               >
                 Licenses & certifications
@@ -195,7 +197,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
           {/* Content for the selected tab */}
           {loading ? (
             <LoadingOutlined />
-          ) : activeButton === "Experience" ? (
+          ) : activeButton === 'Experience' ? (
             <div>
               {/* Display user experience */}
               {userExperience.map((experience, index) => (
@@ -215,18 +217,18 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                     <span>{`${
                       experience.startDate
                         ? new Date(experience.startDate).toLocaleDateString()
-                        : "N/A"
+                        : 'N/A'
                     } - ${
                       experience.endDate
                         ? new Date(experience.endDate).toLocaleDateString()
-                        : "N/A"
+                        : 'N/A'
                     } | ${experience.location}`}</span>
                   </div>
                   <hr />
                 </DetailsInfo>
               ))}
             </div>
-          ) : activeButton === "Education" ? (
+          ) : activeButton === 'Education' ? (
             <div>
               {/* Display user education */}
               {userExperience
@@ -240,35 +242,35 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                     >
                       {ed.otherQualification &&
                         ed.otherQualification
-                          .split(" ")
+                          .split(' ')
                           .filter((word) => word[0] === word[0].toUpperCase())
                           .slice(0, 2)
                           .map((word) => word[0])
-                          .join("")}
+                          .join('')}
                     </div>
                     <div>
                       <h3>{ed.otherQualification && ed.otherQualification}</h3>
                       <p>
-                        {typeof ed?.qualificationCertificate === "string"
-                          ? ed.qualificationCertificate.includes("Certificate")
+                        {typeof ed?.qualificationCertificate === 'string'
+                          ? ed.qualificationCertificate.includes('Certificate')
                             ? ed.qualificationCertificate.substring(
                                 ed.qualificationCertificate.indexOf(
-                                  "Certificate"
+                                  'Certificate'
                                 ),
                                 ed.qualificationCertificate.indexOf(
-                                  "Certificate"
+                                  'Certificate'
                                 ) + 19
                               )
-                            : "No certificate available"
-                          : "No certificate available"}
+                            : 'No certificate available'
+                          : 'No certificate available'}
                       </p>
                       <span>
-                        {"date issued : "}
+                        {'date issued : '}
                         {ed.yearOfQualification
                           ? new Date(
                               ed.yearOfQualification
                             ).toLocaleDateString() // Safely convert to Date and extract year
-                          : "No license year available"}
+                          : 'No license year available'}
                       </span>
                     </div>
                     <hr />
@@ -283,38 +285,38 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                     }}
                   >
                     {verificationData.primaryDegreeName
-                      .split(" ")
+                      .split(' ')
                       .filter((word) => word[0] === word[0].toUpperCase())
                       .slice(0, 2)
                       .map((word) => word[0])
-                      .join("")}
+                      .join('')}
                   </div>
                   <div>
                     <h3>{verificationData.primaryDegreeName}</h3>
                     <p>
                       {typeof verificationData.primaryDegreeCertificate ===
-                      "string"
+                      'string'
                         ? verificationData.primaryDegreeCertificate.includes(
-                            "Certificate"
+                            'Certificate'
                           )
                           ? verificationData.primaryDegreeCertificate.substring(
                               verificationData.primaryDegreeCertificate.indexOf(
-                                "Certificate"
+                                'Certificate'
                               ),
                               verificationData.primaryDegreeCertificate.indexOf(
-                                "Certificate"
+                                'Certificate'
                               ) + 19
                             )
-                          : "No certificate available"
-                        : "No certificate available"}
+                          : 'No certificate available'
+                        : 'No certificate available'}
                     </p>
                     <span>
-                      {"date issued :   "}
+                      {'date issued :   '}
                       {verificationData.yearOfCurrentLicense
                         ? new Date(
                             verificationData.yearOfCurrentLicense
                           ).toLocaleDateString() // Safely convert to Date and extract year
-                        : "No license year available"}
+                        : 'No license year available'}
                     </span>
                   </div>
                   <hr />
@@ -323,7 +325,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                 <p>...</p> // Display if the object is empty or null
               )}
             </div>
-          ) : activeButton === "Licenses" ? (
+          ) : activeButton === 'Licenses' ? (
             <div>
               {/* Display user licenses */}
               {verificationData && Object.keys(verificationData).length > 0 ? (
@@ -334,22 +336,22 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
                     }}
                   >
                     {verificationData.primaryDegreeName
-                      .split(" ")
+                      .split(' ')
                       .filter((word) => word[0] === word[0].toUpperCase())
                       .slice(0, 2)
                       .map((word) => word[0])
-                      .join("")}
+                      .join('')}
                   </div>
                   <div>
                     <h3>{verificationData.validationNumber}</h3>
                     <p>{verificationData.status}</p>
                     <span>
-                      {"date issued :   "}
+                      {'date issued :   '}
                       {verificationData.yearOfCurrentLicense
                         ? new Date(
                             verificationData.yearOfCurrentLicense
                           ).toLocaleDateString() // Safely convert to Date and extract year
-                        : "No license year available"}
+                        : 'No license year available'}
                     </span>
                   </div>
                   <button>View Certificates</button>
@@ -360,7 +362,7 @@ const PopupProfile: React.FC<PopupProfileProps> = ({
               )}
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
       </Right>
@@ -619,7 +621,7 @@ const Right = styled.div`
           margin-bottom: 1rem;
         }
 
-        & > p:nth-child(5) {
+        /* & > p:nth-child(5) {
           display: flex;
           justify-content: start;
           align-items: center;
@@ -640,7 +642,7 @@ const Right = styled.div`
             border: none;
             background-color: #7a40f2;
           }
-        }
+        } */
       }
     }
 
@@ -670,7 +672,7 @@ const Button = styled.button<ButtonProps>`
   border: none;
   background-color: inherit;
   color: #bdbdbd;
-  color: ${({ isActive }) => (isActive ? "#2857D1" : "#BDBDBD")};
+  color: ${({ isActive }) => (isActive ? '#2857D1' : '#BDBDBD')};
 `;
 
 /* Style for displaying experience, education, and license details */
@@ -707,7 +709,7 @@ const DetailsInfo = styled.div`
     background-color: inherit;
     color: #2f80ed;
   }
-  & > div:nth-child(1) {
+  /* & > div:nth-child(1) {
     border: none;
     width: 3rem;
     height: 3rem;
@@ -743,13 +745,13 @@ const DetailsInfo = styled.div`
       letter-spacing: -1px;
       color: #828282;
     }
-  }
+  } */
 
   //mobile-specific styles
   @media (max-width: 768px) {
     margin-left: 0;
 
-    & > div:nth-child(1) {
+    /* & > div:nth-child(1) {
       width: 2rem;
       height: 2rem;
       font-size: 16px;
@@ -764,6 +766,6 @@ const DetailsInfo = styled.div`
       & p > {
         font-size: 14px;
       }
-    }
+    } */
   }
 `;

@@ -247,7 +247,6 @@ const PasswordContainer = styled.div`
 `;
 
 const Password = styled.input`
-  /* border: 2px solid green; */
   width: 100%;
   border-radius: 4px;
   padding: 1rem;
@@ -270,17 +269,6 @@ const Password = styled.input`
     color: 1px solid ${({ theme }) => theme.palette.greyGrey3};
     font-size: 1.125rem;
     font-weight: 300;
-
-    //mobile-specific styles
-    @media (max-width: 768px) {
-      font-size: 15px;
-    }
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    padding: 12px;
-    font-size: 15px;
   }
 `;
 
@@ -315,22 +303,12 @@ const CheckboxWrapper = styled.div`
     margin-right: 10px;
     cursor: pointer;
   }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 12.5px;
-  }
 `;
 
 export const FieldErrorInfo = styled.div`
   font-size: 1rem;
   color: red;
   text-align: left;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
 `;
 
 export const InputWrapper = styled.div`
@@ -346,18 +324,6 @@ export const InputLabel = styled.label`
     color: ${({ theme }) => theme.palette.greyGrey2};
     font-size: 15px;
     font-weight: 400;
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 23.92px;
-    letter-spacing: -1px;
-
-    & > span {
-      font-size: 12px;
-    }
   }
 `;
 
@@ -393,23 +359,10 @@ export const Input = styled.input<IInput>`
     color: 1px solid ${({ theme }) => theme.palette.greyGrey3};
     font-size: 1.125rem;
     font-weight: 300;
-
-    //mobile-specific styles
-    @media (max-width: 768px) {
-      font-size: 15px;
-    }
   }
 
   &.read {
     color: ${({ theme }) => theme.palette.greyGrey2};
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    padding: 12px;
-    font-size: 15px;
-    background-color: inherit;
-    width: 100%;
   }
 `;
 
@@ -439,23 +392,9 @@ export const TextArea = styled.textarea<IInput>`
     font-size: 1.125rem;
     font-weight: 300;
   }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    padding: 12px;
-    font-size: 15px;
-    background-color: inherit;
-    width: 100%;
-
-    &::placeholder {
-      font-size: 12px;
-    }
-  }
 `;
 
 const Select = styled.select`
-  /* border: 2px solid red; */
-  /* max-width: 400px; */
   border-radius: 4px;
   padding: 15px;
   font-weight: 300;
@@ -479,13 +418,6 @@ const Select = styled.select`
     font-size: 1rem;
     font-weight: 300;
   }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    padding: 12px;
-    font-size: 15px;
-    background-color: inherit;
-  }
 `;
 
 export const InputContainer = styled.div`
@@ -498,11 +430,6 @@ export const InputContainer = styled.div`
   }
   &:hover {
     cursor: pointer;
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 

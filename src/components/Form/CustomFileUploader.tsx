@@ -1,4 +1,4 @@
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 import React, { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
@@ -21,6 +21,7 @@ const CustomFileUploader: React.FC<CustomFileUploaderProps> = ({
 }) => {
   const [field, meta, helpers] = useField(name);
   const [imageName, setImageName] = useState<string>('');
+  const { handleBlur } = useFormikContext<any>();
 
   useEffect(() => {
     if (field.value) {
@@ -50,13 +51,17 @@ const CustomFileUploader: React.FC<CustomFileUploaderProps> = ({
             type='file'
             accept='.pdf'
             onChange={handleChange}
+            // onBlur={() => handleBlur({ target: { name: name } })}
           />
           <IconStyle>
             <FileIcon />
           </IconStyle>
         </InputContainer>
 
-        <PseudoFormField>
+        <PseudoFormField
+          tabIndex={0}
+          onClick={() => handleBlur({ target: { name: name } })}
+        >
           {truncateTextByCharacters(imageName, 40)}
         </PseudoFormField>
       </InputLabel>
@@ -101,6 +106,7 @@ const PseudoFormField = styled.div`
 
 const InputWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 

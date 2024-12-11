@@ -27,7 +27,7 @@ export const VerificationSchema = Yup.object().shape({
 export type VerificationDataType = Yup.InferType<typeof VerificationSchema>;
 
 type InitialValues = {
-  yearOfCurrentLicense: Date | null;
+  yearOfCurrentLicense: string;
   license: any;
   primaryDegreeName: string;
   validationNumber: string;
@@ -36,7 +36,7 @@ type InitialValues = {
 };
 
 export const verificationInitialValues: InitialValues = {
-  yearOfCurrentLicense: null,
+  yearOfCurrentLicense: '',
   license: null,
   primaryDegreeName: '',
   validationNumber: '',

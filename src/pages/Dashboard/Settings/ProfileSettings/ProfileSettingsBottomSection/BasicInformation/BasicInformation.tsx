@@ -101,7 +101,14 @@ const BasicInformation = () => {
         />
       </FieldGroups>
 
-      <FieldGroups>
+      <FieldGroups className='three-col'>
+        <NumberOnlyInputField
+          label='Years of Experience'
+          name='yearsOfExperience'
+          type='text'
+          placeholder=''
+        />
+
         <CustomSelectField
           label='State'
           name='state'
@@ -121,14 +128,14 @@ const BasicInformation = () => {
         />
       </FieldGroups>
 
-      <FieldGroups>
+      {/* <FieldGroups>
         <NumberOnlyInputField
           label='Years of Experience'
           name='yearsOfExperience'
           type='text'
           placeholder=''
         />
-      </FieldGroups>
+      </FieldGroups> */}
 
       <TextAreaInputField
         label='Bio'
@@ -150,6 +157,10 @@ const FieldGroups = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+
+  &.three-col {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
   &.submit-btn {
     display: flex;

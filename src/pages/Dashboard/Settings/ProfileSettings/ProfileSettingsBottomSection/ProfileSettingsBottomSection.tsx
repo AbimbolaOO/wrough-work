@@ -9,8 +9,13 @@ import {
 } from '../../../../../components/SegmentedView/SegmentedViewLite';
 import Experiences from './ Experiences/ Experiences';
 import BasicInformation from './BasicInformation/BasicInformation';
-import { segmentedControlConfData } from './segmentedControlConfData';
 import Verification from './Verification/Verification';
+
+const segmentedControlConfData = [
+  { title: 'Basic information ' },
+  { title: 'Verification' },
+  { title: ' Experiences' },
+];
 
 const ProfileSettingsBottomSection = () => {
   return (

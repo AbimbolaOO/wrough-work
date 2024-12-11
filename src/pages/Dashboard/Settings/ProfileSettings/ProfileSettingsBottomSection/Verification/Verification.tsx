@@ -18,6 +18,6 @@ const Verification = () => {
   );
 };
 
-const Container = styled.div``;
-
 export default Verification;
+
+const Container = styled.div``;
