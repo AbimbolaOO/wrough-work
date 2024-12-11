@@ -58,6 +58,8 @@ export const TextInputField: React.FC<IInputField> = ({
           {...props}
           className={className ? className : ''}
           readOnly={read}
+          lpiSrc={lpiSrc}
+          rpiSrc={rpiSrc}
         />
         {lpiSrc ? <LeftPlaceHolderCardIcon alt='icon' src={lpiSrc} /> : null}
         {rpiSrc ? <RightPlaceHolderCardIcon alt='icon' src={rpiSrc} /> : null}
@@ -335,9 +337,13 @@ interface IInput {
 }
 
 export const Input = styled.input<IInput>`
-  /* border: 2px solid green; */
   border-radius: 4px;
   padding: 15px;
+
+  padding-left: ${({ lpiSrc, rpiSrc }) => (lpiSrc || rpiSrc ? '62px' : '15px')};
+  padding-right: ${({ lpiSrc, rpiSrc }) =>
+    lpiSrc || rpiSrc ? '62px' : '15px'};
+
   text-align: left;
   font-weight: 300;
   color: ${({ theme }) => theme.palette.blackBlack2};
@@ -435,18 +441,24 @@ export const InputContainer = styled.div`
 
 export const LeftPlaceHolderCardIcon = styled.img`
   display: grid;
-  margin-left: 1rem;
+  margin-left: 30px;
   margin-top: 1rem;
   place-content: center;
   margin-top: auto;
   margin-bottom: auto;
+
+  width: 24px;
+  height: 24px;
 `;
 
 export const RightPlaceHolderCardIcon = styled.img`
   display: grid;
-  margin-right: 1rem;
+  margin-right: 30px;
   margin-left: auto;
   place-content: center;
   margin-top: auto;
   margin-bottom: auto;
+
+  width: 24px;
+  height: 24px;
 `;
