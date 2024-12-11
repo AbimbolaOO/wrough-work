@@ -1,63 +1,65 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import EmptyApplicationCard from '../../../../../components/Card/EmptyApplicationCard';
 import JobListCard from '../../../../../components/Card/JobListCard';
-import useGetAllAppsForUser from '../../../../../hooks/getData/useGetAllAppsForUser';
-import { expired } from '../../../../../utils/utils';
+import useGetActiveJobApplications from '../../../../../hooks/dashboard/jobs/useGetActiveJobApplications';
+import { useAppSelector } from '../../../../../redux/store';
 
 const ActiveApplications = () => {
-  const { userAppsData, loading } = useGetAllAppsForUser();
+  const { getActiveJobApplications, loading } = useGetActiveJobApplications();
+  const { jobData, page } = useAppSelector(
+    (state) => state.activeJobApplications
+  );
+
+  useEffect(() => {
+    getActiveJobApplications();
+  }, [page]);
 
   return (
-    <Container>
+    <Wrapper>
       {loading ? (
         <LoadContainer>
           <LoadingOutlined />
         </LoadContainer>
-      ) : userAppsData.length ? (
-        <>
-          {userAppsData.map(
-            (data, index) =>
-              data.status === 'ACCEPTED' &&
-              data.job &&
-              !expired(data.job.expiryDate) ? (
-                <JobListCard
-                  className='activejobs'
-                  key={index}
-                  imgSrc={'/static/gif/happyAnimal.gif'} // TODO: Place a default image here
-                  institutionName={data.job.institutionName || ''}
-                  jobDescription={data.job.jobDescription.jobDescription || ''}
-                  yearsOfExperience={data.job.yearsOfExperience || ''}
-                  pay={data.job.pay || 0}
-                />
-              ) : null // Do not render if status is not "ACCEPTED" or job is expired
-          )}
-        </>
+      ) : jobData.length ? (
+        <Container>
+          {jobData.map((data, index) => (
+            <JobListCard
+              className='activejobs'
+              key={index}
+              imgSrc={'/static/gif/happyAnimal.gif'} // TODO: Place a default image here
+              institutionName={data.job ? data.job.institutionName : ''}
+              jobDescription={
+                data.job ? data.job.jobDescription.jobDescription : ''
+              }
+              yearsOfExperience={data.job ? data.job.yearsOfExperience : ''}
+              pay={data.job ? data.job.pay : 0}
+            />
+          ))}
+        </Container>
       ) : (
         <EmptyApplicationCard />
       )}
-    </Container>
+    </Wrapper>
   );
 };
 
 export default ActiveApplications;
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 65vh;
+`;
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  height: 65vh;
+  gap: 16px;
   overflow: auto;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 100%;
-    grid-template-columns: repeat(1, 1fr);
-    overflow-x: hidden;
-  }
+  width: 100%;
 `;
 
 const LoadContainer = styled.div`

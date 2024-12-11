@@ -4,11 +4,7 @@ import styled from '@emotion/styled';
 
 import ValidatingFormSubmitButton from '../../../components/Button/FormSubmitButton';
 import { FormComponent } from '../../../components/Form/FormComponent';
-import {
-  DateInputField,
-  SelectField,
-  TextInputField,
-} from '../../../components/Form/FormField';
+import { DateInputField, SelectField, TextInputField } from '../../../components/Form/FormField';
 import { FormikToggleCheckbox } from '../../../components/Form/FormikToggleCheckbox';
 import usePatchSingleJob from '../../../hooks/patchData/usePatchSingleJob';
 import usePostJob from '../../../hooks/postData/usePostJob';
@@ -18,7 +14,6 @@ import {
   jobPostingInitialValues,
   JobPostingSchemaPost,
 } from '../../../models/jobPosting/jobPosting.model';
-import { formatDate } from '../../../utils/utils';
 import PostJobDescription from './OptionalHeaderContent/PostJobDescription';
 
 interface PostJobFormProps {

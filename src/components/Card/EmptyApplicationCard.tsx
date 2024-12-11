@@ -8,11 +8,11 @@ import { InternalNavLink } from '../Link/Link';
 const EmptyApplicationCard = () => {
   return (
     <Container>
-      You currently don’t have any application{' '}
+      You currently don’t have any application <br />
       <InternalNavLink to={`/${LOCUMJOBS}`}>
-        <Span>click here</Span>{' '}
+        <Span>click here </Span>
       </InternalNavLink>
-      to get started
+      <span>to get started</span>
     </Container>
   );
 };
@@ -21,12 +21,12 @@ export default EmptyApplicationCard;
 
 const Container = styled.div`
   color: ${({ theme }) => theme.palette.blackBlackMain};
-  grid-column: 1/4;
   align-self: center;
   text-align: center;
-  margin: auto;
-  width: 20rem;
   font-weight: 400;
+  width: 100%;
+  height: 100%;
+  place-content: center;
 `;
 
 const Span = styled.span`

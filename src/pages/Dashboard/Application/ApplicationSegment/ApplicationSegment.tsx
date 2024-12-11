@@ -9,14 +9,19 @@ import {
 } from '../../../../components/SegmentedView/SegmentedViewLite';
 import ActiveApplications from './ActiveApplications/ActiveApplications';
 import AllApplications from './AllApplications/AllApplications';
-import { applicationSetmentedControllerConfig } from './applicationSetmentedControllerConfig';
+
+export const applicationSegmentedControllerConfig = [
+  { title: 'All Applications' },
+  { title: 'Active Applications' },
+];
 
 const ApplicationSegment = () => {
   return (
-    <Container className='default-margin'>
+    <Container>
       <SegmentedViewLite>
         <SegmentedViewControllerLite
-          segmentedViewControllerTitle={applicationSetmentedControllerConfig}
+          segmentedViewControllerTitle={applicationSegmentedControllerConfig}
+          className='grey'
         />
         <SegmentedViewDataLite>
           <div>
@@ -38,11 +43,6 @@ const Container = styled.div`
   background-color: white;
   gap: 1rem;
   padding: 2rem;
-  border-radius: 0.75rem;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    overflow-x: hidden;
-    padding: 1rem;
-  }
+  border-radius: 0.75rem;
 `;

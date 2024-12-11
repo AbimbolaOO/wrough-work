@@ -2,14 +2,14 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import Banner from '../../../components/Banner/Banner';
+import PageBanner from '../../../components/Banner/PageBanner';
 import ApplicationSegment from './ApplicationSegment/ApplicationSegment';
 
 const Application = () => {
   return (
     <Container>
-      <Banner
-        title='Applications'
+      <PageBanner
+        label='Applications'
         description='Welcome to your application Dashboards'
       />
       <ApplicationSegment />
@@ -21,10 +21,7 @@ export default Application;
 
 const Container = styled.section`
   display: flex;
+  gap: 32px;
   flex-direction: column;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    overflow-x: hidden;
-  }
+  margin-bottom: 54px;
 `;

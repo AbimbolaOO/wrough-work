@@ -1,6 +1,6 @@
-// Type defination
+// Type definition
 export enum SegmentedViewReducerActionType {
-  CLICK_SEGMENT = 'segmet-clicked',
+  CLICK_SEGMENT = 'segment-clicked',
 }
 
 export interface ISegmentedViewReducerActionType {
@@ -8,7 +8,7 @@ export interface ISegmentedViewReducerActionType {
   payload: any;
 }
 
-export interface IsegmentedViewControllerTitle {
+export interface ISegmentedViewControllerTitle {
   title: string;
 }
 
@@ -21,5 +21,6 @@ export interface ISegmentedViewData {
 }
 
 export interface ISegmentedViewController extends ISegmentedViewData {
-  segmentedViewControllerTitle: IsegmentedViewControllerTitle[];
+  segmentedViewControllerTitle: ISegmentedViewControllerTitle[];
+  className?: string;
 }

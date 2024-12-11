@@ -1,13 +1,13 @@
-import React, { useReducer } from "react";
+import React, { useReducer } from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 import {
   ISegmentedViewController,
   ISegmentedViewData,
   ISegmentedViewReducerActionType,
   SegmentedViewReducerActionType,
-} from "./SegmentedViewTypes";
+} from './SegmentedViewTypes';
 
 // Reducer
 
@@ -25,7 +25,7 @@ function segmentedViewReducer(
 
 // Components
 
-export const SegmentedView: React.FC<Pick<ISegmentedViewData, "children">> = ({
+export const SegmentedView: React.FC<Pick<ISegmentedViewData, 'children'>> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(segmentedViewReducer, { index: 0 });
@@ -54,13 +54,13 @@ export const SegmentedView: React.FC<Pick<ISegmentedViewData, "children">> = ({
 };
 
 export const SegmentedViewController: React.FC<
-  Omit<ISegmentedViewController, "children">
+  Omit<ISegmentedViewController, 'children'>
 > = ({ segmentedViewControllerTitle, state, handleStateChange }) => {
   return (
     <SegmentedViewControllerWrapper>
       {segmentedViewControllerTitle.map((data, index) => (
         <div
-          className={state?.index === index ? "activeSegment" : ""}
+          className={state?.index === index ? 'activeSegment' : ''}
           onClick={() => handleStateChange!(index)}
           key={index}
         >
@@ -72,12 +72,12 @@ export const SegmentedViewController: React.FC<
 };
 
 export const SegmentedViewData: React.FC<
-  Omit<ISegmentedViewData, "handleStateChange">
+  Omit<ISegmentedViewData, 'handleStateChange'>
 > = ({ children, state }) => {
   return (
     <SegmentData>
       {React.Children.map(children, (child: any, index) => {
-        const computedClass = state?.index === index ? "showSegment" : "";
+        const computedClass = state?.index === index ? 'showSegment' : '';
         return React.cloneElement(child, {
           ...child.props,
           className: computedClass,
@@ -132,27 +132,6 @@ const SegmentedViewControllerWrapper = styled.div`
     background: ${({ theme }) => theme.palette.backgroundColor};
     color: ${({ theme }) => theme.palette.mainBlue};
   }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 14px;
-    color: ${({ theme }) => theme.palette.greyGrey3};
-
-    & > * {
-      padding: 0;
-      cursor: pointer;
-
-      & span {
-        display: none;
-      }
-    }
-
-    & > .activeSegment {
-      border-radius: 0;
-      background: inherit;
-      color: ${({ theme }) => theme.palette.blackBlack3};
-    }
-  }
 `;
 
 const SegmentedViewContainer = styled.div`
@@ -162,12 +141,4 @@ const SegmentedViewContainer = styled.div`
   width: 100%;
   margin: auto;
   gap: 1.5rem;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    & > div:nth-of-type(1) {
-      justify-content: space-between;
-      gap: 0;
-    }
-  }
 `;

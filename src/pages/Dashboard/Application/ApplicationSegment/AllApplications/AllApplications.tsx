@@ -1,24 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import EmptyApplicationCard from '../../../../../components/Card/EmptyApplicationCard';
 import JobListCard from '../../../../../components/Card/JobListCard';
-import useGetAllAppsForUser from '../../../../../hooks/getData/useGetAllAppsForUser';
+import useGetJobApplications from '../../../../../hooks/dashboard/jobs/useGetJobApplications';
+import { useAppSelector } from '../../../../../redux/store';
 
 const AllApplications = () => {
-  const { userAppsData, loading } = useGetAllAppsForUser();
+  const { getJobApplications, loading } = useGetJobApplications();
+  const { jobData, page } = useAppSelector((state) => state.jobApplications);
+
+  useEffect(() => {
+    console.log('page--->>', page);
+    getJobApplications();
+  }, [page]);
 
   return (
-    <Container>
+    <Wrapper>
       {loading ? (
         <LoadContainer>
           <LoadingOutlined />
         </LoadContainer>
-      ) : userAppsData.length ? (
-        <>
-          {userAppsData.map((data, index) => (
+      ) : jobData.length ? (
+        <Container>
+          {jobData.map((data, index) => (
             <JobListCard
               className='activejobs'
               key={index}
@@ -31,29 +38,27 @@ const AllApplications = () => {
               pay={data.job ? data.job.pay : 0}
             />
           ))}
-        </>
+        </Container>
       ) : (
         <EmptyApplicationCard />
       )}
-    </Container>
+    </Wrapper>
   );
 };
 
 export default AllApplications;
 
+const Wrapper = styled.div`
+  display: flex;
+  height: 65vh;
+`;
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  height: 65vh;
+  gap: 16px;
   overflow: auto;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 100%;
-    grid-template-columns: repeat(1, 1fr);
-    overflow-x: hidden;
-  }
+  width: 100%;
 `;
 
 const LoadContainer = styled.div`

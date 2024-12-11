@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import PageBanner from '../../../components/Banner/PageBanner';
 import {
   SegmentedView,
   SegmentedViewController,
@@ -21,12 +22,10 @@ const segmentedControllerConfig = [
 const Settings = () => {
   return (
     <Wrapper>
-      <SettingsBanner>
-        <div className='label'>Settings</div>
-        <div className='description'>
-          Welcome to your application Dashboards
-        </div>
-      </SettingsBanner>
+      <PageBanner
+        label='Setting'
+        description='Welcome to your application Dashboards'
+      />
       <Container>
         <SegmentedView>
           <SegmentedViewController
@@ -67,27 +66,4 @@ const Container = styled.div`
   padding: 32px;
   border-radius: 0.75rem;
   margin-bottom: 54px;
-`;
-
-const SettingsBanner = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  margin-left: -54px;
-  margin-right: -54px;
-  padding: 18px 54px;
-
-  & > .label {
-    color: ${({ theme }) => theme.palette.blackBlackMain};
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 35.88px;
-  }
-
-  & > .description {
-    color: ${({ theme }) => theme.palette.greyGrey1};
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 26px;
-  }
 `;

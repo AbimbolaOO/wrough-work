@@ -1,13 +1,14 @@
-import React, { useReducer } from "react";
+import clsx from 'clsx';
+import React, { useReducer } from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 import {
   ISegmentedViewController,
   ISegmentedViewData,
   ISegmentedViewReducerActionType,
   SegmentedViewReducerActionType,
-} from "./SegmentedViewTypes";
+} from './SegmentedViewTypes';
 
 // Reducer
 
@@ -26,7 +27,7 @@ function segmentedViewReducer(
 // Components
 
 export const SegmentedViewLite: React.FC<
-  Pick<ISegmentedViewData, "children">
+  Pick<ISegmentedViewData, 'children'>
 > = ({ children }) => {
   const [state, dispatch] = useReducer(segmentedViewReducer, { index: 0 });
 
@@ -54,13 +55,16 @@ export const SegmentedViewLite: React.FC<
 };
 
 export const SegmentedViewControllerLite: React.FC<
-  Omit<ISegmentedViewController, "children">
-> = ({ segmentedViewControllerTitle, state, handleStateChange }) => {
+  Omit<ISegmentedViewController, 'children'>
+> = ({ segmentedViewControllerTitle, state, handleStateChange, className }) => {
   return (
     <SegmentedViewControllerWrapper>
       {segmentedViewControllerTitle.map((data, index) => (
         <div
-          className={state?.index === index ? "activeSegment" : ""}
+          className={clsx(
+            state?.index === index ? 'activeSegment' : '',
+            className
+          )}
           onClick={() => handleStateChange!(index)}
           key={index}
         >
@@ -72,12 +76,12 @@ export const SegmentedViewControllerLite: React.FC<
 };
 
 export const SegmentedViewDataLite: React.FC<
-  Omit<ISegmentedViewData, "handleStateChange">
+  Omit<ISegmentedViewData, 'handleStateChange'>
 > = ({ children, state }) => {
   return (
     <SegmentData>
       {React.Children.map(children, (child: any, index) => {
-        const computedClass = state?.index === index ? "showSegment" : "";
+        const computedClass = state?.index === index ? 'showSegment' : '';
         return React.cloneElement(child, {
           ...child.props,
           className: computedClass,
@@ -100,25 +104,21 @@ const SegmentData = styled.div`
   }
 
   & > .showSegment {
-    /* border: 2px solid red; */
     display: block;
-  }
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    // border: 1px solid red;
   }
 `;
 
 const SegmentedViewControllerWrapper = styled.div`
-  /* border: 2px solid blue; */
   display: flex;
-  /* justify-content: center; */
   gap: 2rem;
   font-weight: 400;
   font-size: 1.125rem;
   text-align: center;
   color: ${({ theme }) => theme.palette.greyGrey1};
+
+  /* &.grey {
+    color: ${({ theme }) => theme.palette.greyGrey3};
+  } */
 
   & > * {
     padding: 0.6rem;
@@ -132,44 +132,18 @@ const SegmentedViewControllerWrapper = styled.div`
   & > .activeSegment {
     border-radius: 0.375rem;
     color: ${({ theme }) => theme.palette.mainBlue};
-  }
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 13.5px;
-    color: ${({ theme }) => theme.palette.greyGrey3};
-
-    & > * {
-      padding: 0;
-      cursor: pointer;
-    }
-
-    & > .activeSegment {
-      border-radius: 0;
-      background: inherit;
-      color: ${({ theme }) => theme.palette.blackBlack3};
-    }
+    /* &.grey {
+      color: #333333;
+    } */
   }
 `;
 
 const SegmentedViewContainer = styled.div`
-  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   margin: auto;
   gap: 1.5rem;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    & > div:nth-of-type(1) {
-      justify-content: space-between;
-      gap: 0.3rem;
-
-      & > div {
-        text-wrap: nowrap;
-      }
-    }
-  }
 `;
