@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { ExperienceDataType } from '../../../../models/dashboard/settings/profileSettings/experience.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../../../models/https';
 import { useAppSelector } from '../../../../redux/store';
+import { employmentTypeDict } from '../../../../utils/utils';
 import useHttps from '../../../useHttps';
 import useGetUserData from '../useGetUserData';
 
@@ -37,8 +38,7 @@ const useCreateExperience = () => {
     }
 
     if (data.employmentType) {
-      const employmentDict: Record<string, string> = { "Full Time": "FullTime", "PartTime": "Part Time", "Contract": "Contract" };
-      formData.append('employmentType', employmentDict[data.employmentType]);
+      formData.append('employmentType', employmentTypeDict[data.employmentType]);
     }
 
     if (data.yearOfQualification) {

@@ -8,7 +8,7 @@ const Experiences = () => {
   const { authData } = useAppSelector((state) => state.auth);
   return (
     <Container>
-      {authData?.experiences.length !== 0 ? (
+      {authData?.experiences.length === 0 ? (
         <ExperienceForm />
       ) : (
         <ExperienceCard />

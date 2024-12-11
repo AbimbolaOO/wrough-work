@@ -27,13 +27,13 @@ const VerificationTable = () => {
       </VerificationBreakdown>
 
       {authData?.verification?.status === 'Rejected' && (
-        <EditButtonArea
+        <EditButton
           onClick={() => {
             alert('Loading...');
           }}
         >
           Edit Verification
-        </EditButtonArea>
+        </EditButton>
       )}
     </Container>
   );
@@ -73,12 +73,10 @@ const VerificationBreakdown = styled.div`
   }
 `;
 
-const EditButtonArea = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
+const EditButton = styled.div`
+  display: grid;
+  place-content: center;
+  border-radius: 4px;
   padding: 0.5rem 24px;
   margin-left: auto;
   margin-top: 42px;

@@ -109,6 +109,35 @@ export const formatDate = (dateString: string | Date | null, reverse: boolean = 
   return `${year}-${month}-${day}`;
 };
 
+export function formatExperienceDate(dateString: string | Date | null, omitCurrentYear = false) {
+  if (!dateString) return "";
+
+  const inputDate = new Date(dateString);
+  const currentDate = new Date();
+
+  if (isNaN(inputDate.getTime())) {
+    throw new Error("Invalid date string");
+  }
+
+  // If the date is in the future, return "Present"
+  if (inputDate > currentDate) {
+    return "Present";
+  }
+
+  // Extract day, month, and year
+  const day = inputDate.getDate().toString().padStart(2, '0');
+  const month = (inputDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-indexed
+  const year = inputDate.getFullYear();
+
+  // If the year is the current year and the flag is set, omit the year
+  if (omitCurrentYear && year === currentDate.getFullYear()) {
+    return `${day}-${month}`;
+  }
+
+  // Default format: DD-MM-YYYY
+  return `${day}-${month}-${year}`;
+}
+
 
 export const formatPhoneNumberInputField = (phoneNumber: string): string => {
   // Remove all non-digit characters
@@ -127,3 +156,6 @@ export const formatPhoneNumberInputField = (phoneNumber: string): string => {
   }
 };
 
+
+export const employmentTypeDict: Record<string, string> = { "Full Time": "FullTime", "Part Time": "PartTime", "Contract": "Contract" };
+export const employmentTypeReversedDict: Record<string, string> = { "FullTime": "Full Time", "PartTime": "Part Time", "Contract": "Contract" };

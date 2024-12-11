@@ -1,0 +1,119 @@
+import React from 'react';
+
+import styled from '@emotion/styled';
+
+import {
+  employmentTypeReversedDict,
+  formatExperienceDate,
+  truncateTextByCharacters,
+} from '../../utils/utils';
+
+interface ExperienceCardCellProps {
+  title: string;
+  companyName: string;
+  employmentType: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+}
+
+const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
+  title,
+  companyName,
+  employmentType,
+  location,
+  startDate,
+  endDate,
+}) => {
+  return (
+    <Container>
+      <ImageArea>UI</ImageArea>
+      <TextAndButtonsArea>
+        <TextPart>
+          <div className='name'>{companyName}</div>
+          <div className='title'>
+            {truncateTextByCharacters(title, 40)} |{' '}
+            {employmentTypeReversedDict[employmentType]}
+          </div>
+          <div className='title'>
+            {formatExperienceDate(startDate, true)} <span>&mdash;</span>{' '}
+            {formatExperienceDate(endDate)} |{' '}
+            {truncateTextByCharacters(location, 30)}{' '}
+          </div>
+        </TextPart>
+        <ButtonPart>
+          <Button>Edit</Button>
+          <Button className='delete'>Delete</Button>
+        </ButtonPart>
+      </TextAndButtonsArea>
+    </Container>
+  );
+};
+
+export default ExperienceCardCell;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 50px auto;
+  gap: 16px;
+  border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
+  border-radius: 4px;
+  padding: 24px;
+`;
+
+const ImageArea = styled.div`
+  display: grid;
+  place-content: center;
+  font-weight: 400;
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.palette.mainBlue};
+  color: white;
+`;
+
+const TextAndButtonsArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: -7px;
+`;
+
+const TextPart = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.palette.greyGrey2};
+
+  & > .name {
+    color: ${({ theme }) => theme.palette.blackBlack3};
+  }
+  & > .title {
+  }
+  & > .title {
+    font-size: 14px;
+  }
+`;
+
+const ButtonPart = styled.div`
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+`;
+
+const Button = styled.div`
+  display: flex;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 4px 24px;
+  border: 1px solid ${({ theme }) => theme.palette.blackBlackMain};
+  cursor: pointer;
+
+  &.delete {
+    border-color: ${({ theme }) => theme.palette.stateColorRed};
+    color: ${({ theme }) => theme.palette.stateColorRed};
+  }
+`;

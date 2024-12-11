@@ -4,12 +4,7 @@ import React, { useEffect, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import {
-  FieldErrorInfo,
-  IInputField,
-  InputLabel,
-  InputWrapper,
-} from './FormField';
+import { FieldErrorInfo, IInputField, InputLabel, InputWrapper } from './FormField';
 
 const RichTextInputField: React.FC<IInputField> = ({
   label,
@@ -33,6 +28,10 @@ const RichTextInputField: React.FC<IInputField> = ({
             [{ header: [1, 2, 3, 4, false] }],
             [{ size: ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline'],
+            [
+              // "link",
+              'blockquote',
+            ],
             [{ list: 'ordered' }, { list: 'bullet' }],
             [{ align: [] }],
           ],
