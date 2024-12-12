@@ -8,7 +8,7 @@ import useGetLocumJobs from '../../../../hooks/dashboard/jobs/useGetLocumJobs';
 import { useAppSelector } from '../../../../redux/store';
 
 interface JobsListProps {
-  setSelectedJob: (job: any) => void; // Prop to capture the selected job and pass to the parent
+  setSelectedJob: (...arg: any) => void;
 }
 
 const JobsList: React.FC<JobsListProps> = ({ setSelectedJob }) => {
@@ -33,7 +33,7 @@ const JobsList: React.FC<JobsListProps> = ({ setSelectedJob }) => {
             jobDescription={jobs.jobDescription.jobDescription}
             yearsOfExperience={jobs.yearsOfExperience}
             pay={jobs.pay}
-            onClick={() => setSelectedJob(jobs)}
+            onClick={() => setSelectedJob({ ...jobs })}
             className='cursor-pointer'
           />
         ))

@@ -3,21 +3,37 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
-import JobInfo from './JobInfo/JobInfo';
+import JobInfo, { SelectedJobsProps } from './JobInfo/JobInfo';
 import JobSearchForm from './JobSearchForm/JobSearchForm';
 import JobsList from './JobsList/JobsList';
 
+const setJobPlaceHolder = {
+  id: '',
+  jobCreatorId: '',
+  imgSrc: '',
+  title: '',
+  jobDescription: {},
+  institutionName: '',
+  yearsOfExperience: '',
+  location: '',
+  pay: 0,
+  payInterval: '',
+  jobStartDate: '',
+  jobEndDate: '',
+};
+
 const LocumJobs = () => {
-  const [selectedJob, setSelectedJob] = useState(null); // Manage selected job
-  const [isMobileVisible, setIsMobileVisible] = useState(false);
+  const [selectedJob, setSelectedJob] =
+    useState<SelectedJobsProps>(setJobPlaceHolder); // Manage selected job
 
   return (
-    <Container>
+    <Shell>
       <JobSearchForm />
-
-      <JobViewArea>
-        <JobsList setSelectedJob={setSelectedJob} />
-        <JobInfo selectedJob={selectedJob} isMobileVisible={isMobileVisible} />
+      <Container>
+        <JobViewArea>
+          <JobsList setSelectedJob={setSelectedJob} />
+          <JobInfo selectedJob={selectedJob} />
+        </JobViewArea>
 
         <PaginationShell>
           <PaginationControl
@@ -26,14 +42,14 @@ const LocumJobs = () => {
             defaultNumOfPagination={5}
           />
         </PaginationShell>
-      </JobViewArea>
-    </Container>
+      </Container>
+    </Shell>
   );
 };
 
 export default LocumJobs;
 
-const Container = styled.div`
+const Shell = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -41,13 +57,21 @@ const Container = styled.div`
   margin-bottom: 54px;
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  /* DI */
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+`;
+
 const JobViewArea = styled.div`
   display: grid;
   grid-template-columns: 316px 1fr;
-  background-color: white;
   gap: 32px;
-  padding: 2rem;
-  border-radius: 0.75rem;
 `;
 
 const PaginationShell = styled.div`

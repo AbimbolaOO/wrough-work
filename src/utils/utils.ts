@@ -95,7 +95,7 @@ export const expired = (date: string | Date): boolean => {
   return inputDate < currentDate;
 };
 
-export const formatDate = (dateString: string | Date | null, reverse: boolean = false) => {
+export const formatDate = (dateString: string | Date | null, reverse: boolean = false, omitCurrentYear: boolean = false) => {
   if (!dateString) return "";
 
   const date = new Date(dateString);
@@ -103,8 +103,17 @@ export const formatDate = (dateString: string | Date | null, reverse: boolean = 
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
 
+  const currentDate = new Date();
+
   if (reverse) {
+    if (omitCurrentYear && year === currentDate.getFullYear()) {
+      return `${day}-${month}`;
+    }
     return `${day}-${month}-${year}`;
+  }
+
+  if (omitCurrentYear && year === currentDate.getFullYear()) {
+    return `${day}-${month}`;
   }
   return `${year}-${month}-${day}`;
 };

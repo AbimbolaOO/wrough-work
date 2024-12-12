@@ -41,6 +41,7 @@ const Container = styled.div`
   position: sticky;
   top: 70px;
   z-index: 20;
+  justify-content: center;
 `;
 
 const Box = styled.div`
@@ -50,6 +51,7 @@ const Box = styled.div`
   background-color: white;
   padding: 16px 52px;
   border-radius: 12px;
+  /* border: 1px solid red; */
 
   & > *,
   & > * > * > * {

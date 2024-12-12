@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 
-import { IJobApplications } from '../../../models/dashboard/jobs/getAllJobApplications.model';
 import { ILocumJobs } from '../../../models/dashboard/jobs/getLocumJobs.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../../models/https';
 import { locumJobsActions } from '../../../redux/slices/locumJobsSlice';

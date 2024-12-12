@@ -75,7 +75,7 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
   border-radius: 0.3125rem;
   padding: 1.25rem;
-  height: 15rem;
+  /* height: 15rem; */
 
   &.cursor-pointer {
     cursor: pointer;
