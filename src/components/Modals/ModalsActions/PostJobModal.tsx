@@ -11,12 +11,12 @@ import {
   CreateJobPostSchema,
 } from '../../../models/dashboard/jobs/createJobPost.model';
 import FormSubmitButton from '../../Button/FormSubmitButton';
-import { CustomCheckbox } from '../../Form/CustomCheckBox';
 import { CustomTwoValDropDown } from '../../Form/CustomTwoValDropDown';
 import { FormComponent } from '../../Form/FormComponent';
 import { TextInputField } from '../../Form/FormField';
 import NumberOnlyInputField from '../../Form/NumberOnlyInputField';
 import RichTextInputField from '../../Form/RichTextInputField';
+import { ToggleCheckBox } from '../../Form/ToggleCheckBox';
 import ModalContainer from '../ModalContainer';
 
 const salaryInterval: Record<string, string> = {
@@ -30,16 +30,6 @@ const salaryInterval: Record<string, string> = {
 const PostJobModal = () => {
   const { loading, createJobPost } = useCreateJobPost();
 
-  // const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
-  //   createJobPost(
-  //     {
-  //       ...values,
-  //       payInterval: salaryInterval[values.payInterval],
-  //     },
-  //     actions.resetForm
-  //   );
-  // };
-
   const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
     createJobPost(
       {
@@ -47,7 +37,6 @@ const PostJobModal = () => {
         payInterval: salaryInterval[values.payInterval],
       },
       () => {
-        // Reset form to initial values
         actions.resetForm({ values: createJobPostInitialValues });
       }
     );
@@ -101,7 +90,6 @@ const PostJobModal = () => {
             type='text'
           />
         </Row>
-
         <RichTextInputField
           label='Job Description'
           placeholder=''
@@ -132,13 +120,10 @@ const PostJobModal = () => {
             id='expiryDate'
             type='date'
           />
-          {/* <CustomCheckbox name='isPublished' className='column'>
-            Publish
-          </CustomCheckbox> */}
         </Row>
 
         <Row className='flex'>
-          <CustomCheckbox name='isPublished'>Publish</CustomCheckbox>
+          <ToggleCheckBox name='isPublished'>Publish</ToggleCheckBox>
 
           <FormSubmitButton loading={loading} className='small'>
             Create

@@ -4,7 +4,12 @@ import React, { useEffect, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import { FieldErrorInfo, IInputField, InputLabel, InputWrapper } from './FormField';
+import {
+  FieldErrorInfo,
+  IInputField,
+  InputLabel,
+  InputWrapper,
+} from './FormField';
 
 const RichTextInputField: React.FC<IInputField> = ({
   label,
