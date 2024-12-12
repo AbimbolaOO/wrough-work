@@ -2,11 +2,11 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import RichTextDisplay from '../../utils/RichTextDisplay';
 import { truncateText } from '../../utils/utils';
 import BookmarkBoxIcon from '../Icons/BookmarkBoxIcon';
 import JobsIcon from '../Icons/JobsIcon';
 import Img from '../Img/Img';
+import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface IJobListCard {
   imgSrc: string;

@@ -3,9 +3,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IGetCreatedJobs } from '../../models/dashboard/jobs/getCreatedJobs.model';
-import RichTextDisplay from '../../utils/RichTextDisplay';
 import { truncateText } from '../../utils/utils';
 import Img from '../Img/Img';
+import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 import { ToggleButton } from '../ToggleButton/ToggleButton';
 
 // The component expects an array of jobs

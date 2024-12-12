@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import RichTextDisplay from '../../../../utils/RichTextDisplay';
+import RichTextDisplay from '../../../../components/RichTextDisplay/RichTextDisplay';
 
 interface IJobInfoBody {
   jobDescription?: string;

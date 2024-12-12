@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { PrimaryButton } from "../Button";
-import BookmarkBoxIcon from "../Icons/BookmarkBoxIcon";
-import Img from "../Img/Img";
-import { ButtonLink } from "../Link/Link";
-import RichTextDisplay from "../../utils/RichTextDisplay";
-import { truncateText } from "../../utils/utils";
+import { truncateText } from '../../utils/utils';
+import { PrimaryButton } from '../Button';
+import BookmarkBoxIcon from '../Icons/BookmarkBoxIcon';
+import Img from '../Img/Img';
+import { ButtonLink } from '../Link/Link';
+import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface IJobsCard {
   imgSrc?: string;
@@ -17,16 +17,16 @@ interface IJobsCard {
 }
 
 const JobsCard: React.FC<IJobsCard> = ({
-  imgSrc = "/static/gif/happyAnimal.gif",
+  imgSrc = '/static/gif/happyAnimal.gif',
   institutionName,
   jobDescription,
-  link = "/",
+  link = '/',
 }) => {
   return (
     <Container>
       <JobCardHeader>
         <ImageContainer>
-          <Img src={imgSrc} alt="img" />
+          <Img src={imgSrc} alt='img' />
         </ImageContainer>
         <JobCardHeaderText>{institutionName}</JobCardHeaderText>
         <IconContainer>
@@ -37,7 +37,7 @@ const JobsCard: React.FC<IJobsCard> = ({
         <RichTextDisplay richTextContent={truncateText(jobDescription)} />
       </JobCardDescription>
       <ButtonLink to={link}>
-        <PrimaryButton arrowIcon className="noBorder">
+        <PrimaryButton arrowIcon className='noBorder'>
           Apply
         </PrimaryButton>
       </ButtonLink>
@@ -67,7 +67,7 @@ const JobCardHeader = styled.div`
   display: grid;
   grid-template-columns: 48px auto 32px;
   gap: 0.81rem;
-  width:100%;
+  width: 100%;
 `;
 
 const JobCardHeaderText = styled.div`
@@ -94,5 +94,5 @@ const JobCardDescription = styled.div`
 
 const IconContainer = styled.div`
   /* width: 2rem; */
-  margin-left: auto; 
+  margin-left: auto;
 `;

@@ -33,7 +33,7 @@ export const formatNaira = (val: number) =>
     // maximumFractionDigits: 0,
   });
 
-export const formateDatimeStrToNiajaTime = (dateTimeString: string) => {
+export const formateDatetimeStrToNaijaTime = (dateTimeString: string) => {
   const date = new Date(dateTimeString);
   const options = {
     year: "numeric",

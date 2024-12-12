@@ -3,9 +3,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IActiveShifts } from '../../models/dashboard/jobs/getActiveShifts.model';
-import RichTextDisplay from '../../utils/RichTextDisplay';
 import { truncateText } from '../../utils/utils';
 import Img from '../Img/Img';
+import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface ShiftCardProps {
   job: IActiveShifts;

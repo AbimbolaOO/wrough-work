@@ -5,11 +5,11 @@ import styled from '@emotion/styled';
 import useDeleteJob from '../../hooks/deleteData/useDeleteJob';
 import { JobPostingDataTypeGet } from '../../models/jobPosting/jobPosting.model';
 import { ApplicantsDummyData } from '../../pages/Dashboard/Dashboard/PostedJobsDummyData';
-import RichTextDisplay from '../../utils/RichTextDisplay';
 import { truncateText } from '../../utils/utils';
 import BriefcaseIcon from '../Icons/BriefcaseIcon';
 import TrashIcon from '../Icons/TrashIcon';
 import InteractiveModal from '../OldModals/InteractiveModal';
+import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface IManageJobsCard {
   job: JobPostingDataTypeGet;
