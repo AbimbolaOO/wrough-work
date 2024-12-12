@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 
-import { IJobApplications } from '../../../models/dashboard/jobs/getAllJobApplications.model';
+import { ILocumJobs } from '../../../models/dashboard/jobs/getLocumJobs.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../../models/https';
 import { jobApplicationsActions } from '../../../redux/slices/jobApplicationsSlice';
 import { useAppDisPatch, useAppSelector } from '../../../redux/store';
@@ -20,7 +20,7 @@ const useGetJobApplications = () => {
   const onGetJobApplicationsSuccess = ({
     data,
     message,
-  }: SuccessHttpResponse<IJobApplications[]>) => {
+  }: SuccessHttpResponse<ILocumJobs[]>) => {
     dispatch(jobApplicationsActions.getJobApplications({ page: 1, perPage: 10, jobData: data }));
   };
 

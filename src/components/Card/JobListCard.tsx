@@ -2,16 +2,14 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { truncateText } from '../../utils/utils';
 import BookmarkBoxIcon from '../Icons/BookmarkBoxIcon';
 import JobsIcon from '../Icons/JobsIcon';
 import Img from '../Img/Img';
-import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface IJobListCard {
   imgSrc: string;
   institutionName: string;
-  jobDescription: string;
+  jobTitle: string;
   yearsOfExperience: string;
   pay: number;
   onClick?: () => void;
@@ -21,7 +19,7 @@ interface IJobListCard {
 const JobListCard: React.FC<IJobListCard> = ({
   imgSrc,
   institutionName,
-  jobDescription,
+  jobTitle,
   yearsOfExperience,
   pay,
   onClick,
@@ -32,20 +30,18 @@ const JobListCard: React.FC<IJobListCard> = ({
       <LeftContent>
         <LeftContentHeader>
           <ImageContainer>
-            <Img src={imgSrc} alt='img' />
+            <Img src={imgSrc} alt='logo' />
           </ImageContainer>
           <LeftContentText>{institutionName}</LeftContentText>
         </LeftContentHeader>
 
         <LeftContentLowerPart>
-          <JobCardDescription>
-            <RichTextDisplay richTextContent={truncateText(jobDescription)} />
-          </JobCardDescription>
+          <JobCardDescription>{jobTitle}</JobCardDescription>
 
           <LeftContentFooter>
             <JobAgeArea>
               <JobsIcon />
-              {yearsOfExperience} +years
+              {yearsOfExperience} year+
             </JobAgeArea>
 
             <div>
@@ -75,7 +71,7 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
   border-radius: 0.3125rem;
   padding: 1.25rem;
-  /* height: 15rem; */
+  /* border: 2px solid red; */
 
   &.cursor-pointer {
     cursor: pointer;
@@ -83,8 +79,8 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 3.125rem;
-  height: 3.125rem;
+  width: 40px;
+  height: 40px;
   /* border: 2px solid red; */
 `;
 

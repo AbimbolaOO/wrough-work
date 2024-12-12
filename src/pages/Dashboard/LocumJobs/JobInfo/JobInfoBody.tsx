@@ -18,7 +18,4 @@ const JobInfoBody: React.FC<IJobInfoBody> = ({ jobDescription }) => {
 
 export default JobInfoBody;
 
-const Container = styled.div`
-  display: grid;
-  gap: 1rem;
-`;
+const Container = styled.div``;

@@ -4,11 +4,7 @@ import BookmarkIcon from '../../../components/Icons/BookmarkIcon';
 import HeaderSettingsIcon from '../../../components/Icons/HeaderSettingsIcon';
 import NotificationIcon from '../../../components/Icons/NotificationIcon';
 import { InternalNavLink } from '../../../components/Link/Link';
-import {
-  BOOKMARKS,
-  NOTIFICATIONS,
-  USERS_SETTINGS,
-} from '../../../routes/routeConstants';
+import { BOOKMARKS, NOTIFICATIONS, USERS_SETTINGS } from '../../../routes/routeConstants';
 import HeaderDropDown from './HeaderDropDown';
 import HeaderModalButton from './HeaderModalButton';
 

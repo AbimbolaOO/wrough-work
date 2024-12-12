@@ -20,6 +20,14 @@ interface IJobInfoHead {
   jobEndDate: string;
 }
 
+const salaryInterval: Record<string, string> = {
+  HOURLY: 'hour',
+  DAILY: 'day',
+  WEEKLY: 'week',
+  MONTHLY: 'month',
+  YEARLY: 'year',
+};
+
 const JobInfoHead: React.FC<IJobInfoHead> = ({
   imgSrc,
   title,
@@ -58,7 +66,7 @@ const JobInfoHead: React.FC<IJobInfoHead> = ({
               {location}
             </IconWrapper>
             <div>
-              {formatNaira(pay)}/{payInterval.toLowerCase()}
+              {formatNaira(pay)}/{salaryInterval[payInterval] ?? ''}
             </div>
           </CenterContentFooter>
         </CenterContentLowerPart>

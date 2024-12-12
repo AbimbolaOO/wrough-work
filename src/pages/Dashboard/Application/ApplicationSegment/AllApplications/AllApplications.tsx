@@ -30,17 +30,14 @@ const AllApplications = () => {
         </LoadContainer>
       ) : jobData.length ? (
         <Container>
-          {jobData.map((data, index) => (
+          {jobData.map((job, index) => (
             <JobListCard
-              className='activejobs'
               key={index}
               imgSrc={'/static/gif/happyAnimal.gif'} // TODO: Place a default image here
-              institutionName={data.job ? data.job.institutionName : ''}
-              jobDescription={
-                data.job ? data.job.jobDescription.jobDescription : ''
-              }
-              yearsOfExperience={data.job ? data.job.yearsOfExperience : ''}
-              pay={data.job ? data.job.pay : 0}
+              institutionName={job?.institutionName}
+              jobTitle={job.title}
+              yearsOfExperience={job.yearsOfExperience}
+              pay={job.pay}
             />
           ))}
         </Container>
@@ -64,6 +61,7 @@ const Container = styled.div`
   gap: 16px;
   overflow: auto;
   width: 100%;
+  height: fit-content;
 `;
 
 const LoadContainer = styled.div`

@@ -30,7 +30,7 @@ const JobsList: React.FC<JobsListProps> = ({ setSelectedJob }) => {
             key={jobs.id}
             imgSrc={''} // TODO: place a default image here
             institutionName={jobs?.institutionName}
-            jobDescription={jobs.jobDescription.jobDescription}
+            jobTitle={jobs.title}
             yearsOfExperience={jobs.yearsOfExperience}
             pay={jobs.pay}
             onClick={() => setSelectedJob({ ...jobs })}

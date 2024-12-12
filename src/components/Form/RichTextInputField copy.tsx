@@ -13,8 +13,8 @@ const RichTextInputField: React.FC<IInputField> = ({
   ...props
 }) => {
   const quillRef = useRef<HTMLDivElement | null>(null);
-  const [field, meta] = useField(props);
-  const { setFieldValue, handleBlur } = useFormikContext<any>();
+  const [field, meta, helper] = useField(props);
+  const { handleBlur } = useFormikContext<any>();
 
   useEffect(() => {
     const quillElement = quillRef.current as HTMLDivElement & {
@@ -55,7 +55,7 @@ const RichTextInputField: React.FC<IInputField> = ({
           editorContent === '<h2><br></h2>' ||
           editorContent === '<h3><br></h3>' ||
           editorContent === '';
-        setFieldValue(props.name, isEmpty ? '' : editorContent);
+        helper.setValue(isEmpty ? '' : editorContent);
       };
 
       quill.on('text-change', handleTextChange);
@@ -65,15 +65,18 @@ const RichTextInputField: React.FC<IInputField> = ({
         handleBlur({ target: { name: props.name } });
       });
 
-      // Cleanup on unmount
+      // Reset Quill when field value is empty
       return () => {
         quill.off('text-change', handleTextChange);
+        if (field.value === '') {
+          quill.setText('');
+        }
       };
     }
     // eslint-disable-next-line
-  }, [field.value, props.name, setFieldValue, handleBlur]);
+  }, [field.value, props.name, handleBlur, helper]);
 
-  // Reset Quill when field value is empty
+  // Additional effect for resetting Quill when field.value changes to empty
   useEffect(() => {
     if (field.value === '') {
       const quill = (quillRef.current as HTMLDivElement & { __quill?: Quill })

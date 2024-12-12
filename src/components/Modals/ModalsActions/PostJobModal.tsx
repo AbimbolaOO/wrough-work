@@ -29,13 +29,27 @@ const salaryInterval: Record<string, string> = {
 
 const PostJobModal = () => {
   const { loading, createJobPost } = useCreateJobPost();
+
+  // const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
+  //   createJobPost(
+  //     {
+  //       ...values,
+  //       payInterval: salaryInterval[values.payInterval],
+  //     },
+  //     actions.resetForm
+  //   );
+  // };
+
   const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
     createJobPost(
       {
         ...values,
         payInterval: salaryInterval[values.payInterval],
       },
-      actions.resetForm
+      () => {
+        // Reset form to initial values
+        actions.resetForm({ values: createJobPostInitialValues });
+      }
     );
   };
 

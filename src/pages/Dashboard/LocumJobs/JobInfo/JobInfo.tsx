@@ -51,9 +51,11 @@ const JobInfo: React.FC<JobInfoProps> = ({ selectedJob }) => {
           jobStartDate={selectedJob.jobStartDate}
           jobEndDate={selectedJob.jobEndDate}
         />
+
         <JobInfoBody
           jobDescription={selectedJob.jobDescription.jobDescription}
         />
+
         <ButtonArea>
           <SecondaryButton
             click={() => alert('submit')}
@@ -82,8 +84,9 @@ const StickyWrapper = styled.div`
 const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.borderColor};
   border-radius: 6px;
-  padding: 2rem;
+  padding: 32px;
   display: grid;
+  gap: 16px;
   height: fit-content;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.white};
