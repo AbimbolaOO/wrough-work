@@ -3,11 +3,17 @@ import * as Yup from 'yup';
 export const ExperienceSchema = Yup.object().shape({
   title: Yup.string().required('Please enter a title'),
   qualificationCertificate: Yup.mixed()
-    .nullable() // Allow null values
-    .test('fileFormat', 'Unsupported file format', (value) => {
-      if (!value) return true; // Allow null values
-      return value && value instanceof Blob; // Ensure it's a file if provided
-    }),
+    .required('Upload your certificate')
+    .test(
+      'fileFormat',
+      'Unsupported file format',
+      (value) => value && value instanceof File // Ensures the value is a File
+    )
+    .test(
+      'fileSize',
+      'File size must not exceed 3MB',
+      (value) => value && value instanceof File && value.size <= 3 * 1024 * 1024 // Type narrowed to File
+    ),
   companyName: Yup.string().required('Enter a company name'),
   otherQualification: Yup.string().nullable(),
   employmentType: Yup.string().required('Please select type'),

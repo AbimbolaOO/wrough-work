@@ -9,16 +9,27 @@ export const VerificationSchema = Yup.object().shape({
     .test(
       'fileFormat',
       'Unsupported file format',
-      (value) => value && value instanceof Blob
+      (value) => value && value instanceof File // Ensures the value is a File
+    )
+    .test(
+      'fileSize',
+      'File size must not exceed 3MB',
+      (value) => value && value instanceof File && value.size <= 3 * 1024 * 1024 // Type narrowed to File
     ),
   primaryDegreeName: Yup.string().required('Enter degree name'),
   validationNumber: Yup.string().required('Enter validation number'),
+
   primaryDegreeCertificate: Yup.mixed()
-    .required('Please upload degree certificate')
+    .required('Upload your certificate')
     .test(
       'fileFormat',
       'Unsupported file format',
-      (value) => value && value instanceof Blob
+      (value) => value && value instanceof File // Ensures the value is a File
+    )
+    .test(
+      'fileSize',
+      'File size must not exceed 3MB',
+      (value) => value && value instanceof File && value.size <= 3 * 1024 * 1024 // Type narrowed to File
     ),
   // status: Yup.string(),
   // id: Yup.string().optional().nullable(),

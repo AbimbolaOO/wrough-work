@@ -6,7 +6,7 @@ export const ProfileImageSchema = Yup.object().shape({
     .nullable()
     .test(
       'fileSize',
-      'This image is too large',
+      'Image should be less than 3MB',
       (value: File | null | undefined) => {
         return !value || value.size <= 3000000;
       }

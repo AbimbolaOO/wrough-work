@@ -49,7 +49,7 @@ const CustomFileUploader: React.FC<CustomFileUploaderProps> = ({
             id={name}
             name={name}
             type='file'
-            accept='.pdf'
+            accept='.pdf, image/*'
             onChange={handleChange}
             // onBlur={() => handleBlur({ target: { name: name } })}
           />

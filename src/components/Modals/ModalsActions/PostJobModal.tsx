@@ -1,5 +1,6 @@
 import 'quill/dist/quill.snow.css';
 
+import Quill from 'quill';
 import React from 'react';
 
 import styled from '@emotion/styled';
@@ -38,6 +39,13 @@ const PostJobModal = () => {
       },
       () => {
         actions.resetForm({ values: createJobPostInitialValues });
+        // Note this extra code below help to reset the react quill on submit without this code react quill wont work properly
+        const quill = document.querySelector('.ql-editor') as HTMLDivElement & {
+          __quill?: Quill;
+        };
+        if (quill && quill.__quill) {
+          quill.__quill.setText('');
+        }
       }
     );
   };

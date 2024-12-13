@@ -1,6 +1,6 @@
 import { useField, useFormikContext } from 'formik';
 import Quill from 'quill';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -18,11 +18,10 @@ const RichTextInputField: React.FC<IInputField> = ({
   ...props
 }) => {
   const quillRef = useRef<HTMLDivElement | null>(null);
-  const [field, meta, helper] = useField(props);
-  const { handleBlur } = useFormikContext<any>();
-  // console.log('field.value--@@@>>', field.value);
+  const [field, meta] = useField(props);
+  const { handleBlur, setFieldValue } = useFormikContext<any>();
 
-  useEffect(() => {
+  const initializeQuill = () => {
     const quillElement = quillRef.current as HTMLDivElement & {
       __quill?: Quill;
     };
@@ -34,10 +33,7 @@ const RichTextInputField: React.FC<IInputField> = ({
             [{ header: [1, 2, 3, 4, false] }],
             [{ size: ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline'],
-            [
-              // "link",
-              'blockquote',
-            ],
+            ['blockquote'],
             [{ list: 'ordered' }, { list: 'bullet' }],
             [{ align: [] }],
           ],
@@ -52,7 +48,6 @@ const RichTextInputField: React.FC<IInputField> = ({
         quill.clipboard.dangerouslyPasteHTML(field.value);
       }
 
-      // Handle content changes
       const handleTextChange = () => {
         const editorContent = quill.root.innerHTML.trim();
         const isEmpty =
@@ -61,37 +56,22 @@ const RichTextInputField: React.FC<IInputField> = ({
           editorContent === '<h2><br></h2>' ||
           editorContent === '<h3><br></h3>' ||
           editorContent === '';
-        helper.setValue(isEmpty ? '' : editorContent);
+        setFieldValue(props.name, isEmpty ? '' : editorContent);
       };
 
       quill.on('text-change', handleTextChange);
+      quill.on('blur', () => handleBlur({ target: { name: props.name } }));
 
-      // Trigger handleBlur when the editor loses focus
-      quill.on('blur', () => {
-        handleBlur({ target: { name: props.name } });
-      });
-
-      // Reset Quill when field value is empty
       return () => {
         quill.off('text-change', handleTextChange);
-        if (field.value === '') {
-          quill.setText('');
-        }
       };
     }
-    // eslint-disable-next-line
-  }, [field.value, props.name, handleBlur, helper]);
+  };
 
-  // Additional effect for resetting Quill when field.value changes to empty
-  useEffect(() => {
-    if (field.value === '') {
-      const quill = (quillRef.current as HTMLDivElement & { __quill?: Quill })
-        .__quill;
-      if (quill) {
-        quill.setText('');
-      }
-    }
-  }, [field.value]);
+  // Use useLayoutEffect for immediate visual updates
+  useLayoutEffect(() => {
+    initializeQuill();
+  }, []);
 
   return (
     <InputWrapper className={className}>
@@ -101,9 +81,6 @@ const RichTextInputField: React.FC<IInputField> = ({
           ref={quillRef}
           className='ql-editor'
           onBlur={() => handleBlur({ target: { name: props.name } })}
-          onChange={(e: any) => {
-            console.log('e.target -->>', e.target.content);
-          }}
           style={{ height: '329px' }}
         ></QuillBox>
       </Shell>
