@@ -1,15 +1,10 @@
 import { useField, useFormikContext } from 'formik';
 import Quill from 'quill';
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import {
-  FieldErrorInfo,
-  IInputField,
-  InputLabel,
-  InputWrapper,
-} from './FormField';
+import { FieldErrorInfo, IInputField, InputLabel, InputWrapper } from './FormField';
 
 const RichTextInputField: React.FC<IInputField> = ({
   label,
@@ -71,6 +66,7 @@ const RichTextInputField: React.FC<IInputField> = ({
   // Use useLayoutEffect for immediate visual updates
   useLayoutEffect(() => {
     initializeQuill();
+    // eslint-disable-next-line
   }, []);
 
   return (

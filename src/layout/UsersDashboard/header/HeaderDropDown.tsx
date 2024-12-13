@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -6,44 +6,58 @@ import { HoverDropDown } from '../../../components/DropDown/DropDown';
 import DownArrowIcon from '../../../components/Icons/DownArrowIcon';
 import IconImg from '../../../components/Img/IconImg';
 import { InternalNavLink } from '../../../components/Link/Link';
+import { Modal } from '../../../components/Modals/Modal';
+import PostJobModal from '../../../components/Modals/ModalsActions/PostJobModal';
+import ModalTriggerContainer from '../../../components/Modals/ModalTriggerContainer';
 import FullScreenModal from '../../../components/OldModals/FullScreenModal';
 import PopupProfile from '../../../components/PopupProfile/PopupProfile';
+import { ModalProvider } from '../../../context/ModalContext';
 import useOnLogout from '../../../hooks/auth/useOnLogout';
-import useGetUserData from '../../../hooks/getData/useGetUserData';
+import { useAppSelector } from '../../../redux/store';
+import { capitalize } from '../../../utils/utils';
 import { headerConfig } from './headerConfig';
 
-const DropDownLabel = () => {
+const DropDownLabel = ({ imgSrc }: { imgSrc: string }) => {
   return (
     <DropDownLabelContainer>
-      <IconImg src='/static/img/PlaceholderUserImage.png' />
+      <IconImg src={imgSrc} />
       <DownArrowIcon />
     </DropDownLabelContainer>
   );
 };
 
+const ShowProfileModal = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ModalProvider>
+      <ModalTriggerContainer>
+        <ShowProfile>{children}</ShowProfile>
+      </ModalTriggerContainer>
+      <Modal>
+        <PostJobModal />
+      </Modal>
+    </ModalProvider>
+  );
+};
+
 const HeaderDropDown = () => {
   const { logoutUser } = useOnLogout();
-  const { userData } = useGetUserData();
+  const { authData } = useAppSelector((state) => state.auth);
   const [modal, setModal] = useState(false);
 
-  const showModal = () => {
-    setModal(true);
-  };
-
-  useEffect(() => {
-    setModal(false);
-  }, []);
+  const profileImageSrc =
+    authData?.profileImage ?? '/static/svg/profilePlaceholder.svg';
 
   return (
-    <HoverDropDown label={<DropDownLabel />}>
+    <HoverDropDown label={<DropDownLabel imgSrc={profileImageSrc} />}>
       <Container>
-        <HoverDropDownContentCell>
-          <IconImg src='/static/img/PlaceholderUserImage.png' />
+        <HoverDropDownContentCell className='default-cursor'>
+          <IconImg src={profileImageSrc} />
           <UserInfoArea>
-            <p>{userData?.firstName}</p>
-            <Description>Teir 2 account</Description>
+            <p>{capitalize(authData?.firstName ?? '')}</p>
+            <Description>Tier 2 account</Description>
           </UserInfoArea>
         </HoverDropDownContentCell>
+
         {headerConfig.map((data, index) => {
           if (data.title === 'Logout') {
             return (
@@ -55,13 +69,17 @@ const HeaderDropDown = () => {
               </HoverDropDownContentCell>
             );
           }
+
           if (data.title === 'View Profile') {
             return (
-              <HoverDropDownContentCell onClick={() => showModal()} key={index}>
-                {data.icon} <p>{data.title}</p>
+              <HoverDropDownContentCell>
+                <ShowProfileModal>
+                  {data.icon} <p>{data.title}</p>
+                </ShowProfileModal>
               </HoverDropDownContentCell>
             );
           }
+
           return (
             <InternalNavLink to={data.path} key={index}>
               <HoverDropDownContentCell>
@@ -110,10 +128,16 @@ const HoverDropDownContentCell = styled.div`
   color: ${({ theme }) => theme.palette.blackBlackMain};
   font-weight: 400;
   cursor: pointer;
+  width: 100%;
+
+  &.default-cursor {
+    cursor: default;
+  }
 `;
 
 const UserInfoArea = styled.div`
   /* border: 2px solid red; */
+  /* cursor: default; */
 `;
 
 const Description = styled.div`
@@ -122,4 +146,11 @@ const Description = styled.div`
   font-style: normal;
   font-weight: 300;
   color: ${({ theme }) => theme.palette.greyGrey1};
+`;
+
+const ShowProfile = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
 `;
