@@ -7,7 +7,7 @@ import DownArrowIcon from '../../../components/Icons/DownArrowIcon';
 import IconImg from '../../../components/Img/IconImg';
 import { InternalNavLink } from '../../../components/Link/Link';
 import { Modal } from '../../../components/Modals/Modal';
-import PostJobModal from '../../../components/Modals/ModalsActions/PostJobModal';
+import ProfileModal from '../../../components/Modals/ModalsActions/ProfileModal';
 import ModalTriggerContainer from '../../../components/Modals/ModalTriggerContainer';
 import FullScreenModal from '../../../components/OldModals/FullScreenModal';
 import PopupProfile from '../../../components/PopupProfile/PopupProfile';
@@ -33,7 +33,7 @@ const ShowProfileModal = ({ children }: { children: React.ReactNode }) => {
         <ShowProfile>{children}</ShowProfile>
       </ModalTriggerContainer>
       <Modal>
-        <PostJobModal />
+        <ProfileModal />
       </Modal>
     </ModalProvider>
   );
@@ -72,7 +72,7 @@ const HeaderDropDown = () => {
 
           if (data.title === 'View Profile') {
             return (
-              <HoverDropDownContentCell>
+              <HoverDropDownContentCell key={index}>
                 <ShowProfileModal>
                   {data.icon} <p>{data.title}</p>
                 </ShowProfileModal>

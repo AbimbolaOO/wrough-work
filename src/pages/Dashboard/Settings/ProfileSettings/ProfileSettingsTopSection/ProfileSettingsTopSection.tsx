@@ -13,12 +13,13 @@ import {
   profileImageValues,
 } from '../../../../../models/dashboard/settings/profileSettings/profileImage.model';
 import { useAppSelector } from '../../../../../redux/store';
+import { DEFAULT_IMAGE_URL } from '../../../../../utils/utils';
 
 const ProfileSettingsTopSection = () => {
   const { authData } = useAppSelector((state) => state.auth);
   const { uploadProfileImage, loading } = useUploadProfileImage();
   const [defaultImgUrl, setDefaultImgUrl] = useState<string | null>(
-    authData?.profileImage ?? '/static/svg/profilePlaceholder.svg'
+    authData?.profileImage ?? DEFAULT_IMAGE_URL
   );
 
   const handleSubmit = (values: ProfileImageDataType) => {

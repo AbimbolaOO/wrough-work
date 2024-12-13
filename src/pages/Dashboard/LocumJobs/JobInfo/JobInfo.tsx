@@ -4,7 +4,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import { PrimaryButton, SecondaryButton } from '../../../../components/Button';
-import useGetUserData from '../../../../hooks/getData/useGetUserData';
 import useApplyToJob from '../../../../hooks/postData/useApplyToJob';
 import JobInfoBody from './JobInfoBody';
 import JobInfoHead from './JobInfoHead';
@@ -30,8 +29,6 @@ interface JobInfoProps {
 
 const JobInfo: React.FC<JobInfoProps> = ({ selectedJob }) => {
   const { loading, applyToJob } = useApplyToJob();
-
-  const { userData } = useGetUserData();
 
   if (!selectedJob) {
     return <p>no jobs available</p>;

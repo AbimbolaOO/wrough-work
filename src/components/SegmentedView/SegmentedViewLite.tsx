@@ -58,7 +58,7 @@ export const SegmentedViewControllerLite: React.FC<
   Omit<ISegmentedViewController, 'children'>
 > = ({ segmentedViewControllerTitle, state, handleStateChange, className }) => {
   return (
-    <SegmentedViewControllerWrapper>
+    <SegmentedViewControllerWrapper className={className}>
       {segmentedViewControllerTitle.map((data, index) => (
         <div
           className={clsx(
@@ -112,13 +112,18 @@ const SegmentedViewControllerWrapper = styled.div`
   display: flex;
   gap: 2rem;
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: 18px;
   text-align: center;
   color: ${({ theme }) => theme.palette.greyGrey1};
 
-  /* &.grey {
-    color: ${({ theme }) => theme.palette.greyGrey3};
-  } */
+  &.sm-header {
+    font-size: 14px;
+    margin-left: -32px;
+    margin-right: -32px;
+    padding-left: 22px;
+    padding-right: 22px;
+    border-bottom: 1px solid ${({ theme }) => theme.palette.greyGrey4};
+  }
 
   & > * {
     padding: 0.6rem;

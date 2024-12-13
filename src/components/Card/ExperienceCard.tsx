@@ -9,7 +9,7 @@ import {
   truncateTextByCharacters,
 } from '../../utils/utils';
 
-interface ExperienceCardCellProps {
+interface ExperienceCardProps {
   title: string;
   companyName: string;
   employmentType: string;
@@ -18,7 +18,7 @@ interface ExperienceCardCellProps {
   endDate: string;
 }
 
-const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
+const ExperienceCard: React.FC<ExperienceCardProps> = ({
   title,
   companyName,
   employmentType,
@@ -28,8 +28,8 @@ const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
 }) => {
   return (
     <Container>
-      <ImageArea>UI</ImageArea>
-      <TextAndButtonsArea>
+      <Box>
+        <AbbreviationIcon>UI</AbbreviationIcon>
         <TextPart>
           <div className='name'>{companyName}</div>
           <div className='title'>
@@ -42,43 +42,32 @@ const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
             {truncateTextByCharacters(location, 30)}{' '}
           </div>
         </TextPart>
-        <ButtonPart>
-          <Button>Edit</Button>
-          <Button className='delete'>Delete</Button>
-        </ButtonPart>
-      </TextAndButtonsArea>
+      </Box>
     </Container>
   );
 };
 
-export default ExperienceCardCell;
+export default ExperienceCard;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 50px auto;
-  gap: 16px;
-  border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
-  border-radius: 4px;
-  padding: 24px;
+  grid-template-columns: 1fr 100px;
+  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.greyGrey4};
+
+  padding: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
 `;
 
-const ImageArea = styled.div`
+const Box = styled.div`
   display: grid;
-  place-content: center;
-  font-weight: 400;
-  font-size: 18px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.mainBlue};
-  color: white;
-`;
-
-const TextAndButtonsArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: -7px;
+  grid-template-columns: 50px 1fr;
+  gap: 8px;
+  width: 100%;
 `;
 
 const TextPart = styled.div`
@@ -98,23 +87,14 @@ const TextPart = styled.div`
   }
 `;
 
-const ButtonPart = styled.div`
-  display: flex;
-  gap: 16px;
-  margin-left: auto;
-`;
-
-const Button = styled.div`
-  display: flex;
-  border-radius: 4px;
-  font-size: 14px;
+const AbbreviationIcon = styled.div`
+  display: grid;
+  place-content: center;
+  width: 50px;
+  height: 50px;
+  color: white;
+  background-color: ${({ theme }) => theme.palette.mainBlue};
+  font-size: 18px;
   font-weight: 400;
-  padding: 4px 24px;
-  border: 1px solid ${({ theme }) => theme.palette.blackBlackMain};
-  cursor: pointer;
-
-  &.delete {
-    border-color: ${({ theme }) => theme.palette.stateColorRed};
-    color: ${({ theme }) => theme.palette.stateColorRed};
-  }
+  border-radius: 50%;
 `;

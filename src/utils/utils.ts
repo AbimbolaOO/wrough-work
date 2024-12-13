@@ -168,3 +168,6 @@ export const formatPhoneNumberInputField = (phoneNumber: string): string => {
 
 export const employmentTypeDict: Record<string, string> = { "Full Time": "FullTime", "Part Time": "PartTime", "Contract": "Contract" };
 export const employmentTypeReversedDict: Record<string, string> = { "FullTime": "Full Time", "PartTime": "Part Time", "Contract": "Contract" };
+
+
+export const DEFAULT_IMAGE_URL = '/static/svg/profilePlaceholder.svg';
