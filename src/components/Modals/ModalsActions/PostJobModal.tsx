@@ -1,7 +1,6 @@
 import 'quill/dist/quill.snow.css';
 
 import Quill from 'quill';
-import React from 'react';
 
 import styled from '@emotion/styled';
 
@@ -51,7 +50,7 @@ const PostJobModal = () => {
   };
 
   return (
-    <ModalContainer>
+    <ModalContainer width='1080px'>
       <FormComponent
         initialValues={createJobPostInitialValues}
         schema={CreateJobPostSchema}

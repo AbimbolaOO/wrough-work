@@ -7,8 +7,9 @@ import CloseIcon from '../Icons/CloseIcon';
 
 interface ModalContainerProps {
   children: React.ReactNode;
+  width?: string;
 }
-const ModalContainer: React.FC<ModalContainerProps> = ({ children }) => {
+const ModalContainer: React.FC<ModalContainerProps> = ({ children, width }) => {
   const modalContext = useContext(ModalContext);
   const onClickCancel = (e: any) => {
     modalContext?.displayModal(false);
@@ -16,6 +17,7 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ children }) => {
 
   return (
     <Container
+      width={width}
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
       }}
@@ -31,7 +33,10 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ children }) => {
 
 export default ModalContainer;
 
-const Container = styled.div`
+interface IContainer {
+  width?: string;
+}
+const Container = styled.div<IContainer>`
   padding: 77px;
   padding-top: 30px;
   padding-bottom: 61px;
@@ -39,7 +44,9 @@ const Container = styled.div`
   background-color: white;
   margin-top: 60px;
   margin-bottom: 60px;
-  width: 1080px;
+  /* width: 1080px; */
+  width: ${({ width }) => (width ? width : 'fit-content')};
+
   display: flex;
   flex-direction: column;
   gap: 38px;

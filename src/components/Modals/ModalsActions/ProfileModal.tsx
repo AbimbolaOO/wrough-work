@@ -65,8 +65,12 @@ const ProfileModal = () => {
               <div>Availability</div>
               <DarkCell>Full Time</DarkCell>
             </div>
-            <div>Schedule an interview</div>
-            <div>View CV</div>
+            <Button onClick={() => alert('Lol LOl')}>
+              Schedule an interview
+            </Button>
+            <Button className='purple' onClick={() => alert('Lol')}>
+              View CV
+            </Button>
           </Availability>
         </BasicInformationSection>
 
@@ -132,6 +136,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 364px 1fr;
   gap: 30px;
+  /* border: 1px solid blue; */
 
   & > * {
     border: 1px solid ${({ theme }) => theme.palette.greyGrey4};
@@ -199,6 +204,7 @@ const BasicInformationSection = styled.div`
   flex-direction: column;
   gap: 12px;
   color: ${({ theme }) => theme.palette.greyGrey2};
+  /* border: 1px solid blue; */
 `;
 
 const BasicLabel = styled.div`
@@ -209,11 +215,13 @@ const BasicLabel = styled.div`
 const AgeArea = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
 `;
 
 const Availability = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 34px;
 `;
 
 const DarkCell = styled.div`
@@ -230,5 +238,22 @@ const SegmentContainer = styled.div`
     margin-left: -32px;
     margin-right: -32px;
     overflow-y: auto;
+  }
+`;
+
+const Button = styled.div`
+  display: grid;
+  place-content: center;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background-color: ${({ theme }) => theme.palette.mainBlue};
+  cursor: pointer;
+
+  &.purple {
+    background-color: ${({ theme }) => theme.palette.mainPurple};
   }
 `;
