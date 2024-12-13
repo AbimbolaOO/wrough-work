@@ -6,7 +6,11 @@ import BookmarkBoxIcon from '../../../../components/Icons/BookmarkBoxIcon';
 import JobsIcon from '../../../../components/Icons/JobsIcon';
 import LocationIcon from '../../../../components/Icons/LocationIcon';
 import Img from '../../../../components/Img/Img';
-import { formatDate, formatNaira } from '../../../../utils/utils';
+import {
+  formatDate,
+  formatNaira,
+  salaryInterval,
+} from '../../../../utils/utils';
 
 interface IJobInfoHead {
   imgSrc: string;
@@ -20,13 +24,13 @@ interface IJobInfoHead {
   jobEndDate: string;
 }
 
-const salaryInterval: Record<string, string> = {
-  HOURLY: 'hour',
-  DAILY: 'day',
-  WEEKLY: 'week',
-  MONTHLY: 'month',
-  YEARLY: 'year',
-};
+// const salaryInterval: Record<string, string> = {
+//   HOURLY: 'hour',
+//   DAILY: 'day',
+//   WEEKLY: 'week',
+//   MONTHLY: 'month',
+//   YEARLY: 'year',
+// };
 
 const JobInfoHead: React.FC<IJobInfoHead> = ({
   imgSrc,

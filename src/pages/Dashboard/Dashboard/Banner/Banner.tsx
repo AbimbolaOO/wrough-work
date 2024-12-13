@@ -70,6 +70,7 @@ const Navigation = styled.div`
   gap: 0.5rem;
   color: ${({ theme }) => theme.palette.stateColorYellow};
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const ImageArea = styled.div`

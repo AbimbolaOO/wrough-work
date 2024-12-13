@@ -79,8 +79,4 @@ const Section = styled.section`
 const MainContent = styled.main`
   height: 100%;
   width: 100%;
-
-  @media (max-width: 884px) {
-    padding: 1.5rem;
-  }
 `;

@@ -171,3 +171,12 @@ export const employmentTypeReversedDict: Record<string, string> = { "FullTime": 
 
 
 export const DEFAULT_IMAGE_URL = '/static/svg/profilePlaceholder.svg';
+
+export const salaryInterval: Record<string, string> = {
+  HOURLY: 'hour',
+  DAILY: 'day',
+  WEEKLY: 'week',
+  MONTHLY: 'month',
+  YEARLY: 'year',
+};
+

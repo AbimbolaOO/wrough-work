@@ -220,6 +220,7 @@ const AgeArea = styled.div`
 
 const Availability = styled.div`
   display: grid;
+  align-items: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 34px;
 `;
@@ -247,9 +248,10 @@ const Button = styled.div`
   color: white;
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
+  height: fit-content;
+  /* line-height: 20px; */
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 10px 20px;
   background-color: ${({ theme }) => theme.palette.mainBlue};
   cursor: pointer;
 

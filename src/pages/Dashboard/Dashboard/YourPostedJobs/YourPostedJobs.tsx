@@ -4,14 +4,14 @@ import EmptyableCard from '../../../../components/Card/EmptyableCard';
 import PostedJobsCard from '../../../../components/Card/PostedJobsCard';
 import { IGetCreatedJobs } from '../../../../models/dashboard/jobs/getCreatedJobs.model';
 import { useAppSelector } from '../../../../redux/store';
-import { MANAGE_POSTED_JOBS } from '../../../../routes/routeConstants';
+import { DASHBOARD, MANAGE_POSTED_JOBS } from '../../../../routes/routeConstants';
 
 const YourPostedJobs = () => {
   const navigate = useNavigate();
   const jobsCreatedList = useAppSelector((state) => state.jobsCreatedList);
 
   const handleViewAll = () => {
-    navigate(`/${MANAGE_POSTED_JOBS}`);
+    navigate(`/${DASHBOARD}/${MANAGE_POSTED_JOBS}`);
   };
 
   return (

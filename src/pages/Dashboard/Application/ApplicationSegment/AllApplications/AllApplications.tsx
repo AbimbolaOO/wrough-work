@@ -52,7 +52,7 @@ export default AllApplications;
 
 const Wrapper = styled.div`
   display: flex;
-  height: 65vh;
+  min-height: 65vh;
 `;
 
 const Container = styled.div`

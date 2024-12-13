@@ -39,10 +39,8 @@ const ApplicationSegment = () => {
 export default ApplicationSegment;
 
 const Container = styled.div`
-  display: grid;
   background-color: white;
   gap: 1rem;
   padding: 2rem;
-
   border-radius: 0.75rem;
 `;

@@ -11,8 +11,9 @@ import SignupOtp from '../pages/Auth/SignupOtp/SignupOtp';
 import Application from '../pages/Dashboard/Application/Application';
 import Bookmarks from '../pages/Dashboard/Bookmarks/Bookmarks';
 import DashboardHome from '../pages/Dashboard/Dashboard/DashboardHome';
-import ManagePostedJobs from '../pages/Dashboard/Dashboard/ManageJobs/ManagePostedJobs';
 import LocumJobs from '../pages/Dashboard/LocumJobs/LocumJobs';
+import ManagePostedJobs from '../pages/Dashboard/ManagePostedJobs/ManagePostedJobs';
+import ManagePostJobApplicant from '../pages/Dashboard/ManagePostJobApplicant/ManagePostJobApplicant';
 import Notifications from '../pages/Dashboard/Notifications/Notifications';
 import Settings from '../pages/Dashboard/Settings/Settings';
 import { NotFound404 } from '../pages/NotFound404';
@@ -47,7 +48,14 @@ export default function Router() {
         { path: USERS_SETTINGS, element: <Settings /> },
         { path: NOTIFICATIONS, element: <Notifications /> },
         { path: BOOKMARKS, element: <Bookmarks /> },
-        { path: MANAGE_POSTED_JOBS, element: <ManagePostedJobs /> },
+        {
+          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}`,
+          element: <ManagePostedJobs />,
+        },
+        {
+          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}/:id`,
+          element: <ManagePostJobApplicant />,
+        },
 
         { path: NOTFOUND, element: <NotFound404 /> },
         { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },
