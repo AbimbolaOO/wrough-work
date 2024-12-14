@@ -2,12 +2,12 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import CalendarIcon from '../../../../components/Icons/CalenderIcon';
 import FileIcon from '../../../../components/Icons/FileIcon';
 import ThreeDotIcon from '../../../../components/Icons/ThreeDotIcon';
-import UserIcon from '../../../../components/Icons/UserIcon';
 import Img from '../../../../components/Img/Img';
 import { DEFAULT_IMAGE_URL } from '../../../../utils/utils';
+import ApplicantCalendarModal from './ApplicantCalendarModal';
+import ShowApplicantModal from './ShowApplicantModal';
 
 const ApplicantCard = () => {
   return (
@@ -27,9 +27,9 @@ const ApplicantCard = () => {
       <Bottom>
         {/* <div>dd</div> */}
         <IconBottom>
-          <UserIcon />
+          <ShowApplicantModal />
           <FileIcon />
-          <CalendarIcon />
+          <ApplicantCalendarModal />
         </IconBottom>
       </Bottom>
     </Container>

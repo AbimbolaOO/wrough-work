@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChevronLeftIcon = () => {
+const ChevronRightIcon = () => {
   return (
     <svg
       width='24'
@@ -10,7 +10,7 @@ const ChevronLeftIcon = () => {
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
-        d='M15 18L9 12L15 6'
+        d='M9 18L15 12L9 6'
         stroke='#1F2937'
         strokeWidth='1.25'
         strokeLinecap='round'
@@ -20,4 +20,4 @@ const ChevronLeftIcon = () => {
   );
 };
 
-export default ChevronLeftIcon;
+export default ChevronRightIcon;

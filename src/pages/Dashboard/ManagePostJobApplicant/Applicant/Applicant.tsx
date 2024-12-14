@@ -8,7 +8,7 @@ const Applicant = () => {
   return (
     <Container>
       {Array.from({ length: 4 }).map((data, index) => (
-        <ApplicantCard />
+        <ApplicantCard key={index} />
       ))}
     </Container>
   );

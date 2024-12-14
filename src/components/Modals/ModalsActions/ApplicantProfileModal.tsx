@@ -21,7 +21,7 @@ const segmentedControlConfData = [
   { title: ' Licenses & certifications' },
 ];
 
-const ProfileModal = () => {
+const ApplicantProfileModal = () => {
   const { authData } = useAppSelector((state) => state.auth);
 
   return (
@@ -65,6 +65,12 @@ const ProfileModal = () => {
               <div>Availability</div>
               <DarkCell>Full Time</DarkCell>
             </div>
+            <Button onClick={() => alert('Lol LOl')}>
+              Schedule an interview
+            </Button>
+            <Button className='purple' onClick={() => alert('Lol')}>
+              View CV
+            </Button>
           </Availability>
         </BasicInformationSection>
 
@@ -123,7 +129,7 @@ const ProfileModal = () => {
   );
 };
 
-export default ProfileModal;
+export default ApplicantProfileModal;
 
 const Container = styled.div`
   /* border: 1px solid red; */
@@ -233,5 +239,23 @@ const SegmentContainer = styled.div`
     margin-left: -32px;
     margin-right: -32px;
     overflow-y: auto;
+  }
+`;
+
+const Button = styled.div`
+  display: grid;
+  place-content: center;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  height: fit-content;
+  /* line-height: 20px; */
+  border-radius: 4px;
+  padding: 10px 20px;
+  background-color: ${({ theme }) => theme.palette.mainBlue};
+  cursor: pointer;
+
+  &.purple {
+    background-color: ${({ theme }) => theme.palette.mainPurple};
   }
 `;
