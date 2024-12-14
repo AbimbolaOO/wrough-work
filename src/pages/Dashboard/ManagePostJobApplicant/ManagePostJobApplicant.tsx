@@ -4,8 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import LeftTriangleIcon from '../../../components/Icons/LeftTriangleIcon';
+import {
+  SegmentedView,
+  SegmentedViewController,
+  SegmentedViewData,
+} from '../../../components/SegmentedView/SegmentedView';
 import { DASHBOARD, MANAGE_POSTED_JOBS } from '../../../routes/routeConstants';
+import Applicant from './Applicant/Applicant';
+import Interview from './Interview/Interview';
 import ManagePostJobHeader from './ManagePostJobHeader';
+import Screening from './Screening/Screening';
+
+const segmentedControllerConfig = [
+  { title: 'Applicants' },
+  { title: 'Screening' },
+  { title: 'Interview' },
+];
 
 const ManagePostJobApplicant = () => {
   const navigate = useNavigate();
@@ -25,7 +39,25 @@ const ManagePostJobApplicant = () => {
         pay={300000}
         payInterval='HOURLY'
       />
-      <div>Fuck itt</div>
+      <Shell>
+        <SegmentedView>
+          <SegmentedViewController
+            className='hollow'
+            segmentedViewControllerTitle={segmentedControllerConfig}
+          />
+          <SegmentedViewData>
+            <div>
+              <Applicant />
+            </div>
+            <div>
+              <Screening />
+            </div>
+            <div>
+              <Interview />
+            </div>
+          </SegmentedViewData>
+        </SegmentedView>
+      </Shell>
     </Container>
   );
 };
@@ -60,4 +92,13 @@ const NavigationArea = styled.div`
   &:hover > svg {
     transform: translateX(-8px);
   }
+`;
+
+const Shell = styled.div`
+  display: flex;
+  width: 100%;
+  /* grid-template-columns: repeat(3, 1fr); */
+  flex-direction: column;
+  padding-left: 8px;
+  padding-right: 8px;
 `;

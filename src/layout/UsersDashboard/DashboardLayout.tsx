@@ -63,7 +63,7 @@ const Container = styled.div`
   height: 100vh;
   overflow: auto;
   width: 100%;
-  background-color: #f7f7f7;
+  background-color: #f2f8fd;
 `;
 
 const Section = styled.section`

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useReducer } from 'react';
 
 import styled from '@emotion/styled';
@@ -55,16 +56,19 @@ export const SegmentedView: React.FC<Pick<ISegmentedViewData, 'children'>> = ({
 
 export const SegmentedViewController: React.FC<
   Omit<ISegmentedViewController, 'children'>
-> = ({ segmentedViewControllerTitle, state, handleStateChange }) => {
+> = ({ segmentedViewControllerTitle, state, handleStateChange, className }) => {
   return (
     <SegmentedViewControllerWrapper>
       {segmentedViewControllerTitle.map((data, index) => (
         <div
-          className={state?.index === index ? 'activeSegment' : ''}
+          className={clsx(
+            state?.index === index ? 'activeSegment' : '',
+            className
+          )}
           onClick={() => handleStateChange!(index)}
           key={index}
         >
-          {data.title} <span>Settings</span>
+          {data.title}
         </div>
       ))}
     </SegmentedViewControllerWrapper>
@@ -123,6 +127,13 @@ const SegmentedViewControllerWrapper = styled.div`
     }
   }
 
+  & > div.hollow {
+    padding: 10px 58px;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
+  }
+
   & > *:hover {
     color: ${({ theme }) => theme.palette.blackBlack2};
   }
@@ -131,6 +142,12 @@ const SegmentedViewControllerWrapper = styled.div`
     border-radius: 0.375rem;
     background: ${({ theme }) => theme.palette.backgroundColor};
     color: ${({ theme }) => theme.palette.mainBlue};
+  }
+
+  & > .hollow.activeSegment {
+    border-radius: 0.375rem;
+    background: white;
+    border: 1px solid ${({ theme }) => theme.palette.mainBlue};
   }
 `;
 

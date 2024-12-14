@@ -13,10 +13,9 @@ import PrivacySettings from './PrivacySettings/PrivacySettings';
 import ProfileSettings from './ProfileSettings/ProfileSettings';
 
 const segmentedControllerConfig = [
-  { title: 'Profile' },
-  // { title: 'Password' },
-  { title: 'Notification' },
-  { title: 'Privacy' },
+  { title: 'Profile Settings' },
+  { title: 'Notification Settings' },
+  { title: 'Privacy Settings' },
 ];
 
 const Settings = () => {
