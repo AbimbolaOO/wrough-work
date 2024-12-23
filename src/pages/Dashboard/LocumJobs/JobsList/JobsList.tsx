@@ -13,10 +13,8 @@ interface JobsListProps {}
 
 const JobsList: React.FC<JobsListProps> = () => {
   const { getLocumJobs, loading } = useGetLocumJobs();
-  const { jobData, page } = useAppSelector((state) => state.locumJobs);
-  const { jobId: currentJobId } = useAppSelector(
-    (state) => state.locumSingleJobs
-  );
+  const { jobData } = useAppSelector((state) => state.locumJobs);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,23 +33,14 @@ const JobsList: React.FC<JobsListProps> = () => {
     });
   };
 
-  // useEffect(() => {
-  //   console.log('jobId-->>', jobId);
-  //   if (jobId) {
-  //     addQueryParams({ jobId });
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
-
   useEffect(() => {
-    if (currentJobId !== jobId) {
+    if (jobData.length === 0) {
       getLocumJobs();
     }
     // eslint-disable-next-line
-  }, [page]);
+  }, []);
 
   const handleJobClick = (jobId: string) => {
-    // console.log('handleJobClick-->>', jobId);
     addQueryParams({ jobId });
   };
 

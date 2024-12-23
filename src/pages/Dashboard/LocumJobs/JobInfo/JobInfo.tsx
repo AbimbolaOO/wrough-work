@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import { PrimaryButton, SecondaryButton } from '../../../../components/Button';
+import EmptyState from '../../../../components/Card/EmptyState';
 import useGetSingleLocumJob from '../../../../hooks/dashboard/jobs/useGetSingleLocumJob';
 import { useAppSelector } from '../../../../redux/store';
 import JobInfoBody from './JobInfoBody';
@@ -30,17 +31,42 @@ interface JobInfoProps {}
 const JobInfo: React.FC<JobInfoProps> = () => {
   const location = useLocation();
   const { getSingleLocumJob, loading } = useGetSingleLocumJob();
-  const { jobData } = useAppSelector((state) => state.locumSingleJobs);
+  const { jobData, jobId: existingJobId } = useAppSelector(
+    (state) => state.locumSingleJobs
+  );
+  const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
   const jobId = queryParams.get('jobId');
+
+  const addQueryParams = (params: Record<string, string>) => {
+    const queryString = new URLSearchParams({
+      ...Object.fromEntries(new URLSearchParams(location.search)),
+      ...params,
+    }).toString();
+
+    navigate({
+      pathname: location.pathname,
+      search: queryString,
+    });
+  };
+
+  useEffect(() => {
+    if (existingJobId) {
+      addQueryParams({ jobId: existingJobId });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (jobId) {
       getSingleLocumJob(jobId);
     }
-    // eslint-disable-next-line
   }, [jobId]);
+
+  if (jobId === null) {
+    return <EmptyState>Click on job to preview</EmptyState>;
+  }
 
   return (
     <StickyWrapper>
