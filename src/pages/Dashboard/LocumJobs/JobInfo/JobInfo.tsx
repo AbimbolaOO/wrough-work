@@ -28,7 +28,7 @@ interface JobInfoProps {
 }
 
 const JobInfo: React.FC<JobInfoProps> = ({ selectedJob }) => {
-  const { loading, applyToJob } = useApplyToJob();
+  const { loading } = useApplyToJob();
 
   if (!selectedJob) {
     return <p>no jobs available</p>;
