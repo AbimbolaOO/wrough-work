@@ -4,13 +4,12 @@ import { useState } from 'react';
 import { ILocumJobs } from '../../../models/dashboard/jobs/getLocumJobs.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../../models/https';
 import { locumJobsActions } from '../../../redux/slices/locumJobsSlice';
-import { useAppDisPatch, useAppSelector } from '../../../redux/store';
+import { useAppDisPatch } from '../../../redux/store';
 import useHttps from '../../useHttps';
 
 const useGetLocumJobs = () => {
   const request = useHttps();
   const [loading, setLoading] = useState(false);
-  const { authData } = useAppSelector((state) => state.auth);
   const dispatch = useAppDisPatch();
 
   const onGetLocumJobsError = (err: AxiosError<ErrorHttpResponse>) => {
@@ -25,9 +24,15 @@ const useGetLocumJobs = () => {
   };
 
 
-  const getLocumJobs = (filter?: string) => {
+  const getLocumJobs = (filter?: Record<string, string>) => {
+    let urlPath = `jobs-service/jobs`;
+
+    // if (filter && Object.keys(filter).length !== 0) {
+    //   urlPath = urlPath; //TODO:: comeback an enhance this feature
+    // }
+
     const url: HttpConfig = {
-      url: `jobs-service/jobs/institutions/${authData?.id}/jobs`,
+      url: urlPath,
       method: 'get',
     };
 

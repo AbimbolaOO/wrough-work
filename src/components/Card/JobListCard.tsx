@@ -12,7 +12,7 @@ interface IJobListCard {
   jobTitle: string;
   yearsOfExperience: string;
   pay: number;
-  onClick?: () => void;
+  onClick?: (...args: any) => void;
   className?: string;
 }
 
@@ -70,6 +70,10 @@ const Container = styled.div`
 
   &.cursor-pointer {
     cursor: pointer;
+  }
+
+  &.active {
+    border: 1px solid ${({ theme }) => theme.palette.mainBlue};
   }
 `;
 

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import { PrimaryButton, SecondaryButton } from '../../../../components/Button';
-import useApplyToJob from '../../../../hooks/postData/useApplyToJob';
+import useGetSingleLocumJob from '../../../../hooks/dashboard/jobs/useGetSingleLocumJob';
+import { useAppSelector } from '../../../../redux/store';
 import JobInfoBody from './JobInfoBody';
 import JobInfoHead from './JobInfoHead';
 
@@ -23,46 +25,64 @@ export interface SelectedJobsProps {
   jobEndDate: string;
 }
 
-interface JobInfoProps {
-  selectedJob: SelectedJobsProps;
-}
+interface JobInfoProps {}
 
-const JobInfo: React.FC<JobInfoProps> = ({ selectedJob }) => {
-  const { loading } = useApplyToJob();
+const JobInfo: React.FC<JobInfoProps> = () => {
+  const location = useLocation();
+  const { getSingleLocumJob, loading } = useGetSingleLocumJob();
+  const { jobData } = useAppSelector((state) => state.locumSingleJobs);
 
-  if (!selectedJob) {
-    return <p>no jobs available</p>;
-  }
+  const queryParams = new URLSearchParams(location.search);
+  const jobId = queryParams.get('jobId');
+
+  useEffect(() => {
+    if (jobId) {
+      getSingleLocumJob(jobId);
+    }
+    // eslint-disable-next-line
+  }, [jobId]);
 
   return (
     <StickyWrapper>
-      <Container>
-        <JobInfoHead
-          imgSrc={selectedJob.imgSrc || '/static/gif/happyAnimal.gif'} // Use job's imgSrc or default image
-          title={selectedJob.title}
-          institutionName={selectedJob.institutionName}
-          yearsOfExperience={`${selectedJob.yearsOfExperience} years+`}
-          location={selectedJob.location}
-          pay={selectedJob.pay}
-          payInterval={selectedJob.payInterval}
-          jobStartDate={selectedJob.jobStartDate}
-          jobEndDate={selectedJob.jobEndDate}
-        />
+      {!loading ? (
+        <Container>
+          <JobInfoHead
+            // imgSrc={jobData || '/static/gif/happyAnimal.gif'}
+            imgSrc={'/static/gif/happyAnimal.gif'}
+            title={jobData?.title ?? ''}
+            institutionName={jobData?.institutionName ?? ''}
+            yearsOfExperience={`${jobData?.yearsOfExperience ?? ''} years+`}
+            location={jobData?.location ?? ''}
+            pay={jobData?.pay ?? 0}
+            payInterval={jobData?.payInterval ?? ''}
+            jobStartDate={jobData?.jobStartDate ?? ''}
+            jobEndDate={jobData?.jobEndDate ?? ''}
+          />
 
-        <JobInfoBody
-          jobDescription={selectedJob.jobDescription.jobDescription}
-        />
+          <JobInfoBody
+            jobDescription={jobData?.jobDescription.jobDescription}
+          />
 
-        <ButtonArea>
-          <SecondaryButton
-            click={() => alert('submit')}
-            className='fw600 pl-pr-4 respond'
-          >
-            {loading ? <LoadingOutlined /> : 'Apply'}
-          </SecondaryButton>
-          <PrimaryButton className='fw600 danger respond'>Report</PrimaryButton>
-        </ButtonArea>
-      </Container>
+          <ButtonArea>
+            <SecondaryButton
+              click={() => alert('submit')}
+              className='fw600 pl-pr-4 respond'
+            >
+              {loading ? <LoadingOutlined /> : 'Apply'}
+            </SecondaryButton>
+            <PrimaryButton className='fw600 danger respond'>
+              Report
+            </PrimaryButton>
+          </ButtonArea>
+        </Container>
+      ) : (
+        <>
+          <div>
+            <LoadingOutlined />
+          </div>
+          {/* <EmptyState>Click on job to preview</EmptyState> */}
+        </>
+      )}
     </StickyWrapper>
   );
 };

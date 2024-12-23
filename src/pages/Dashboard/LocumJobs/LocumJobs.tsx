@@ -1,38 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import styled from '@emotion/styled';
 
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
-import JobInfo, { SelectedJobsProps } from './JobInfo/JobInfo';
+import JobInfo from './JobInfo/JobInfo';
 import JobSearchForm from './JobSearchForm/JobSearchForm';
 import JobsList from './JobsList/JobsList';
 
-const setJobPlaceHolder = {
-  id: '',
-  jobCreatorId: '',
-  imgSrc: '',
-  title: '',
-  jobDescription: {},
-  institutionName: '',
-  yearsOfExperience: '',
-  location: '',
-  pay: 0,
-  payInterval: '',
-  jobStartDate: '',
-  jobEndDate: '',
-};
-
 const LocumJobs = () => {
-  const [selectedJob, setSelectedJob] =
-    useState<SelectedJobsProps>(setJobPlaceHolder); // Manage selected job
-
   return (
     <Shell>
       <JobSearchForm />
       <Container>
         <JobViewArea>
-          <JobsList setSelectedJob={setSelectedJob} />
-          <JobInfo selectedJob={selectedJob} />
+          <JobsList />
+          <JobInfo />
         </JobViewArea>
 
         <PaginationShell>
