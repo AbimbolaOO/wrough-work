@@ -44,12 +44,7 @@ const JobListCard: React.FC<IJobListCard> = ({
               {yearsOfExperience} year+
             </JobAgeArea>
 
-            <div>
-              {pay.toLocaleString('en-NG', {
-                style: 'currency',
-                currency: 'NGN',
-              })}
-            </div>
+            <div>{pay.formatCurrency()}</div>
           </LeftContentFooter>
         </LeftContentLowerPart>
       </LeftContent>

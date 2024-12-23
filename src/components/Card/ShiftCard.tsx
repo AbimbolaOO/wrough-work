@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IActiveShifts } from '../../models/dashboard/jobs/getActiveShifts.model';
-import { truncateText } from '../../utils/utils';
+import { salaryIntervally, truncateText } from '../../utils/utils';
 import Img from '../Img/Img';
 import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
@@ -45,11 +45,8 @@ const ShiftCard: React.FC<ShiftCardProps> = ({ job }) => {
               : 'N/A'}
           </BottomSectionData>
           <BottomSectionData>
-            {job.job?.pay.toLocaleString('en-NG', {
-              style: 'currency',
-              currency: 'NGN',
-            })}{' '}
-            {job.job?.payInterval}
+            {job.job?.pay.formatCurrency()}{' '}
+            {salaryIntervally[job.job?.payInterval ?? '']}
           </BottomSectionData>
         </FlexContainer>
       </BottomSection>

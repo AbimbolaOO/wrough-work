@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import JobsIcon from '../../../components/Icons/JobsIcon';
-import { formatNaira, salaryInterval } from '../../../utils/utils';
+import { salaryInterval } from '../../../utils/utils';
 
 interface ManagePostJobHeaderProps {
   title: string;
@@ -35,7 +35,7 @@ const ManagePostJobHeader: React.FC<ManagePostJobHeaderProps> = ({
           </IconWrapper>
 
           <div>
-            {formatNaira(pay)}/{salaryInterval[payInterval] ?? ''}
+            {pay.formatCurrency()}/{salaryInterval[payInterval] ?? ''}
           </div>
         </CenterContentFooter>
       </CenterContentLowerPart>

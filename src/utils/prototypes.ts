@@ -3,6 +3,10 @@ declare global {
     capitalize(): string;
     obfuscateEmail(): string;
   }
+
+  interface Number {
+    formatCurrency(): string;
+  }
 }
 
 // eslint-disable-next-line
@@ -32,6 +36,21 @@ String.prototype.obfuscateEmail = function (): string {
   const obfuscatedEmail = `${firstTwoChars}******@${domain}`;
 
   return obfuscatedEmail;
+};
+
+/* eslint-disable no-extend-native */
+Number.prototype.formatCurrency = function (): string {
+  const amount = Number(this);
+  if (isNaN(amount)) {
+    return "--";
+  }
+
+  return this.toLocaleString('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
 };
 
 export {};

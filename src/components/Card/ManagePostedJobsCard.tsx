@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { IGetCreatedJobs } from '../../models/dashboard/jobs/getCreatedJobs.model';
 import { DASHBOARD, MANAGE_POSTED_JOBS } from '../../routes/routeConstants';
-import { formatNaira, salaryInterval } from '../../utils/utils';
+import { salaryInterval } from '../../utils/utils';
 import DeleteIcon from '../Icons/DeleteIcon';
 import JobsIcon from '../Icons/JobsIcon';
 import Img from '../Img/Img';
@@ -39,7 +39,7 @@ const ManagePostedJobsCard: React.FC<ManageJobsCardProps> = ({ job }) => {
             </IconWrapper>
 
             <div>
-              {formatNaira(job.pay)}/{salaryInterval[job.payInterval] ?? ''}
+              {job.pay.formatCurrency()}/{salaryInterval[job.payInterval] ?? ''}
             </div>
           </CenterContentFooter>
         </CenterContentLowerPart>

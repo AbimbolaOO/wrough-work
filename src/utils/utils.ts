@@ -27,13 +27,13 @@ export const truncateText = (text: string) => {
   return words.slice(0, 9).join(" ") + "..."; // Join the first 9 words and append '...'
 };
 
-export const formatNaira = (val: number) =>
-  val.toLocaleString("en-NG", {
-    style: "currency",
-    currency: "NGN",
-    // minimumFractionDigits: 0,
-    // maximumFractionDigits: 0,
-  });
+// export const formatNaira = (val: number) =>
+//   val.toLocaleString("en-NG", {
+//     style: "currency",
+//     currency: "NGN",
+//     // minimumFractionDigits: 0,
+//     // maximumFractionDigits: 0,
+//   });
 
 export const formateDatetimeStrToNaijaTime = (dateTimeString: string) => {
   const date = new Date(dateTimeString);
@@ -180,6 +180,14 @@ export const salaryInterval: Record<string, string> = {
   WEEKLY: 'week',
   MONTHLY: 'month',
   YEARLY: 'year',
+};
+
+export const salaryIntervally: Record<string, string> = {
+  HOURLY: 'Hourly',
+  DAILY: 'Daily',
+  WEEKLY: 'Weekly',
+  MONTHLY: 'Monthly',
+  YEARLY: 'Yearly',
 };
 
 

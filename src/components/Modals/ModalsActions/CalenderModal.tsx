@@ -6,7 +6,7 @@ import {
   createJobInterviewInitialValues,
   CreateJobInterviewSchema,
 } from '../../../models/dashboard/jobs/createJobInterview.model';
-import CustomCalender from '../../Form/CustomCheckBox/CustomCalender';
+import CustomCalender from '../../Form/CustomCalender/CustomCalender';
 import { FormComponent } from '../../Form/FormComponent';
 import PlainModalContainer from '../PlainModalContainer';
 

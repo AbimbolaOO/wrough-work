@@ -48,12 +48,7 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
               ? new Date(job.jobEndDate).toLocaleDateString()
               : 'N/A'}
           </BottomSectionData>
-          <BottomSectionData>
-            {job.pay.toLocaleString('en-NG', {
-              style: 'currency',
-              currency: 'NGN',
-            })}
-          </BottomSectionData>
+          <BottomSectionData>{job.pay.formatCurrency()}</BottomSectionData>
         </FlexContainer>
       </BottomSection>
     </Container>
