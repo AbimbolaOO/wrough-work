@@ -1,28 +1,32 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
+import useCreateJobInterviewTime from '../../../hooks/dashboard/jobs/useCreateJobInterviewTime';
 import {
-  mailingListInitialValues,
-  MailingListSchema,
-} from '../../../models/mailingList/mailingList.model';
+  CreateJobInterviewDataType,
+  createJobInterviewInitialValues,
+  CreateJobInterviewSchema,
+} from '../../../models/dashboard/jobs/createJobInterview.model';
 import CustomCalender from '../../Form/CustomCheckBox/CustomCalender';
 import { FormComponent } from '../../Form/FormComponent';
 import PlainModalContainer from '../PlainModalContainer';
 
 const CalenderModal = () => {
+  const { loading, createJobPostInterviewTime } = useCreateJobInterviewTime();
+  const handleOnSubmit = (values: CreateJobInterviewDataType) => {
+    createJobPostInterviewTime({ ...values, duration: '30' });
+  };
+
   return (
     <PlainModalContainer>
       <FormComponent
-        initialValues={mailingListInitialValues}
-        schema={MailingListSchema}
-        onSubmit={onsubmit}
-        className='flex'
+        initialValues={createJobInterviewInitialValues}
+        schema={CreateJobInterviewSchema}
+        onSubmit={handleOnSubmit}
       >
         <CustomCalender
-          label=''
-          id='Date'
-          name='Date'
-          placeholder='Enter your email address '
-          className='spanTwo mailingList'
+          id='interviewDate'
+          name='interviewDate'
+          isSubmitting={loading}
         />
       </FormComponent>
     </PlainModalContainer>

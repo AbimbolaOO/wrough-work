@@ -1,3 +1,5 @@
+import { formatISO, parse } from 'date-fns';
+
 export const phoneRegex = /^\+234\d{10}$/; // Regex pattern for Nigerian phone numbers starting with "+234"
 // export const phoneRegex = /^(\+?234|0)?[789]\d{10}$/; // Regex pattern for Nigerian phone numbers +234 or 080
 
@@ -197,4 +199,10 @@ export const calculateAge = (birthday: string): number => {
   }
 
   return age;
+};
+
+
+export const convertToISO = (dateString: string) => {
+  const parsedDate = parse(dateString, 'dd/MM/yyyy hh:mm a', new Date());
+  return formatISO(parsedDate, { representation: 'complete' }); // Outputs in strict ISO 8601 format with Z
 };

@@ -1,12 +1,21 @@
 import clsx from 'clsx';
-import { add, differenceInDays, endOfMonth, format, setDate, startOfMonth, sub } from 'date-fns';
-import { useField } from 'formik';
-import React, { useEffect, useRef, useState } from 'react';
+import {
+  add,
+  differenceInDays,
+  endOfMonth,
+  format,
+  isSameDay,
+  setDate,
+  startOfMonth,
+  sub,
+} from 'date-fns';
+import { useField, useFormikContext } from 'formik';
+import React, { useState } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
-import useOutsideClick from '../../../hooks/ui-control/useOutsideClick';
+import { convertToISO } from '../../../utils/utils';
 import ChevronLeftIcon from '../../Icons/ChevronLeftIcon';
 import ChevronRightIcon from '../../Icons/ChevronRightIcon';
 import CustomTimePicker from './CustomTimePicker';
@@ -15,12 +24,9 @@ interface CustomCalenderProps {
   label?: any;
   id: string;
   name: string;
-  placeholder?: string;
   className?: string;
-  readonly?: boolean;
   allowYear?: boolean;
-  submitBtn?: boolean;
-  isSubmitting?: boolean;
+  isSubmitting: boolean;
 }
 
 const daysOfWeek = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
@@ -29,27 +35,16 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
   label,
   className,
   allowYear,
-  submitBtn = true,
-  isSubmitting = true,
+  isSubmitting,
   ...props
 }) => {
-  const DateFieldRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(DateFieldRef, () => setDidTouchDateField(false));
-  const [field, meta, helper] = useField(props);
-  const [didTouchDateField, setDidTouchDateField] = useState<boolean>(false);
+  const [, , helper] = useField(props);
+  const { submitForm } = useFormikContext();
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<string>();
+  const [timeOfDay, setTimeOfDay] = useState<string>();
 
-  const handleAmPmToggle = (e: any) => {
-    console.log('any', e.target);
-  };
-
-  useEffect(() => {
-    if (selectedDate) {
-      helper.setValue(selectedDate);
-    }
-    // eslint-disable-next-line
-  }, [selectedDate]);
+  const [time, setTime] = useState('--:--');
 
   const stateDate = startOfMonth(currentDate);
   const endDate = endOfMonth(currentDate);
@@ -57,24 +52,13 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
   const prefixDays = stateDate.getDay() < 1 ? 6 : stateDate.getDay() - 1;
   const suffixDays = 7 - endDate.getDay();
 
-  //   const prevMonthEndDate = endOfMonth(
-  //     sub(currentDate, { months: 1 })
-  //   ).getDate();
-
-  //   const bleedingDaysFromPrevMonth = Number(prevMonthEndDate) - prefixDays;
-
-  //   const handleDateFieldClick = (e: any) => {
-  //     setDidTouchDateField(true);
-  //   };
-
-  //   const handleIconClick = (e: any) => {
-  //     setDidTouchDateField(!didTouchDateField);
-  //   };
+  const handleTimeOfDay = (timeOfTheDay: string) => {
+    setTimeOfDay(timeOfTheDay);
+  };
 
   const handleDateSelected = (index: number) => {
     if (currentDate) {
       const date = setDate(currentDate, index);
-      // setSelectedDate(format(date, 'yyyy-MM-dd'));
       setSelectedDate(format(date, 'dd/MM/yyyy'));
     }
   };
@@ -83,6 +67,12 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
   const nextMonth = () => setCurrentDate(add(currentDate, { months: 1 }));
   const prevYear = () => setCurrentDate(sub(currentDate, { years: 1 }));
   const nextYear = () => setCurrentDate(add(currentDate, { years: 1 }));
+
+  const handleCalenderSubmit = () => {
+    const dateTimeRes = convertToISO(`${selectedDate} ${time} ${timeOfDay}`);
+    helper.setValue(dateTimeRes);
+    submitForm();
+  };
 
   return (
     <DateBox>
@@ -93,7 +83,7 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
           </div>
         )}
         <div className='control-chevron' onClick={prevMonth}>
-          <ChevronLeftIcon />
+          {!isSameDay(new Date(), currentDate) && <ChevronLeftIcon />}
         </div>
         <div className='date-label'>{format(currentDate, 'LLLL yyyy')}</div>
         <div className='control-chevron end' onClick={nextMonth}>
@@ -126,7 +116,7 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
           const setActive =
             // format(setDate(currentDate, index + 1), 'yyyy-MM-dd') ===
             format(setDate(currentDate, index + 1), 'dd/MM/yyyy') ===
-            field.value;
+            selectedDate;
           return (
             <div
               key={index}
@@ -146,22 +136,34 @@ const CustomCalender: React.FC<CustomCalenderProps> = ({
           </div>
         ))}
       </MonthLayout>
-      <TimeArea>
-        {/* <Time type='time' id='time' name='time' /> */}
-        <CustomTimePicker />
 
-        <ToggleAMPM onClick={handleAmPmToggle}>
-          <div className='left'>AM</div>
-          <div className='right'>PM</div>
+      <TimeArea>
+        {/* Time picker */}
+        <CustomTimePicker setTime={setTime} time={time} />
+
+        {/* AM PM Toggle */}
+        <ToggleAMPM>
+          <div
+            className={clsx('left', timeOfDay === 'AM' ? 'activeTOD' : '')}
+            onClick={() => handleTimeOfDay('AM')}
+          >
+            AM
+          </div>
+          <div
+            className={clsx('right', timeOfDay === 'PM' ? 'activeTOD' : '')}
+            onClick={() => handleTimeOfDay('PM')}
+          >
+            PM
+          </div>
         </ToggleAMPM>
-        {submitBtn && (
-          <SubmitButton>
-            Set{' '}
-            <div>
-              <LoadingOutlined />
-            </div>
-          </SubmitButton>
-        )}
+
+        <SubmitButton
+          disabled={time.includes('-') || !selectedDate || !timeOfDay}
+          type='button'
+          onClick={(e: any) => handleCalenderSubmit()}
+        >
+          Set {isSubmitting ? <LoadingOutlined /> : ''}
+        </SubmitButton>
       </TimeArea>
     </DateBox>
   );
@@ -200,7 +202,6 @@ const Control = styled.div<IControl>`
     place-content: center;
   }
 
-  /*  */
   & > div.date-label {
     grid-column: span 3;
     font-size: 14px;
@@ -297,11 +298,15 @@ const ToggleAMPM = styled.div`
   & > div.left {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    /* margin-left: -3px; */
+  }
+
+  & > div.activeTOD {
+    border: 1px solid #616161;
+    z-index: 1;
   }
 `;
 
-const SubmitButton = styled.div`
+const SubmitButton = styled.button`
   display: flex;
   padding: 8px 24px;
   font-size: 12px;
@@ -312,4 +317,11 @@ const SubmitButton = styled.div`
   color: white;
   cursor: pointer;
   gap: 12px;
+  border: none;
+  align-items: center;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #b4b4b4;
+  }
 `;

@@ -1,23 +1,74 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 
-const CustomTimePicker = () => {
+import useOutsideClick from '../../../hooks/ui-control/useOutsideClick';
+
+interface CustomTimePickerProps {
+  setTime: (...args: any) => void;
+  time: string;
+}
+
+const CustomTimePicker: React.FC<CustomTimePickerProps> = ({
+  setTime,
+  time,
+}) => {
+  const selectFieldRef = useRef<HTMLDivElement>(null);
+  useOutsideClick(selectFieldRef, () => setTimeTray(false));
+  const [showTimeTray, setTimeTray] = useState(false);
+  const [hour, setHour] = useState(-1);
+  const [min, setMin] = useState(-1);
+  // const [time, setTime] = useState('--:--');
+
+  const handleTimeSelection = (value: number, type: string) => {
+    const formattedValue = value < 10 ? `0${value}` : `${value}`;
+    const [hours, minutes] = time.split(':');
+    if (type === 'hour') {
+      setTime(`${formattedValue}:${minutes}`);
+      setHour(value);
+    } else if (type === 'minute') {
+      setTime(`${hours}:${formattedValue}`);
+      setMin(value);
+    }
+  };
+
   return (
     <Container>
-      <Time type='text' id='time' name='time' placeholder='00:00' readOnly />
-      <TimeValues>
-        <div>
-          {Array.from({ length: 12 }).map((data, index) => (
-            <div key={index}>{index + 1}</div>
-          ))}
-        </div>
-        <div>
-          {Array.from({ length: 60 }).map((data, index) => (
-            <div key={index}>{index + 1}</div>
-          ))}
-        </div>
-      </TimeValues>
+      <Time
+        type='text'
+        id='time'
+        name='time'
+        placeholder='00:00'
+        readOnly
+        value={time}
+        onClick={() => setTimeTray(true)}
+      />
+      {showTimeTray && (
+        <TimeValues ref={selectFieldRef}>
+          <TimeCol>
+            {Array.from({ length: 12 }).map((data, index) => (
+              <TimeCell
+                className={Number(hour) === index + 1 ? 'active' : ''}
+                key={index}
+                onClick={() => handleTimeSelection(index + 1, 'hour')}
+              >
+                {index + 1}
+              </TimeCell>
+            ))}
+          </TimeCol>
+          <TimeCol>
+            {Array.from({ length: 60 }).map((data, index) => (
+              <TimeCell
+                className={Number(min) === index ? 'active' : ''}
+                key={index}
+                onClick={() => handleTimeSelection(index, 'minute')}
+              >
+                {index}
+              </TimeCell>
+            ))}
+          </TimeCol>
+        </TimeValues>
+      )}
     </Container>
   );
 };
@@ -33,6 +84,7 @@ const Container = styled.div`
   align-items: center;
   height: fit-content;
   position: relative;
+  color: #212121;
 `;
 
 const Time = styled.input`
@@ -63,29 +115,58 @@ const TimeValues = styled.div`
   background-color: white;
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3),
     0px 8px 12px 0px rgba(0, 0, 0, 0.15);
-  /* left: 10px; */
-  /*
+
+  animation-name: tray-animation;
+  animation-duration: 0.3s;
+  transform-origin: left;
+  animation-timing-function: ease-in-out;
+
+  @keyframes tray-animation {
+    from {
+      transform: translateY(10px);
+      opacity: 30%;
+    }
+    80% {
+      opacity: 90%;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 100%;
+    }
+  }
+`;
+
+const TimeCol = styled.div`
+  /* border: 1px solid blue; */
+  height: 120px;
+  overflow: auto;
+  display: grid;
+  align-items: center;
+  padding: 4px;
+  text-align: center;
+  /* border: 0.5px solid red; */
+
   white-space: nowrap;
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
-  } */
+  }
+`;
 
-  & > div {
-    /* border: 1px solid blue; */
-    height: 120px;
-    overflow: auto;
-    display: grid;
-    align-items: center;
-    padding: 4px;
-    text-align: center;
+const TimeCell = styled.div`
+  display: grid;
+  /* border: 0.5px solid blue; */
+  place-content: center;
+  font-size: 14px;
 
-    white-space: nowrap;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.palette.highlightColor};
+  }
+
+  &.active {
+    background-color: ${({ theme }) => theme.palette.mainBlue};
+    color: white;
   }
 `;
