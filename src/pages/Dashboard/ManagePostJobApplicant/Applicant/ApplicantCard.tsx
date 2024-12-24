@@ -25,7 +25,6 @@ const ApplicantCard = () => {
         </IconArea>
       </Upper>
       <Bottom>
-        {/* <div>dd</div> */}
         <IconBottom>
           <ShowApplicantModal />
           <FileIcon />

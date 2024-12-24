@@ -16,7 +16,7 @@ const ModalTriggerContainer: React.FC<ModalTriggerContainerProps> = ({
   };
 
   return (
-    <div onClick={onClick} style={{ width: '100%' }}>
+    <div onClick={onClick} style={{ width: 'fit-content' }}>
       {children}
     </div>
   );

@@ -73,7 +73,8 @@ const Container = styled.div`
   }
 
   &.active {
-    border: 1px solid ${({ theme }) => theme.palette.mainBlue};
+    border: 1px solid #2f80ed;
+    background-color: #edf5ff;
   }
 `;
 

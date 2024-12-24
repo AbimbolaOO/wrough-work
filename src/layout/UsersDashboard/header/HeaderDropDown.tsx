@@ -9,8 +9,6 @@ import { InternalNavLink } from '../../../components/Link/Link';
 import { Modal } from '../../../components/Modals/Modal';
 import ProfileModal from '../../../components/Modals/ModalsActions/ProfileModal';
 import ModalTriggerContainer from '../../../components/Modals/ModalTriggerContainer';
-import FullScreenModal from '../../../components/OldModals/FullScreenModal';
-import PopupProfile from '../../../components/PopupProfile/PopupProfile';
 import { ModalProvider } from '../../../context/ModalContext';
 import useOnLogout from '../../../hooks/auth/useOnLogout';
 import { useAppSelector } from '../../../redux/store';
@@ -89,17 +87,6 @@ const HeaderDropDown = () => {
           );
         })}
       </Container>
-      {modal ? (
-        <FullScreenModal
-          closeAction={() => {
-            setModal(false);
-          }}
-        >
-          <PopupProfile forApplicant={false} />
-        </FullScreenModal>
-      ) : (
-        ''
-      )}
     </HoverDropDown>
   );
 };

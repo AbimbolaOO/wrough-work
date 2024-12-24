@@ -6,6 +6,11 @@ import styled from '@emotion/styled';
 
 import { PrimaryButton, SecondaryButton } from '../../../../components/Button';
 import EmptyState from '../../../../components/Card/EmptyState';
+import { Modal } from '../../../../components/Modals/Modal';
+import ApplyForJobModal from '../../../../components/Modals/ModalsActions/ApplyForJobModal';
+import ReportJobModal from '../../../../components/Modals/ModalsActions/ReportJobModal';
+import ModalTriggerContainer from '../../../../components/Modals/ModalTriggerContainer';
+import { ModalProvider } from '../../../../context/ModalContext';
 import useGetSingleLocumJob from '../../../../hooks/dashboard/jobs/useGetSingleLocumJob';
 import { useAppSelector } from '../../../../redux/store';
 import JobInfoBody from './JobInfoBody';
@@ -62,6 +67,7 @@ const JobInfo: React.FC<JobInfoProps> = () => {
     if (jobId) {
       getSingleLocumJob(jobId);
     }
+    // eslint-disable-next-line
   }, [jobId]);
 
   if (jobId === null) {
@@ -90,15 +96,29 @@ const JobInfo: React.FC<JobInfoProps> = () => {
           />
 
           <ButtonArea>
-            <SecondaryButton
-              click={() => alert('submit')}
-              className='fw600 pl-pr-4 respond'
-            >
-              {loading ? <LoadingOutlined /> : 'Apply'}
-            </SecondaryButton>
-            <PrimaryButton className='fw600 danger respond'>
-              Report
-            </PrimaryButton>
+            <ModalProvider>
+              <ModalTriggerContainer>
+                <SecondaryButton className='fw600 pl-pr-4 respond'>
+                  {loading ? <LoadingOutlined /> : 'Apply'}
+                </SecondaryButton>
+              </ModalTriggerContainer>
+
+              <Modal>
+                <ApplyForJobModal jobId={jobId} />
+              </Modal>
+            </ModalProvider>
+
+            <ModalProvider>
+              <ModalTriggerContainer>
+                <PrimaryButton className='fw600 danger respond'>
+                  Report
+                </PrimaryButton>
+              </ModalTriggerContainer>
+
+              <Modal>
+                <ReportJobModal />
+              </Modal>
+            </ModalProvider>
           </ButtonArea>
         </Container>
       ) : (
@@ -106,7 +126,6 @@ const JobInfo: React.FC<JobInfoProps> = () => {
           <div>
             <LoadingOutlined />
           </div>
-          {/* <EmptyState>Click on job to preview</EmptyState> */}
         </>
       )}
     </StickyWrapper>
@@ -139,4 +158,5 @@ const ButtonArea = styled.div`
   display: flex;
   gap: 2rem;
   height: fit-content;
+  /* border: 1px solid red; */
 `;

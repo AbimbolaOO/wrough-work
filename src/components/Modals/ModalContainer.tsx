@@ -8,8 +8,15 @@ import CloseIcon from '../Icons/CloseIcon';
 interface ModalContainerProps {
   children: React.ReactNode;
   width?: string;
+  padding?: string;
+  marginTop?: string;
 }
-const ModalContainer: React.FC<ModalContainerProps> = ({ children, width }) => {
+const ModalContainer: React.FC<ModalContainerProps> = ({
+  children,
+  width,
+  padding,
+  marginTop,
+}) => {
   const modalContext = useContext(ModalContext);
   const onClickCancel = (e: any) => {
     modalContext?.displayModal(false);
@@ -18,6 +25,8 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ children, width }) => {
   return (
     <Container
       width={width}
+      padding={padding}
+      marginTop={marginTop}
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
       }}
@@ -35,33 +44,26 @@ export default ModalContainer;
 
 interface IContainer {
   width?: string;
+  padding?: string;
+  marginTop?: string;
 }
 const Container = styled.div<IContainer>`
-  padding: 77px;
-  padding-top: 30px;
-  padding-bottom: 61px;
+  padding: ${({ padding }) => (padding ? padding : '30px 77px 61px')};
   border-radius: 10px;
   background-color: white;
-  margin-top: 60px;
+  margin-top: ${({ marginTop }) => (marginTop ? marginTop : '60px')};
   margin-bottom: 60px;
-  /* width: 1080px; */
   width: ${({ width }) => (width ? width : 'fit-content')};
 
   display: flex;
   flex-direction: column;
   gap: 38px;
-
-  & > * {
-    /* border: 1px solid red; */
-  }
 `;
 
 const IconContainer = styled.div`
   display: flex;
-  /* gap: 6px; */
   align-self: flex-end;
 
-  /* margin-right: -46px; */
   cursor: pointer;
 
   & > svg {
