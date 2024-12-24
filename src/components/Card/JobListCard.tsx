@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import BookmarkBoxIcon from '../Icons/BookmarkBoxIcon';
+import BookmarkJob from '../../section/dashboard/BookmarkJob';
 import JobsIcon from '../Icons/JobsIcon';
 import Img from '../Img/Img';
 
@@ -14,6 +14,7 @@ interface IJobListCard {
   pay: number;
   onClick?: (...args: any) => void;
   className?: string;
+  jobId: string;
 }
 
 const JobListCard: React.FC<IJobListCard> = ({
@@ -24,6 +25,7 @@ const JobListCard: React.FC<IJobListCard> = ({
   pay,
   onClick,
   className,
+  jobId,
 }) => {
   return (
     <Container className={className} onClick={onClick}>
@@ -44,13 +46,13 @@ const JobListCard: React.FC<IJobListCard> = ({
               {yearsOfExperience} year+
             </JobAgeArea>
 
-            <div>{pay.formatCurrency()}</div>
+            <div>{pay?.formatCurrency()}</div>
           </LeftContentFooter>
         </LeftContentLowerPart>
       </LeftContent>
 
       <IconContainer>
-        <BookmarkBoxIcon />
+        <BookmarkJob jobId={jobId} />
       </IconContainer>
     </Container>
   );

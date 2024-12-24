@@ -38,6 +38,7 @@ const AllApplications = () => {
               jobTitle={job.title}
               yearsOfExperience={job.yearsOfExperience}
               pay={job.pay}
+              jobId={job.id}
             />
           ))}
         </Container>

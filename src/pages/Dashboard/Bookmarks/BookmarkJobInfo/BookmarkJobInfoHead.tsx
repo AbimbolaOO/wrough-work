@@ -8,7 +8,7 @@ import Img from '../../../../components/Img/Img';
 import BookmarkJob from '../../../../section/dashboard/BookmarkJob';
 import { formatDate, salaryInterval } from '../../../../utils/utils';
 
-interface IJobInfoHead {
+interface IBookmarkJobInfoHead {
   imgSrc: string;
   title: string;
   institutionName: string;
@@ -21,7 +21,7 @@ interface IJobInfoHead {
   jobId: string;
 }
 
-const JobInfoHead: React.FC<IJobInfoHead> = ({
+const BookmarkJobInfoHead: React.FC<IBookmarkJobInfoHead> = ({
   imgSrc,
   title,
   institutionName,
@@ -83,7 +83,7 @@ const JobInfoHead: React.FC<IJobInfoHead> = ({
   );
 };
 
-export default JobInfoHead;
+export default BookmarkJobInfoHead;
 
 const Container = styled.div`
   display: grid;

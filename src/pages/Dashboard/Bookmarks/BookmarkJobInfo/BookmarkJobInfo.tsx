@@ -10,11 +10,11 @@ import ApplyForJobModal from '../../../../components/Modals/ModalsActions/ApplyF
 import ReportJobModal from '../../../../components/Modals/ModalsActions/ReportJobModal';
 import ModalTriggerContainer from '../../../../components/Modals/ModalTriggerContainer';
 import { ModalProvider } from '../../../../context/ModalContext';
-import useGetSingleLocumJob from '../../../../hooks/dashboard/jobs/useGetSingleLocumJob';
+import useGetSingleBookmarkedLocumJob from '../../../../hooks/dashboard/jobs/useGetSingleBookmarkedLocumJob';
 import useQueryString from '../../../../hooks/ui-control/useQueryString';
 import { useAppSelector } from '../../../../redux/store';
-import JobInfoBody from './JobInfoBody';
-import JobInfoHead from './JobInfoHead';
+import BookmarkJobInfoBody from './BookmarkJobInfoBody';
+import BookmarkJobInfoHead from './BookmarkJobInfoHead';
 
 export interface SelectedJobsProps {
   id: string;
@@ -31,13 +31,15 @@ export interface SelectedJobsProps {
   jobEndDate: string;
 }
 
-interface JobInfoProps {}
+interface BookmarkJobInfoProps {}
 
-const JobInfo: React.FC<JobInfoProps> = () => {
+const BookmarkJobInfo: React.FC<BookmarkJobInfoProps> = () => {
   const [queryParams, setQueryParams] = useQueryString();
-  const { getSingleLocumJob, loading } = useGetSingleLocumJob();
-  const { jobData, jobId: existingJobId } = useAppSelector(
-    (state) => state.locumSingleJobs
+  const { getSingleBookmarkedLocumJob, loading } =
+    useGetSingleBookmarkedLocumJob();
+
+  const { bookmarkJobData, jobId: existingJobId } = useAppSelector(
+    (state) => state.locumSingleBookmarkJobs
   );
 
   const jobId = queryParams.get('jobId');
@@ -51,7 +53,7 @@ const JobInfo: React.FC<JobInfoProps> = () => {
 
   useEffect(() => {
     if (jobId && jobId !== existingJobId) {
-      getSingleLocumJob(jobId);
+      getSingleBookmarkedLocumJob(jobId);
     }
     // eslint-disable-next-line
   }, [jobId]);
@@ -64,22 +66,24 @@ const JobInfo: React.FC<JobInfoProps> = () => {
     <StickyWrapper>
       {!loading ? (
         <Container>
-          <JobInfoHead
+          <BookmarkJobInfoHead
             // imgSrc={jobData || '/static/gif/happyAnimal.gif'}
             imgSrc={'/static/gif/happyAnimal.gif'}
-            title={jobData?.title ?? ''}
-            institutionName={jobData?.institutionName ?? ''}
-            yearsOfExperience={`${jobData?.yearsOfExperience ?? ''} years+`}
-            location={jobData?.location ?? ''}
-            pay={jobData?.pay ?? 0}
-            payInterval={jobData?.payInterval ?? ''}
-            jobStartDate={jobData?.jobStartDate ?? ''}
-            jobEndDate={jobData?.jobEndDate ?? ''}
-            jobId={jobData?.id ?? ''}
+            title={bookmarkJobData?.title ?? ''}
+            institutionName={bookmarkJobData?.institutionName ?? ''}
+            yearsOfExperience={`${
+              bookmarkJobData?.yearsOfExperience ?? ''
+            } years+`}
+            location={bookmarkJobData?.location ?? ''}
+            pay={bookmarkJobData?.pay ?? 0}
+            payInterval={bookmarkJobData?.payInterval ?? ''}
+            jobStartDate={bookmarkJobData?.jobStartDate ?? ''}
+            jobEndDate={bookmarkJobData?.jobEndDate ?? ''}
+            jobId={bookmarkJobData?.id ?? ''}
           />
 
-          <JobInfoBody
-            jobDescription={jobData?.jobDescription.jobDescription}
+          <BookmarkJobInfoBody
+            jobDescription={bookmarkJobData?.jobDescription.jobDescription}
           />
 
           <ButtonArea>
@@ -104,8 +108,8 @@ const JobInfo: React.FC<JobInfoProps> = () => {
 
               <Modal>
                 <ReportJobModal
-                  title={jobData?.title ?? ''}
-                  description={jobData?.institutionName ?? ''}
+                  title={bookmarkJobData?.title ?? ''}
+                  description={bookmarkJobData?.institutionName ?? ''}
                 />
               </Modal>
             </ModalProvider>
@@ -122,12 +126,12 @@ const JobInfo: React.FC<JobInfoProps> = () => {
   );
 };
 
-export default JobInfo;
+export default BookmarkJobInfo;
 
 const StickyWrapper = styled.div`
   display: flex;
   position: sticky;
-  top: 160px;
+  top: 0px;
   height: 80vh;
   /* border: 1px solid red; */
   overflow: auto;

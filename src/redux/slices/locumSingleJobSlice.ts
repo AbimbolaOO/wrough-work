@@ -15,7 +15,7 @@ const initialState: ILocumSingleJobQuery = {
 
 
 const locumSingleJobSlice = createSlice({
-    name: 'locumJobs',
+    name: 'locumSingleJob',
     initialState,
     reducers: {
         getSingleLocumJobs(state, action: PayloadAction<ILocumSingleJobQuery>) {

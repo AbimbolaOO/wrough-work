@@ -1,37 +1,22 @@
 import clsx from 'clsx';
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import JobListCard from '../../../../components/Card/JobListCard';
 import useGetLocumJobs from '../../../../hooks/dashboard/jobs/useGetLocumJobs';
+import useQueryString from '../../../../hooks/ui-control/useQueryString';
 import { useAppSelector } from '../../../../redux/store';
 
 interface JobsListProps {}
 
 const JobsList: React.FC<JobsListProps> = () => {
   const { getLocumJobs, loading } = useGetLocumJobs();
+  const [queryParams, setQueryParams] = useQueryString();
   const { jobData } = useAppSelector((state) => state.locumJobs);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const queryParams = new URLSearchParams(location.search);
   const jobId = queryParams.get('jobId');
-
-  const addQueryParams = (params: Record<string, string>) => {
-    const queryString = new URLSearchParams({
-      ...Object.fromEntries(new URLSearchParams(location.search)),
-      ...params,
-    }).toString();
-
-    navigate({
-      pathname: location.pathname,
-      search: queryString,
-    });
-  };
 
   useEffect(() => {
     if (jobData.length === 0) {
@@ -41,7 +26,8 @@ const JobsList: React.FC<JobsListProps> = () => {
   }, []);
 
   const handleJobClick = (jobId: string) => {
-    addQueryParams({ jobId });
+    // addQueryParams({ jobId });
+    setQueryParams({ jobId });
   };
 
   return (
@@ -63,6 +49,7 @@ const JobsList: React.FC<JobsListProps> = () => {
               'cursor-pointer',
               jobs.id === jobId ? 'active' : ''
             )}
+            jobId={jobs.id}
           />
         ))
       )}

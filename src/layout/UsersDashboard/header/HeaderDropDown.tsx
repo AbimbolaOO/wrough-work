@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styled from '@emotion/styled';
 
 import { HoverDropDown } from '../../../components/DropDown/DropDown';
@@ -40,7 +38,6 @@ const ShowProfileModal = ({ children }: { children: React.ReactNode }) => {
 const HeaderDropDown = () => {
   const { logoutUser } = useOnLogout();
   const { authData } = useAppSelector((state) => state.auth);
-  const [modal, setModal] = useState(false);
 
   const profileImageSrc =
     authData?.profileImage ?? '/static/svg/profilePlaceholder.svg';

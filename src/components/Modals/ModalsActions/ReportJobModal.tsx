@@ -14,8 +14,17 @@ import { FormComponent } from '../../Form/FormComponent';
 import { TextAreaInputField } from '../../Form/FormField';
 import ModalContainer from '../ModalContainer';
 
-const ReportJobModal = () => {
+interface ReportJobModalProps {
+  title: string;
+  description: string;
+}
+
+const ReportJobModal: React.FC<ReportJobModalProps> = ({
+  title,
+  description,
+}) => {
   const { reportJobPost, loading } = useReportJobPost();
+
   const handleOnSubmit = (values: ReportJobPostDataType, actions: any) => {
     reportJobPost(values, () =>
       actions.resetForm({ values: reportJobPostInitialValues })
@@ -35,8 +44,8 @@ const ReportJobModal = () => {
             <FormContentLayout>
               <RadioButtonArea>
                 <SelectionText>
-                  <Title>Pharmacy</Title>
-                  <Description>NewLine Pharmacy</Description>
+                  <Title>{title}</Title>
+                  <Description>{description}</Description>
                 </SelectionText>
 
                 <CustomRadioGroup name='reason'>
