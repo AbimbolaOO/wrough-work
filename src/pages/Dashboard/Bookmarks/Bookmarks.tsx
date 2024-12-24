@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import PageBanner from '../../../components/Banner/PageBanner';
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
 import BookmarkJobInfo from './BookmarkJobInfo/BookmarkJobInfo';
-import BookmarkLists from './BookmarkLists/BookmarkLists';
+import BookmarkLists from './BookmarkList/BookmarkLists';
 
 const Bookmarks = () => {
   return (
