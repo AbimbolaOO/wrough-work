@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { ButtonLink } from "../Link/Link";
+import { ButtonLink } from '../Link/Link';
 
 const CompanyLogo = () => {
   return (
-    <ButtonLink to="https://locumspace.co/" target="_blank">
+    <ButtonLink to='https://locumspace.co/' target='_blank'>
       <Container>
-        <img src="/static/svg/companyLogo.svg" alt="Company" />
+        <img src='/static/svg/companyLogo.svg' alt='Company' />
       </Container>
     </ButtonLink>
   );
@@ -23,10 +23,9 @@ const Container = styled.div`
   color: black;
   width: fit-content;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: 54px;
-    height: 26px;
+  @media (max-width: 884px) {
+    width: 87px;
+    height: 43px;
   }
 `;
 

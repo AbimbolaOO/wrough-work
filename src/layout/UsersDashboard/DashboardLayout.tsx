@@ -8,9 +8,11 @@ import useOnRefreshScreen from '../../hooks/auth/useOnRefreshScreen';
 import useDashboardLoading from '../../hooks/dashboard/dashboardLoading/useDashboardLoading';
 import DashboardHeader from './header/DashboardHeader';
 import SettingsHeader from './SettingsHeader';
+import MobileNav from './sideNav/MobileNav';
 import Nav from './sideNav/Nav';
 
 const DashboardLayout = () => {
+  const [open, setOpen] = useState(false);
   const { onRefreshScreen, loading, userId } = useOnRefreshScreen();
   const { getDashboardLoadingData, loading: dashboardDataLoading } =
     useDashboardLoading();
@@ -18,12 +20,6 @@ const DashboardLayout = () => {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split('/');
-
-  const [isNavVisible, setIsNavVisible] = useState(false);
-
-  const toggleNavVisibility = () => {
-    setIsNavVisible((prev) => !prev);
-  };
 
   useEffect(() => {
     console.log('rendering layout');
@@ -43,9 +39,20 @@ const DashboardLayout = () => {
 
   return (
     <Container>
-      <Nav isVisible={isNavVisible} onClose={toggleNavVisibility} />
+      <Nav />
+      <MobileNav
+        open={open}
+        toggleNav={() => {
+          setOpen(!open);
+        }}
+      />
       <Section>
-        <DashboardHeader toggleNav={toggleNavVisibility} />
+        <DashboardHeader
+          open={open}
+          toggleNav={() => {
+            setOpen(!open);
+          }}
+        />
         {splitLocation[3] === 'settings' && <SettingsHeader />}
         <MainContent>
           <Outlet />
@@ -64,6 +71,12 @@ const Container = styled.div`
   overflow: auto;
   width: 100%;
   background-color: #f2f8fd;
+
+  @media (max-width: 884px) {
+    grid-template-columns: 1fr;
+    /* border: 1px solid red; */
+    width: 100%;
+  }
 `;
 
 const Section = styled.section`
@@ -73,6 +86,13 @@ const Section = styled.section`
   & > * {
     padding-left: 54px;
     padding-right: 54px;
+  }
+
+  @media (max-width: 884px) {
+    & > * {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
 `;
 

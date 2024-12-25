@@ -6,13 +6,7 @@ import { NavBoxItem } from '../../../components/Link/Link';
 import useOnLogout from '../../../hooks/auth/useOnLogout';
 import { navConfig } from './navConfig';
 
-const Nav = ({
-  isVisible,
-  onClose,
-}: {
-  isVisible: boolean;
-  onClose: () => void;
-}) => {
+const Nav = () => {
   const { logoutUser } = useOnLogout();
 
   return (
@@ -23,15 +17,6 @@ const Nav = ({
 
       <NavBtnSection>
         {navConfig.map((nav) => (
-          // <NavBoxItem
-          //   path={nav.path}
-          //   key={nav.title}
-          //   icon={nav.icon(isVisible)}
-          //   clicked={isVisible && onClose}
-          // >
-          //   {nav.title}
-          // </NavBoxItem>
-
           <NavBoxItem path={nav.path} key={nav.title} icon={nav.icon}>
             {nav.title}
           </NavBoxItem>
@@ -39,7 +24,7 @@ const Nav = ({
       </NavBtnSection>
 
       <LogoutBox onClick={() => logoutUser()}>
-        {!isVisible && <LogoutIcon />} Logout
+        <LogoutIcon /> Logout
       </LogoutBox>
     </Container>
   );
@@ -48,7 +33,6 @@ const Nav = ({
 export default Nav;
 
 const Container = styled.nav`
-  /* border: 2px solid blue; */
   padding: 52px 32px 72px;
   display: flex;
   background-color: white;
@@ -66,6 +50,10 @@ const Container = styled.nav`
   & > div {
     margin-left: 24px;
   }
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;
 
 const NavBtnSection = styled.section`
@@ -82,11 +70,9 @@ const LogoutBox = styled.div`
   display: flex;
   gap: 1.25rem;
   cursor: pointer;
+  align-items: center;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    width: fit-content;
-    font-size: 14px;
-    color: ${({ theme }) => theme.palette.blackBlack2};
+  &:hover {
+    color: ${({ theme }) => theme.palette.greyGrey1};
   }
 `;

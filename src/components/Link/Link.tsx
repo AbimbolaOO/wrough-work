@@ -34,7 +34,7 @@ export const NavBoxItem: React.FC<INavItem> = ({ icon, path, children }) => {
       className={(navData) => (navData.isActive ? 'active' : '')}
       to={path}
     >
-      {icon}
+      <IconArea>{icon}</IconArea>
       {children}
     </NavigationBoxLink>
   );
@@ -59,10 +59,26 @@ export const NavigationBoxLink = styled(RouterLink)`
   &.active {
     background-color: #2858d128;
     color: ${({ theme }) => theme.palette.mainBlue};
+
+    @media (max-width: 884px) {
+      background-color: transparent;
+    }
+  }
+
+  @media (max-width: 884px) {
+    padding-left: 0;
   }
 `;
 
 export const ExternalLink = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.palette.purplePurple1};
+`;
+
+const IconArea = styled.div`
+  display: flex;
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;

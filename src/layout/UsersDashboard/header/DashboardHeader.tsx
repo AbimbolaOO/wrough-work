@@ -2,16 +2,29 @@ import styled from '@emotion/styled';
 
 import BookmarkIcon from '../../../components/Icons/BookmarkIcon';
 import HeaderSettingsIcon from '../../../components/Icons/HeaderSettingsIcon';
+import MenuIcon from '../../../components/Icons/MenuIcon';
 import NotificationIcon from '../../../components/Icons/NotificationIcon';
 import { InternalNavLink } from '../../../components/Link/Link';
-import { BOOKMARKS, NOTIFICATIONS, USERS_SETTINGS } from '../../../routes/routeConstants';
+import {
+  BOOKMARKS,
+  NOTIFICATIONS,
+  USERS_SETTINGS,
+} from '../../../routes/routeConstants';
 import HeaderDropDown from './HeaderDropDown';
 import HeaderModalButton from './HeaderModalButton';
 
-const DashboardHeader = ({ toggleNav }: { toggleNav: () => void }) => {
+interface IHeader {
+  open: boolean;
+  toggleNav: (...arg: any) => void;
+}
+
+const DashboardHeader: React.FC<IHeader> = ({ open, toggleNav }) => {
   return (
     <Container>
       <HeaderModalButton>Post a Job</HeaderModalButton>
+      <MenuButton onClick={() => toggleNav()}>
+        <MenuIcon />
+      </MenuButton>
 
       <IconsContainer>
         <IconWrapper>
@@ -52,6 +65,11 @@ const Container = styled.div`
   grid-template-columns: auto 282px;
   align-items: center;
   gap: 32px;
+
+  @media (max-width: 884px) {
+    grid-template-columns: 1fr 24px;
+    width: 100%;
+  }
 `;
 
 const IconsContainer = styled.section`
@@ -59,10 +77,30 @@ const IconsContainer = styled.section`
   justify-self: flex-end;
   gap: 2rem;
   z-index: 2;
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;
 
 const IconWrapper = styled.div`
   &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const MenuButton = styled.div`
+  display: none;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: 884px) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     cursor: pointer;
   }
 `;
