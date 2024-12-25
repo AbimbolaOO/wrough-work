@@ -1,15 +1,12 @@
 import styled from '@emotion/styled';
 
+import CompanyLogo from '../../../components/CompanyLogo/CompanyLogo';
 import BookmarkIcon from '../../../components/Icons/BookmarkIcon';
 import HeaderSettingsIcon from '../../../components/Icons/HeaderSettingsIcon';
 import MenuIcon from '../../../components/Icons/MenuIcon';
 import NotificationIcon from '../../../components/Icons/NotificationIcon';
 import { InternalNavLink } from '../../../components/Link/Link';
-import {
-  BOOKMARKS,
-  NOTIFICATIONS,
-  USERS_SETTINGS,
-} from '../../../routes/routeConstants';
+import { BOOKMARKS, NOTIFICATIONS, USERS_SETTINGS } from '../../../routes/routeConstants';
 import HeaderDropDown from './HeaderDropDown';
 import HeaderModalButton from './HeaderModalButton';
 
@@ -21,6 +18,9 @@ interface IHeader {
 const DashboardHeader: React.FC<IHeader> = ({ open, toggleNav }) => {
   return (
     <Container>
+      <OptionalLogo>
+        <CompanyLogo />
+      </OptionalLogo>
       <HeaderModalButton>Post a Job</HeaderModalButton>
       <MenuButton onClick={() => toggleNav()}>
         <MenuIcon />
@@ -67,8 +67,9 @@ const Container = styled.div`
   gap: 32px;
 
   @media (max-width: 884px) {
-    grid-template-columns: 1fr 24px;
-    width: 100%;
+    grid-template-columns: auto 1fr 24px;
+    gap: 0;
+    width: 100vw;
   }
 `;
 
@@ -102,5 +103,13 @@ export const MenuButton = styled.div`
     align-items: center;
     justify-content: flex-end;
     cursor: pointer;
+  }
+`;
+
+const OptionalLogo = styled.div`
+  display: none;
+
+  @media (max-width: 884px) {
+    display: grid;
   }
 `;

@@ -76,6 +76,10 @@ const ContentContainer = styled.div`
   &.biggerPadding {
     height: fit-content;
   }
+
+  @media (max-width: 884px) {
+    width: 100%;
+  }
 `;
 
 const EmptyWrapper = styled.div`
@@ -107,8 +111,7 @@ const NonEmptyContentWrapper = styled.div`
     padding: 2rem;
   }
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
+  @media (max-width: 884px) {
     &.biggerPadding {
       padding: 1rem;
     }

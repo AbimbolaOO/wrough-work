@@ -82,11 +82,7 @@ const UpperSectionDescription = styled.div`
   font-weight: 300;
   color: ${({ theme }) => theme.palette.greyGrey1};
 `;
-const ImageContainer = styled.div`
-  /* width: 3.125rem;
-  height: 3.125rem; */
-  /* border: 2px solid red; */
-`;
+const ImageContainer = styled.div``;
 
 const BottomSection = styled.div`
   display: flex;

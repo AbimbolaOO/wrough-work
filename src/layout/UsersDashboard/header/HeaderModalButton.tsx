@@ -53,6 +53,24 @@ const Box = styled.div<IBox>`
   gap: 16px;
   justify-content: ${({ text }) => (text ? 'space-between' : 'center')};
   /* margin-left: ${({ text }) => (text ? '0px' : '156px')}; */
+  /* border: 1px solid red; */
+
+  @media (max-width: 768px) {
+    & > * {
+      font-size: 14px;
+      width: 140px;
+      padding: 12px 32px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    & > * {
+      font-size: 14px;
+      padding: 6px 24px;
+      width: fit-content;
+      margin-left: -18px;
+    }
+  }
 `;
 
 const TextDescription = styled.div`

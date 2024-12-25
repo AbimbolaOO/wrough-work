@@ -18,7 +18,6 @@ const CustomTimePicker: React.FC<CustomTimePickerProps> = ({
   const [showTimeTray, setTimeTray] = useState(false);
   const [hour, setHour] = useState(-1);
   const [min, setMin] = useState(-1);
-  // const [time, setTime] = useState('--:--');
 
   const handleTimeSelection = (value: number, type: string) => {
     const formattedValue = value < 10 ? `0${value}` : `${value}`;
@@ -137,16 +136,15 @@ const TimeValues = styled.div`
 `;
 
 const TimeCol = styled.div`
-  /* border: 1px solid blue; */
   height: 120px;
   overflow: auto;
   display: grid;
   align-items: center;
   padding: 4px;
   text-align: center;
-  /* border: 0.5px solid red; */
 
   white-space: nowrap;
+  /* hide scrollbar */
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
@@ -156,7 +154,6 @@ const TimeCol = styled.div`
 
 const TimeCell = styled.div`
   display: grid;
-  /* border: 0.5px solid blue; */
   place-content: center;
   font-size: 14px;
 

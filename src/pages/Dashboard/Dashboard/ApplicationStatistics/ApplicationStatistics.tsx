@@ -48,10 +48,8 @@ const Container = styled.div`
   flex-direction: column;
   gap: 1.25rem;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    justify-content: center;
-    align-items: center;
+  @media (max-width: 884px) {
+    width: calc(100vw - 40px);
   }
 `;
 
@@ -59,12 +57,12 @@ const Header = styled.p`
   font-size: 1.125rem;
   font-weight: 500;
   color: ${({ theme }) => theme.palette.blackBlack3};
+
   &.firstCard {
     color: ${({ theme }) => theme.palette.mainBlue};
   }
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
+  @media (max-width: 884px) {
     display: none;
   }
 `;

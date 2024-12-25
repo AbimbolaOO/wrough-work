@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 interface IStatsData {
   title: string;
@@ -24,37 +24,31 @@ const StatsCard: React.FC<IStatsCard> = ({ statsData }) => {
 
 export default StatsCard;
 
-const CardHeader = styled.p`
-  font-size: 1.125rem;
-  font-weight: 500;
-
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    font-size: 15px;
-    font-weight: 500;
-    text-wrap: nowrap;
-  }
-`;
-
 const StatsArea = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.31rem;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 480px) {
+    overflow: hidden;
+    grid-auto-flow: column;
+    overflow: auto;
+
+    /* hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
 const StatsCardContainer = styled.div`
   border-radius: 0.375rem;
   padding: 0.38rem 0.81rem;
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 68px;
-    padding: 7px 16px 8px 9px;
-    border-radius: 6px;
+
+  @media (max-width: 480px) {
+    width: 180px;
   }
 
   &:nth-of-type(1) {
@@ -70,11 +64,16 @@ const StatsCardContainer = styled.div`
   &:nth-of-type(3) {
     color: ${({ theme }) => theme.palette.mainPurple};
     background: rgba(228, 207, 254, 0.5);
+  }
+`;
 
-    //mobile-specific styles
-    @media (max-width: 768px) {
-      display: none;
-    }
+const CardHeader = styled.p`
+  font-size: 1.125rem;
+  font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+    font-weight: 400;
   }
 `;
 
@@ -83,8 +82,8 @@ const StatsData = styled.p`
   font-weight: 500;
   color: ${({ theme }) => theme.palette.blackBlackMain};
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
+  @media (max-width: 480px) {
     font-size: 24px;
+    font-weight: 400;
   }
 `;

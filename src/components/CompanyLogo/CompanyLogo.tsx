@@ -27,6 +27,11 @@ const Container = styled.div`
     width: 87px;
     height: 43px;
   }
+
+  @media (max-width: 480px) {
+    width: 52px;
+    height: 26px;
+  }
 `;
 
 export default CompanyLogo;

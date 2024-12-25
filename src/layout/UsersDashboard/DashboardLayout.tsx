@@ -74,8 +74,7 @@ const Container = styled.div`
 
   @media (max-width: 884px) {
     grid-template-columns: 1fr;
-    /* border: 1px solid red; */
-    width: 100%;
+    width: 100vw;
   }
 `;
 
