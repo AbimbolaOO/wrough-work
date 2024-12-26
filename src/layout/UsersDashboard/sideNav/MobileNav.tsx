@@ -75,7 +75,7 @@ const MainContainer = styled.div`
     &.close {
       transform: translateY(-100%);
       opacity: 0;
-      transition: transform 0s linear 0.3s, opacity 0.3s linear 0.1s;
+      transition: transform 0s ease-in-out 0.3s, opacity 0.3s ease-in-out 0s;
     }
   }
 `;
@@ -84,7 +84,7 @@ const Container = styled.nav`
   display: flex;
   padding: 24px 24px;
   background-color: white;
-  transition: transform 0.3s linear;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
   flex-direction: column;
   gap: 3.8rem;

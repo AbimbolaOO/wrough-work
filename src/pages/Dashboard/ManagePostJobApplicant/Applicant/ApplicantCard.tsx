@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import FileIcon from '../../../../components/Icons/FileIcon';
+import FolderIcon from '../../../../components/Icons/FolderIcon';
 import ThreeDotIcon from '../../../../components/Icons/ThreeDotIcon';
 import Img from '../../../../components/Img/Img';
 import { DEFAULT_IMAGE_URL } from '../../../../utils/utils';
@@ -27,7 +27,7 @@ const ApplicantCard = () => {
       <Bottom>
         <IconBottom>
           <ShowApplicantModal />
-          <FileIcon />
+          <FolderIcon />
           <ApplicantCalendarModal />
         </IconBottom>
       </Bottom>
