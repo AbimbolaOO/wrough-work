@@ -34,4 +34,8 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr;
   border-top: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   padding: 24px 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;

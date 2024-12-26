@@ -45,8 +45,8 @@ const ProfileSettingsTopSection = () => {
               <Img src={`${defaultImgUrl}`} alt='profile image' />
             </ImageContainer>
             <TextArea>
-              <div className='name'>Abimbola Olayemi</div>
-              <div className='email'>abimbolaolayemiwhyte@gmail.com</div>
+              <div className='name'>{`${authData?.lastName} ${authData?.firstName}`}</div>
+              <div className='email'>{authData?.email}</div>
 
               <ImageUploadButton
                 id='profileImage'
@@ -69,12 +69,23 @@ const Container = styled.div`
   gap: 2rem;
   align-items: center;
   padding: 1.25rem;
+
+  @media (max-width: 884px) {
+    /* border: 1px solid blue; */
+    gap: 16px;
+  }
 `;
 
 export const InputContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 32px;
   align-items: center;
+
+  @media (max-width: 884px) {
+    /* display: flex; */
+    gap: 16px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -84,6 +95,7 @@ const ImageContainer = styled.div`
   height: 150px;
   border-radius: 4px;
   overflow: hidden;
+  /* border: 1px solid red; */
 
   & > * {
     grid-column: 1;
@@ -92,10 +104,16 @@ const ImageContainer = styled.div`
   }
 
   & > .loadingIcon {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
     place-content: center;
     color: ${({ theme }) => theme.palette.mainBlue};
+  }
+
+  /*  */
+  @media (max-width: 624px) {
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -107,6 +125,9 @@ const Img = styled.img`
 const TextArea = styled.div`
   display: flex;
   flex-direction: column;
+  /* border: 1px solid red; */
+  width: 100%;
+  word-break: break-word;
 
   & > .name {
     font-weight: 500;
@@ -124,5 +145,22 @@ const TextArea = styled.div`
 
   & > :last-of-type {
     margin-top: 10px;
+  }
+
+  @media (max-width: 624px) {
+    & > .name {
+      font-size: 18px;
+      line-height: 26px;
+      color: ${({ theme }) => theme.palette.blackBlackMain};
+    }
+
+    & > .email {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    & > :last-of-type {
+      margin-top: 10px;
+    }
   }
 `;

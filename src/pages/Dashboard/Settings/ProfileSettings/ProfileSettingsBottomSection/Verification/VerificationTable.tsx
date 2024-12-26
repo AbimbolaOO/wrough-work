@@ -48,6 +48,11 @@ const Container = styled.div`
   font-size: 18px;
   line-height: 26px;
 
+  @media (max-width: 480px) {
+    font-size: 12px;
+    line-height: 22px;
+  }
+
   & > .row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -85,6 +90,10 @@ const EditButton = styled.div`
   font-size: 14px;
   cursor: pointer;
   background-color: ${({ theme }) => theme.palette.mainBlue};
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
 `;
 
 const Badge = styled.div`

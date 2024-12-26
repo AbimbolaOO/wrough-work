@@ -79,7 +79,11 @@ export const FormSubmitButton = styled.button`
     margin-left: auto;
   }
 
-  // Mobile-specific styles
+  &.notification {
+    padding: 10px 16px;
+    font-weight: 400;
+  }
+
   @media (max-width: 768px) {
     &.max-width-40rem {
       width: 180px;
@@ -87,10 +91,12 @@ export const FormSubmitButton = styled.button`
       font-size: 14px;
       font-weight: 500;
     }
+  }
 
+  @media (max-width: 480px) {
     &.notification {
       font-size: 14px;
-      padding: 0.3rem;
+      padding: 0.3rem 10px;
       font-weight: 400;
     }
   }

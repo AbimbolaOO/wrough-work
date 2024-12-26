@@ -38,5 +38,17 @@ const SettingsBanner = styled.div`
     font-weight: 400;
     font-size: 18px;
     line-height: 26px;
+
+    @media (max-width: 884px) {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  @media (max-width: 884px) {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin: 0;
+    padding: 16px;
   }
 `;

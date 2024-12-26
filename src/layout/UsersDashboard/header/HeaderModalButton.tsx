@@ -52,23 +52,27 @@ const Box = styled.div<IBox>`
   width: 100%;
   gap: 16px;
   justify-content: ${({ text }) => (text ? 'space-between' : 'center')};
-  /* margin-left: ${({ text }) => (text ? '0px' : '156px')}; */
-  /* border: 1px solid red; */
 
-  @media (max-width: 768px) {
+  & > * {
+    width: fit-content;
+  }
+
+  @media (max-width: 780px) {
     & > * {
-      font-size: 14px;
-      width: 140px;
-      padding: 12px 32px;
+      font-size: 16px;
+      padding: 10px 32px;
+      width: fit-content;
+      margin-left: -18px;
     }
   }
 
   @media (max-width: 480px) {
     & > * {
       font-size: 14px;
-      padding: 6px 24px;
-      width: fit-content;
+      padding: 6px 22px;
+      /* width: fit-content !important; */
       margin-left: -18px;
+      /* border: 1px solid red; */
     }
   }
 `;

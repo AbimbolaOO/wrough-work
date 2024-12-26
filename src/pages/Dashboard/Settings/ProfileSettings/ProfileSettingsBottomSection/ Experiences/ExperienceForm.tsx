@@ -7,6 +7,7 @@ import CustomFileUploader from '../../../../../../components/Form/CustomFileUplo
 import CustomSelectField from '../../../../../../components/Form/CustomSelectField';
 import { FormComponent } from '../../../../../../components/Form/FormComponent';
 import { TextInputField } from '../../../../../../components/Form/FormField';
+import ThreeDotVertical from '../../../../../../components/Icons/ThreeDotVertical';
 import useCreateExperience from '../../../../../../hooks/dashboard/settings/profilesetting/useCreateExperience';
 import {
   ExperienceDataType,
@@ -75,6 +76,9 @@ const ExperienceForm = () => {
           <DateRange>
             <TextInputField name='startDate' type='date' />
             <Dash>&mdash;</Dash>
+            <DotIcon>
+              <ThreeDotVertical />
+            </DotIcon>
             <TextInputField name='endDate' type='date' label='' />
           </DateRange>
         </DateRangeArea>
@@ -96,6 +100,10 @@ const FieldGroups = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 
+  @media (max-width: 884px) {
+    grid-template-columns: 1fr;
+  }
+
   &.submit-btn {
     display: flex;
 
@@ -110,6 +118,19 @@ const DateRange = styled.div`
   grid-template-columns: 1fr auto 1fr;
   place-content: center;
   gap: 16px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const DotIcon = styled.div`
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 480px) {
+    display: none;
+  }
 `;
 
 const DateRangeArea = styled.div`
@@ -127,5 +148,10 @@ const Label = styled.div`
 
 const Dash = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 14px;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;

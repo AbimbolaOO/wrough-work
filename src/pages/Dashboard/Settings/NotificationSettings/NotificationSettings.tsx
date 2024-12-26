@@ -43,8 +43,12 @@ const NotificationSettings = () => {
             </CautionLabel>
           </div>
           <CheckBoxArea>
-            <Checkbox name='email'>Email</Checkbox>
-            <Checkbox name='pushNotification'>Push notification </Checkbox>
+            <Checkbox name='email' className='small-sc'>
+              Email
+            </Checkbox>
+            <Checkbox name='pushNotification' className='small-sc'>
+              Push notification{' '}
+            </Checkbox>
           </CheckBoxArea>
         </SectionSegment>
 
@@ -58,7 +62,9 @@ const NotificationSettings = () => {
             </CautionLabel>
           </div>
           <CheckBoxArea>
-            <Checkbox name='telNotification'>Yes, please do</Checkbox>
+            <Checkbox name='telNotification' className='small-sc'>
+              Yes, please do
+            </Checkbox>
           </CheckBoxArea>
         </SectionSegment>
 
@@ -82,8 +88,7 @@ const Container = styled.div`
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-size: 1.125rem;
 
-  // Mobile-specific styles
-  @media (max-width: 768px) {
+  @media (max-width: 480px) {
     padding: 1rem;
     font-size: 14px;
   }

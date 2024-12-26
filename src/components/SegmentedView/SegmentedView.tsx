@@ -58,7 +58,7 @@ export const SegmentedViewController: React.FC<
   Omit<ISegmentedViewController, 'children'>
 > = ({ segmentedViewControllerTitle, state, handleStateChange, className }) => {
   return (
-    <SegmentedViewControllerWrapper>
+    <SegmentedViewControllerWrapper className={className}>
       {segmentedViewControllerTitle.map((data, index) => (
         <div
           className={clsx(
@@ -115,12 +115,15 @@ const SegmentedViewControllerWrapper = styled.div`
   font-size: 1.125rem;
   text-align: center;
   color: ${({ theme }) => theme.palette.greyGrey1};
+  /* border: 1px solid blue; */
+  /* display: none; */
 
   & > * {
     padding: 0.6rem;
     cursor: pointer;
     display: flex;
     gap: 0.5rem;
+    /* border: 1px solid red; */
 
     & span {
       display: flex;
@@ -149,6 +152,45 @@ const SegmentedViewControllerWrapper = styled.div`
     background: white;
     border: 1px solid ${({ theme }) => theme.palette.mainBlue};
   }
+
+  @media (max-width: 624px) {
+    &.large-screen {
+      display: none;
+    }
+  }
+
+  &.small-screen {
+    display: none;
+    color: ${({ theme }) => theme.palette.greyGrey3};
+    font-size: 16px;
+    font-weight: 400;
+    gap: 0px;
+    justify-content: space-between;
+    text-align: left;
+
+    & > *:hover {
+      color: ${({ theme }) => theme.palette.greyGrey2};
+    }
+
+    & > * {
+      padding: 0px;
+    }
+
+    @media (max-width: 624px) {
+      &.small-screen {
+        display: flex;
+      }
+    }
+  }
+
+  &.small-screen {
+    @media (max-width: 624px) {
+      & > .activeSegment {
+        background: transparent;
+        color: ${({ theme }) => theme.palette.blackBlack3};
+      }
+    }
+  }
 `;
 
 const SegmentedViewContainer = styled.div`
@@ -158,4 +200,5 @@ const SegmentedViewContainer = styled.div`
   width: 100%;
   margin: auto;
   gap: 1.5rem;
+  /* border: 1px solid red; */
 `;

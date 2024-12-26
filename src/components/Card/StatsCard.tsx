@@ -30,7 +30,6 @@ const StatsArea = styled.div`
   gap: 1.31rem;
 
   @media (max-width: 480px) {
-    overflow: hidden;
     grid-auto-flow: column;
     overflow: auto;
 

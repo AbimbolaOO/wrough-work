@@ -66,7 +66,7 @@ export const NavigationBoxLink = styled(RouterLink)`
   }
 
   @media (max-width: 884px) {
-    padding-left: 0;
+    padding: 0;
   }
 `;
 

@@ -100,13 +100,12 @@ export const TextAreaInputField: React.FC<IInputField> = ({
   );
 };
 
-export const Checkbox: React.FC<Pick<IInputField, 'name' | 'children'>> = ({
-  children,
-  ...props
-}) => {
+export const Checkbox: React.FC<
+  Pick<IInputField, 'name' | 'children' | 'className'>
+> = ({ children, className, ...props }) => {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
   return (
-    <CheckboxWrapper>
+    <CheckboxWrapper className={className ? className : ''}>
       <label className='checkbox'>
         <input type='checkbox' {...field} {...props} />
         {children}
@@ -304,6 +303,12 @@ const CheckboxWrapper = styled.div`
     color: red;
     margin-right: 10px;
     cursor: pointer;
+  }
+
+  &.small-sc {
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 `;
 

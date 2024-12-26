@@ -128,6 +128,10 @@ const NavBtnSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 7px;
+
+  @media (max-width: 884px) {
+    gap: 32px;
+  }
 `;
 
 const LogoutBox = styled.div`

@@ -28,4 +28,8 @@ const Container = styled.div`
     border: 1px solid ${({ theme }) => theme.palette.borderColor};
     border-radius: 0.375rem;
   }
+
+  @media (max-width: 884px) {
+    /* border: 1px solid orange; */
+  }
 `;

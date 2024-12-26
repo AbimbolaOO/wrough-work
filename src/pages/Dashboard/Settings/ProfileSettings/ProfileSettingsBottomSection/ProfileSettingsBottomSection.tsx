@@ -47,4 +47,7 @@ const Container = styled.div`
   gap: 2rem;
   align-items: center;
   padding: 1.25rem;
+
+  @media (max-width: 884px) {
+  }
 `;

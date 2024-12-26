@@ -83,4 +83,8 @@ const FieldGroups = styled.div`
       margin-left: auto;
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;

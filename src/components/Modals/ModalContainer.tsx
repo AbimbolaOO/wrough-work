@@ -58,6 +58,16 @@ const Container = styled.div<IContainer>`
   display: flex;
   flex-direction: column;
   gap: 38px;
+
+  @media (max-width: 884px) {
+    width: 90vw;
+    padding: 42px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 42px 24px;
+    width: 94vw;
+  }
 `;
 
 const IconContainer = styled.div`

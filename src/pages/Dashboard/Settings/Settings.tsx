@@ -18,6 +18,12 @@ const segmentedControllerConfig = [
   { title: 'Privacy Settings' },
 ];
 
+const segmentedControllerConfigShortText = [
+  { title: 'Profile' },
+  { title: 'Notification' },
+  { title: 'Privacy' },
+];
+
 const Settings = () => {
   return (
     <Wrapper>
@@ -28,15 +34,17 @@ const Settings = () => {
       <Container>
         <SegmentedView>
           <SegmentedViewController
+            className='large-screen'
             segmentedViewControllerTitle={segmentedControllerConfig}
+          />
+          <SegmentedViewController
+            className='small-screen'
+            segmentedViewControllerTitle={segmentedControllerConfigShortText}
           />
           <SegmentedViewData>
             <div>
               <ProfileSettings />
             </div>
-            {/* <div>
-            <PasswordSettings />
-          </div> */}
             <div>
               <NotificationSettings />
             </div>
@@ -56,6 +64,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+  /* border: 1px solid red; */
 `;
 
 const Container = styled.div`
@@ -65,4 +74,11 @@ const Container = styled.div`
   padding: 32px;
   border-radius: 0.75rem;
   margin-bottom: 54px;
+
+  /* border: 1px solid green; */
+
+  @media (max-width: 884px) {
+    padding: 16px;
+    border-radius: 0;
+  }
 `;

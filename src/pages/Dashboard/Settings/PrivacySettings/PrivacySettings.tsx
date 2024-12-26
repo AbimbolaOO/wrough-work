@@ -232,11 +232,16 @@ const Container = styled.div`
 
   @media (max-width: 884px) {
     font-size: 14px;
+    padding: 8px;
     & > h2 {
-      margin: 8px;
+      margin: 4px;
     }
     & > p {
-      margin: 8px;
+      margin: 4px;
+    }
+    & > ul {
+      margin-left: 0px;
+      padding-left: 18px;
     }
   }
 `;

@@ -60,6 +60,11 @@ const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   border-radius: 4px;
   padding: 24px;
+
+  @media (max-width: 480px) {
+    gap: 0px;
+    padding: 12px;
+  }
 `;
 
 const ImageArea = styled.div`
@@ -72,6 +77,11 @@ const ImageArea = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.palette.mainBlue};
   color: white;
+
+  @media (max-width: 480px) {
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 const TextAndButtonsArea = styled.div`
@@ -109,7 +119,7 @@ const Button = styled.div`
   border-radius: 4px;
   font-size: 14px;
   font-weight: 400;
-  padding: 4px 24px;
+  padding: 4px 16px;
   border: 1px solid ${({ theme }) => theme.palette.blackBlackMain};
   cursor: pointer;
 

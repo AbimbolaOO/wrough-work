@@ -164,4 +164,19 @@ const Row = styled.div`
     justify-content: space-between;
     margin-top: 16px;
   }
+
+  @media (max-width: 884px) {
+    &.two-even,
+    &.three,
+    &.four {
+      grid-template-columns: 1fr;
+    }
+    &.flex {
+      flex-direction: column;
+      /* border: 1px solid red; */
+      margin-left: auto;
+      align-items: flex-end;
+      gap: 42px;
+    }
+  }
 `;

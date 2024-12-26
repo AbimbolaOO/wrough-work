@@ -88,6 +88,10 @@ const FieldRow = styled.div`
   &:focus-within {
     border: 1px solid ${({ theme }) => theme.palette.greyGrey1};
   }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 45vw 2px 100px;
+  }
 `;
 
 const DividerLine = styled.div`

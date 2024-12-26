@@ -116,6 +116,8 @@ const SegmentedViewControllerWrapper = styled.div`
   text-align: center;
   color: ${({ theme }) => theme.palette.greyGrey1};
 
+  /* display: none; */
+
   &.sm-header {
     font-size: 14px;
     margin-left: -32px;
@@ -141,6 +143,44 @@ const SegmentedViewControllerWrapper = styled.div`
     /* &.grey {
       color: #333333;
     } */
+  }
+
+  @media (max-width: 624px) {
+    color: ${({ theme }) => theme.palette.greyGrey3};
+    font-size: 16px;
+    font-weight: 400;
+    gap: 0px;
+    justify-content: space-between;
+    text-align: left;
+    width: calc(100vw - 120px);
+    display: grid;
+    gap: 16px;
+    grid-auto-flow: column;
+    /* border: 1px solid blue; */
+    overflow: auto;
+
+    /* hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > *:hover {
+      color: ${({ theme }) => theme.palette.greyGrey2};
+    }
+
+    & > * {
+      padding: 0px;
+      /* border: 1px solid red; */
+      width: fit-content;
+      white-space: nowrap;
+    }
+
+    & > .activeSegment {
+      background: transparent;
+      color: ${({ theme }) => theme.palette.blackBlack3};
+    }
   }
 `;
 

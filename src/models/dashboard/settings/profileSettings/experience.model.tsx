@@ -20,7 +20,7 @@ export const ExperienceSchema = Yup.object().shape({
   yearOfQualification: Yup.date(),
   location: Yup.string().required('Please enter your location'),
   startDate: Yup.string().required('Enter start date'),
-  endDate: Yup.string().required('End start date'),
+  endDate: Yup.string().required('Enter end date'),
   // id: Yup.string(),
 });
 

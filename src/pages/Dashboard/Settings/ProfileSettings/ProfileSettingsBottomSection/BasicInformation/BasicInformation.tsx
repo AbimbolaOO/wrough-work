@@ -128,15 +128,6 @@ const BasicInformation = () => {
         />
       </FieldGroups>
 
-      {/* <FieldGroups>
-        <NumberOnlyInputField
-          label='Years of Experience'
-          name='yearsOfExperience'
-          type='text'
-          placeholder=''
-        />
-      </FieldGroups> */}
-
       <TextAreaInputField
         label='Bio'
         name='bio'
@@ -167,6 +158,13 @@ const FieldGroups = styled.div`
 
     & > * {
       margin-left: auto;
+    }
+  }
+
+  @media (max-width: 884px) {
+    &,
+    &.three-col {
+      grid-template-columns: 1fr;
     }
   }
 `;
