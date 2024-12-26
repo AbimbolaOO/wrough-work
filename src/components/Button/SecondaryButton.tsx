@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import ArrowIcon from "../Icons/ArrowIcon";
-import { IButton } from "./interface";
+import ArrowIcon from '../Icons/ArrowIcon';
+import { IButton } from './interface';
 
 export const SecondaryButton: React.FC<IButton> = ({
   children,
@@ -12,7 +12,7 @@ export const SecondaryButton: React.FC<IButton> = ({
   click,
 }) => {
   return (
-    <StyledButton onClick={click} className={className ? className : ""}>
+    <StyledButton onClick={click} className={className ? className : ''}>
       {children} {arrowIcon && <ArrowIcon />}
     </StyledButton>
   );
@@ -55,19 +55,24 @@ const StyledButton = styled.button`
     width: fit-content;
   }
 
-  &.fw600 {
-    font-weight: 600;
-  }
-
   &.pl-pr-4 {
     padding-left: 4rem;
     padding-right: 4rem;
   }
 
-  &.respond {
-    //mobile-specific styles
-    @media (max-width: 768px) {
-      width: 21rem;
+  &.fw600 {
+    font-weight: 600;
+
+    @media (max-width: 540px) {
+      width: 100% !important;
+      padding-left: 32px;
+      padding-right: 32px;
+      gap: 16px;
     }
+  }
+
+  & > svg {
+    width: 24px;
+    height: 24px;
   }
 `;

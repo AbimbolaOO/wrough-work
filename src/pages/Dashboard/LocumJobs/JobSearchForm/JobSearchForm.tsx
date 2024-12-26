@@ -42,6 +42,10 @@ const Container = styled.div`
   top: 70px;
   z-index: 20;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Box = styled.div`

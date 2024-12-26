@@ -20,4 +20,6 @@ const JobInfoBody: React.FC<IJobInfoBody> = ({ jobDescription }) => {
 
 export default JobInfoBody;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+`;

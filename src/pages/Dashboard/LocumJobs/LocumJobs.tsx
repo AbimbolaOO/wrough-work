@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from '@emotion/styled';
 
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
+import BackToJobListButton from './BackToJobListButton/BackToJobListButton';
 import JobInfo from './JobInfo/JobInfo';
 import JobSearchForm from './JobSearchForm/JobSearchForm';
 import JobsList from './JobsList/JobsList';
 
 const LocumJobs = () => {
+  const [showMobileInfo, setShowMobileInfo] = useState<boolean>(false);
+
   return (
     <Shell>
       <JobSearchForm />
+      <BackToJobListButton
+        showMobileInfo={showMobileInfo}
+        setShowMobileInfo={setShowMobileInfo}
+      />
       <Container>
         <JobViewArea>
-          <JobsList />
-          <JobInfo />
+          <JobsList
+            showMobileInfo={showMobileInfo}
+            setShowMobileInfo={setShowMobileInfo}
+          />
+          <JobInfo showMobileInfo={showMobileInfo} />
         </JobViewArea>
 
         <PaginationShell>
@@ -47,16 +57,43 @@ const Container = styled.div`
   background-color: white;
   padding: 2rem;
   border-radius: 0.75rem;
+
+  @media (max-width: 540px) {
+    /* border: 1px solid yellow; */
+    padding: 20px;
+    border-radius: 0;
+    background-color: white;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
 `;
 
 const JobViewArea = styled.div`
   display: grid;
   grid-template-columns: 316px 1fr;
   gap: 32px;
+  height: fit-content;
+
+  @media (max-width: 884px) {
+    /* border: 1px solid red; */
+    grid-template-columns: 1fr;
+    /* border: 1px solid red;
+    height: 80vh;
+    overflow: auto;
+
+    & > * {
+      grid-column: 1;
+      grid-row: 1;
+    } */
+  }
 `;
 
 const PaginationShell = styled.div`
   display: grid;
   place-content: center;
   grid-column: span 2;
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;

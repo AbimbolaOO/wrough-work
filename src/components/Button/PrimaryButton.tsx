@@ -73,32 +73,38 @@ const StyledButton = styled.button`
     font-weight: 500;
   }
 
-  &.fw600 {
-    font-weight: 600;
-  }
-
   &.pl-pr-4 {
     padding-left: 4rem;
     padding-right: 4rem;
   }
 
+  &.fw600 {
+    font-weight: 600;
+
+    @media (max-width: 540px) {
+      width: 100%;
+      padding-left: 16px;
+      padding-right: 16px;
+      gap: 16px;
+    }
+  }
+
   &.danger {
     border: 1px solid ${({ theme }) => theme.palette.stateColorRed};
     color: ${({ theme }) => theme.palette.stateColorRed};
+
+    @media (max-width: 884px) {
+      display: grid;
+      grid-template-columns: 1fr 24px;
+    }
   }
 
   &.nowrap {
     white-space: nowrap;
   }
 
-  @media (max-width: 768px) {
-    &.respond {
-      width: 21rem;
-    }
-
-    &.respondsmall {
-      padding: 0.2rem;
-      font-size: 14px;
-    }
+  & > svg {
+    width: 24px;
+    height: 24px;
   }
 `;

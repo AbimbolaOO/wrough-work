@@ -31,9 +31,11 @@ export interface SelectedJobsProps {
   jobEndDate: string;
 }
 
-interface JobInfoProps {}
+interface JobInfoProps {
+  showMobileInfo?: boolean;
+}
 
-const JobInfo: React.FC<JobInfoProps> = () => {
+const JobInfo: React.FC<JobInfoProps> = ({ showMobileInfo }) => {
   const [queryParams, setQueryParams] = useQueryString();
   const { getSingleLocumJob, loading } = useGetSingleLocumJob();
   const { jobData, jobId: existingJobId } = useAppSelector(
@@ -61,7 +63,7 @@ const JobInfo: React.FC<JobInfoProps> = () => {
   }
 
   return (
-    <StickyWrapper>
+    <StickyWrapper className={showMobileInfo ? 'showMobileInfo' : ''}>
       {!loading ? (
         <Container>
           <JobInfoHead
@@ -85,7 +87,7 @@ const JobInfo: React.FC<JobInfoProps> = () => {
           <ButtonArea>
             <ModalProvider>
               <ModalTriggerContainer>
-                <SecondaryButton className='fw600 pl-pr-4 respond'>
+                <SecondaryButton className='pl-pr-4 fw600'>
                   {loading ? <LoadingOutlined /> : 'Apply'}
                 </SecondaryButton>
               </ModalTriggerContainer>
@@ -97,9 +99,7 @@ const JobInfo: React.FC<JobInfoProps> = () => {
 
             <ModalProvider>
               <ModalTriggerContainer>
-                <PrimaryButton className='fw600 danger respond'>
-                  Report
-                </PrimaryButton>
+                <PrimaryButton className='danger fw600'>Report</PrimaryButton>
               </ModalTriggerContainer>
 
               <Modal>
@@ -131,6 +131,13 @@ const StickyWrapper = styled.div`
   height: 80vh;
   /* border: 1px solid red; */
   overflow: auto;
+
+  @media (max-width: 884px) {
+    display: none;
+    &.showMobileInfo {
+      display: grid;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -142,6 +149,12 @@ const Container = styled.div`
   height: fit-content;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.white};
+
+  @media (max-width: 540px) {
+    padding: 0px;
+    border-radius: 0;
+    border: none;
+  }
 `;
 
 const ButtonArea = styled.div`

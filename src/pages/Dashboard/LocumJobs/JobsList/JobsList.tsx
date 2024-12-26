@@ -9,9 +9,15 @@ import useGetLocumJobs from '../../../../hooks/dashboard/jobs/useGetLocumJobs';
 import useQueryString from '../../../../hooks/ui-control/useQueryString';
 import { useAppSelector } from '../../../../redux/store';
 
-interface JobsListProps {}
+interface JobsListProps {
+  showMobileInfo?: boolean;
+  setShowMobileInfo: (...args: any) => void;
+}
 
-const JobsList: React.FC<JobsListProps> = () => {
+const JobsList: React.FC<JobsListProps> = ({
+  showMobileInfo,
+  setShowMobileInfo,
+}) => {
   const { getLocumJobs, loading } = useGetLocumJobs();
   const [queryParams, setQueryParams] = useQueryString();
   const { jobData } = useAppSelector((state) => state.locumJobs);
@@ -28,10 +34,11 @@ const JobsList: React.FC<JobsListProps> = () => {
   const handleJobClick = (jobId: string) => {
     // addQueryParams({ jobId });
     setQueryParams({ jobId });
+    setShowMobileInfo(!showMobileInfo);
   };
 
   return (
-    <Container>
+    <Container className={showMobileInfo ? 'showMobileInfo' : ''}>
       {loading ? (
         <LoadingOutlined />
       ) : (
@@ -64,4 +71,13 @@ const Container = styled.div`
   flex-direction: column;
   gap: 16px;
   border-radius: 12px;
+
+  @media (max-width: 884px) {
+    display: grid;
+    /* border: 1px solid red; */
+
+    &.showMobileInfo {
+      display: none;
+    }
+  }
 `;
