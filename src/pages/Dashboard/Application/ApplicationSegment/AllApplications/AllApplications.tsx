@@ -63,6 +63,10 @@ const Container = styled.div`
   overflow: auto;
   width: 100%;
   height: fit-content;
+
+  @media (max-width: 884px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const LoadContainer = styled.div`

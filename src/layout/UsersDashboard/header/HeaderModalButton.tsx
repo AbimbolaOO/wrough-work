@@ -21,7 +21,7 @@ const HeaderModalButton: React.FC<HeaderModalButtonProps> = ({
       <Container>
         <Box text={text}>
           {text && <TextDescription>{text}</TextDescription>}
-          <ShowModalButton>{children}</ShowModalButton>
+          <ShowModalButton className='post-job'>{children}</ShowModalButton>
         </Box>
       </Container>
       <Modal>
@@ -52,29 +52,6 @@ const Box = styled.div<IBox>`
   width: 100%;
   gap: 16px;
   justify-content: ${({ text }) => (text ? 'space-between' : 'center')};
-
-  & > * {
-    width: fit-content;
-  }
-
-  @media (max-width: 780px) {
-    & > * {
-      font-size: 16px;
-      padding: 10px 32px;
-      width: fit-content;
-      margin-left: -18px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    & > * {
-      font-size: 14px;
-      padding: 6px 22px;
-      /* width: fit-content !important; */
-      margin-left: -18px;
-      /* border: 1px solid red; */
-    }
-  }
 `;
 
 const TextDescription = styled.div`

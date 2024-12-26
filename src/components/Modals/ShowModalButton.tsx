@@ -42,4 +42,25 @@ const Button = styled.div`
   display: grid;
   place-content: center;
   padding: 10px 57.5px;
+
+  &.post-job {
+    & {
+      width: fit-content;
+    }
+    @media (max-width: 780px) {
+      & {
+        font-size: 16px;
+        padding: 10px 32px;
+        width: fit-content !important;
+        margin-left: -18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      & {
+        font-size: 14px;
+        padding: 6px 22px;
+      }
+    }
+  }
 `;
