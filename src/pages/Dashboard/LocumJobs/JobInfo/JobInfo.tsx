@@ -59,7 +59,11 @@ const JobInfo: React.FC<JobInfoProps> = ({ showMobileInfo }) => {
   }, [jobId]);
 
   if (jobId === null) {
-    return <EmptyState>Click on job to preview</EmptyState>;
+    return (
+      <EmptyState className='no-small-screen'>
+        Click on job to preview
+      </EmptyState>
+    );
   }
 
   return (

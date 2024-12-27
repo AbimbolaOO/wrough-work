@@ -130,9 +130,14 @@ const PostJobModal = () => {
         </Row>
 
         <Row className='flex'>
-          <ToggleCheckBox name='isPublished'>Publish</ToggleCheckBox>
+          <Row className='two'>
+            <ToggleCheckBox name='requiresResume'>
+              Requires a resume
+            </ToggleCheckBox>
+            <ToggleCheckBox name='isPublished'>Publish</ToggleCheckBox>
+          </Row>
 
-          <FormSubmitButton loading={loading} className='small'>
+          <FormSubmitButton loading={loading} className='small h-fit-flex-end'>
             Create
           </FormSubmitButton>
         </Row>
@@ -170,6 +175,7 @@ const Row = styled.div`
     &.three,
     &.four {
       grid-template-columns: 1fr;
+      width: 100%;
     }
     &.flex {
       flex-direction: column;

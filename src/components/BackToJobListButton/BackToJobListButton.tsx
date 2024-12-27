@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import LeftTriangleIcon from '../../../../components/Icons/LeftTriangleIcon';
+import LeftTriangleIcon from '../Icons/LeftTriangleIcon';
 
 interface BackToJobListButtonProps {
   showMobileInfo?: boolean;

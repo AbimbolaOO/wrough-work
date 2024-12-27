@@ -48,23 +48,28 @@ const ProfileModal = () => {
           <BasicLabel>Basic information </BasicLabel>
           <AgeArea>
             <div>
-              <div>Age</div>
+              <Label>Age</Label>
               <DarkCell>{calculateAge(authData?.birthday ?? '')}years</DarkCell>
             </div>
             <div>
-              <div>Years of Experience</div>
+              <Label>Years of Experience</Label>
               <DarkCell>6years</DarkCell>
             </div>
             <div>
-              <div>Location</div>
+              <Label>Location</Label>
               <DarkCell>Lagos, Nigeria</DarkCell>
             </div>
+
+            <MobileViewAvailability>
+              <Label>Availability</Label>
+              <DarkCell>Full Time</DarkCell>
+            </MobileViewAvailability>
           </AgeArea>
           <Availability>
-            <div>
+            <WebViewAvailability>
               <div>Availability</div>
               <DarkCell>Full Time</DarkCell>
-            </div>
+            </WebViewAvailability>
           </Availability>
         </BasicInformationSection>
 
@@ -138,6 +143,10 @@ const Container = styled.div`
     padding: 32px;
     border-radius: 6px;
   }
+
+  @media (max-width: 884px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ExperienceSection = styled.div`
@@ -198,7 +207,11 @@ const BasicInformationSection = styled.div`
   flex-direction: column;
   gap: 12px;
   color: ${({ theme }) => theme.palette.greyGrey2};
-  /* border: 1px solid blue; */
+
+  @media (max-width: 884px) {
+    grid-row: 1;
+    padding: 24px;
+  }
 `;
 
 const BasicLabel = styled.div`
@@ -210,6 +223,17 @@ const AgeArea = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 34px;
+
+  @media (max-width: 884px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+`;
+
+const Label = styled.div`
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
 `;
 
 const Availability = styled.div`
@@ -217,11 +241,36 @@ const Availability = styled.div`
   align-items: center;
   grid-template-columns: repeat(3, 1fr);
   gap: 34px;
+
+  @media (max-width: 884px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+`;
+
+const MobileViewAvailability = styled.div`
+  @media (min-width: 884px) {
+    display: none;
+  }
+`;
+
+const WebViewAvailability = styled.div`
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;
 
 const DarkCell = styled.div`
   color: ${({ theme }) => theme.palette.greyGrey1};
   font-size: 18px;
+
+  @media (max-width: 884px) {
+    font-size: 14px;
+  }
 `;
 
 const SegmentContainer = styled.div`
@@ -233,5 +282,15 @@ const SegmentContainer = styled.div`
     margin-left: -32px;
     margin-right: -32px;
     overflow-y: auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-height: fit-content;
+
+    &.experiences {
+      flex-direction: column;
+      margin: 0px;
+    }
   }
 `;

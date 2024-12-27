@@ -9,7 +9,15 @@ import useGetBookmarkedLocumJobs from '../../../../hooks/dashboard/jobs/useGetBo
 import useQueryString from '../../../../hooks/ui-control/useQueryString';
 import { useAppSelector } from '../../../../redux/store';
 
-const BookmarkLists = () => {
+interface BookmarkListsProps {
+  showMobileInfo?: boolean;
+  setShowMobileInfo: (...args: any) => void;
+}
+
+const BookmarkLists: React.FC<BookmarkListsProps> = ({
+  showMobileInfo,
+  setShowMobileInfo,
+}) => {
   const { getBookmarkedLocumJobs, loading } = useGetBookmarkedLocumJobs();
   const [queryParams, setQueryParams] = useQueryString();
   const { bookmarkJobData } = useAppSelector(
@@ -26,12 +34,12 @@ const BookmarkLists = () => {
   }, []);
 
   const handleJobClick = (jobId: string) => {
-    // addQueryParams({ jobId });
     setQueryParams({ jobId });
+    setShowMobileInfo(!showMobileInfo);
   };
 
   return (
-    <Container>
+    <Container className={showMobileInfo ? 'showMobileInfo' : ''}>
       {loading ? (
         <LoadingOutlined />
       ) : (
@@ -43,7 +51,6 @@ const BookmarkLists = () => {
             jobTitle={bookmark.job.title}
             yearsOfExperience={bookmark.job.yearsOfExperience}
             pay={bookmark.job.pay}
-            // onClick={() => setSelectedJob({ ...bookmark.job })}
             onClick={(e: any) => handleJobClick(bookmark.job.id)}
             className={clsx(
               'cursor-pointer',
@@ -64,4 +71,13 @@ const Container = styled.div`
   flex-direction: column;
   gap: 16px;
   border-radius: 12px;
+
+  @media (max-width: 884px) {
+    display: grid;
+    /* border: 1px solid red; */
+
+    &.showMobileInfo {
+      display: none;
+    }
+  }
 `;

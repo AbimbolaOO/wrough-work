@@ -245,6 +245,16 @@ const MonthLayout = styled.div`
     height: 40px;
     display: grid;
     place-content: center;
+
+    @media (max-width: 415px) {
+      width: 32px;
+      height: 32px;
+    }
+
+    @media (max-width: 360px) {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   & > div.day-num {

@@ -147,12 +147,6 @@ const SegmentedViewControllerWrapper = styled.div`
     color: ${({ theme }) => theme.palette.mainBlue};
   }
 
-  & > .hollow.activeSegment {
-    border-radius: 0.375rem;
-    background: white;
-    border: 1px solid ${({ theme }) => theme.palette.mainBlue};
-  }
-
   @media (max-width: 624px) {
     &.large-screen {
       display: none;
@@ -188,6 +182,35 @@ const SegmentedViewControllerWrapper = styled.div`
       & > .activeSegment {
         background: transparent;
         color: ${({ theme }) => theme.palette.blackBlack3};
+      }
+    }
+  }
+
+  & > .hollow.activeSegment {
+    border-radius: 0.375rem;
+    background: white;
+    border: 1px solid ${({ theme }) => theme.palette.mainBlue};
+  }
+
+  &.hollow {
+    @media (max-width: 768px) {
+      color: ${({ theme }) => theme.palette.greyGrey3};
+      font-size: 14px;
+      font-weight: 400;
+      gap: 0px;
+      justify-content: space-between;
+      text-align: left;
+      width: calc(100vw - 120px);
+      display: grid;
+      grid-auto-flow: column;
+      gap: 16px;
+      overflow: auto;
+
+      /* hide scrollbar */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
   }

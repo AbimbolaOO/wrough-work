@@ -47,6 +47,10 @@ const TextPart = styled.div`
   font-weight: 400;
   color: ${({ theme }) => theme.palette.greyGrey2};
 
+  & > * {
+    word-break: break-all;
+  }
+
   & > .name {
     color: ${({ theme }) => theme.palette.blackBlack3};
   }

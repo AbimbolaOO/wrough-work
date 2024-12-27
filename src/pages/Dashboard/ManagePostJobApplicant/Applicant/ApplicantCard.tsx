@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import FolderIcon from '../../../../components/Icons/FolderIcon';
+// import FolderIcon from '../../../../components/Icons/FolderIcon';
 import ThreeDotIcon from '../../../../components/Icons/ThreeDotIcon';
 import Img from '../../../../components/Img/Img';
 import { DEFAULT_IMAGE_URL } from '../../../../utils/utils';
@@ -27,7 +27,7 @@ const ApplicantCard = () => {
       <Bottom>
         <IconBottom>
           <ShowApplicantModal />
-          <FolderIcon />
+          {/* <FolderIcon /> */}
           <ApplicantCalendarModal />
         </IconBottom>
       </Bottom>
@@ -70,7 +70,7 @@ const Bottom = styled.div`
 const IconBottom = styled.div`
   width: fit-content;
   display: grid;
-  grid-template-columns: repeat(3, 20px);
+  grid-template-columns: repeat(2, 20px);
   align-items: center;
   gap: 32px;
 `;

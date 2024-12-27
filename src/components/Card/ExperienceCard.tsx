@@ -61,6 +61,11 @@ const Container = styled.div`
   padding: 16px;
   padding-left: 32px;
   padding-right: 32px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
 `;
 
 const Box = styled.div`
@@ -68,6 +73,10 @@ const Box = styled.div`
   grid-template-columns: 50px 1fr;
   gap: 8px;
   width: 100%;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 50px 100%;
+  }
 `;
 
 const TextPart = styled.div`

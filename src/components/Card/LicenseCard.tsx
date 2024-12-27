@@ -44,6 +44,10 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Box = styled.div`
@@ -58,8 +62,11 @@ const TextPart = styled.div`
   flex-direction: column;
   font-size: 16px;
   font-weight: 400;
-  /* margin-top: -8px; */
   color: ${({ theme }) => theme.palette.greyGrey2};
+
+  & > * {
+    word-break: break-all;
+  }
 
   & > .name {
     color: ${({ theme }) => theme.palette.blackBlack3};
@@ -77,6 +84,10 @@ const Button = styled.div`
   font-size: 14px;
   font-weight: 400;
   color: #2f80ed;
+
+  @media (max-width: 480px) {
+    padding-left: 52px;
+  }
 `;
 
 const AbbreviationIcon = styled.div`

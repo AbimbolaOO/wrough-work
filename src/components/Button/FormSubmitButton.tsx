@@ -73,6 +73,10 @@ export const FormSubmitButton = styled.button`
     font-weight: 500;
     font-size: 14px;
   }
+  &.h-fit-flex-end {
+    height: fit-content;
+    align-self: flex-end;
+  }
 
   &.right-mt {
     margin-top: 32px;

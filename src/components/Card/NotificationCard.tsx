@@ -69,6 +69,12 @@ const Container = styled.div`
   &:last-of-type {
     border: none;
   }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 50px auto 24px;
+    align-items: flex-start;
+    padding: 16px;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -87,12 +93,21 @@ const TextPlace = styled.div`
   display: flex;
   color: ${({ theme }) => theme.palette.blackBlack3};
   font-size: 18px;
+
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
 `;
 
 const Time = styled.div`
   color: ${({ theme }) => theme.palette.greyGrey2};
   font-size: 14px;
   line-height: 21px;
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    margin-right: -12px;
+  }
 `;
 
 const MenuRegion = styled.div`
@@ -100,7 +115,6 @@ const MenuRegion = styled.div`
   align-items: flex-end;
   flex-direction: column;
   gap: 10px;
-  /* border: 1px solid red; */
 `;
 
 const IconShell = styled.div`

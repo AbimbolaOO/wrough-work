@@ -54,8 +54,9 @@ const Container = styled.div<IContainer>`
   flex-direction: column;
   gap: 38px;
 
-  & > * {
-    /* border: 1px solid red; */
+  @media (max-width: 480px) {
+    padding: 42px 24px;
+    width: 94vw;
   }
 `;
 

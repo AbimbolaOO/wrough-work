@@ -32,4 +32,5 @@ const Container = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: 12px;
+  margin-bottom: 54px;
 `;

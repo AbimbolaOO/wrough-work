@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import styled from '@emotion/styled';
 
+import BackToJobListButton from '../../../components/BackToJobListButton/BackToJobListButton';
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
-import BackToJobListButton from './BackToJobListButton/BackToJobListButton';
 import JobInfo from './JobInfo/JobInfo';
 import JobSearchForm from './JobSearchForm/JobSearchForm';
 import JobsList from './JobsList/JobsList';
@@ -75,16 +75,7 @@ const JobViewArea = styled.div`
   height: fit-content;
 
   @media (max-width: 884px) {
-    /* border: 1px solid red; */
     grid-template-columns: 1fr;
-    /* border: 1px solid red;
-    height: 80vh;
-    overflow: auto;
-
-    & > * {
-      grid-column: 1;
-      grid-row: 1;
-    } */
   }
 `;
 

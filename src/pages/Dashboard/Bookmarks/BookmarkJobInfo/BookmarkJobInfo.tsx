@@ -31,9 +31,13 @@ export interface SelectedJobsProps {
   jobEndDate: string;
 }
 
-interface BookmarkJobInfoProps {}
+interface BookmarkJobInfoProps {
+  showMobileInfo?: boolean;
+}
 
-const BookmarkJobInfo: React.FC<BookmarkJobInfoProps> = () => {
+const BookmarkJobInfo: React.FC<BookmarkJobInfoProps> = ({
+  showMobileInfo,
+}) => {
   const [queryParams, setQueryParams] = useQueryString();
   const { getSingleBookmarkedLocumJob, loading } =
     useGetSingleBookmarkedLocumJob();
@@ -59,11 +63,15 @@ const BookmarkJobInfo: React.FC<BookmarkJobInfoProps> = () => {
   }, [jobId]);
 
   if (jobId === null) {
-    return <EmptyState>Click on job to preview</EmptyState>;
+    return (
+      <EmptyState className='no-small-screen'>
+        Click on job to preview
+      </EmptyState>
+    );
   }
 
   return (
-    <StickyWrapper>
+    <StickyWrapper className={showMobileInfo ? 'showMobileInfo' : ''}>
       {!loading ? (
         <Container>
           <BookmarkJobInfoHead
@@ -135,6 +143,13 @@ const StickyWrapper = styled.div`
   height: 80vh;
   /* border: 1px solid red; */
   overflow: auto;
+
+  @media (max-width: 884px) {
+    display: none;
+    &.showMobileInfo {
+      display: grid;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -146,6 +161,12 @@ const Container = styled.div`
   height: fit-content;
   width: 100%;
   background-color: ${({ theme }) => theme.palette.white};
+
+  @media (max-width: 540px) {
+    padding: 0px;
+    border-radius: 0;
+    border: none;
+  }
 `;
 
 const ButtonArea = styled.div`

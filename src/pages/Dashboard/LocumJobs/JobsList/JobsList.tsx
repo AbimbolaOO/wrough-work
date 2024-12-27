@@ -32,7 +32,6 @@ const JobsList: React.FC<JobsListProps> = ({
   }, []);
 
   const handleJobClick = (jobId: string) => {
-    // addQueryParams({ jobId });
     setQueryParams({ jobId });
     setShowMobileInfo(!showMobileInfo);
   };
@@ -50,7 +49,6 @@ const JobsList: React.FC<JobsListProps> = ({
             jobTitle={jobs.title}
             yearsOfExperience={jobs.yearsOfExperience}
             pay={jobs.pay}
-            // onClick={() => setSelectedJob({ ...jobs })}
             onClick={(e: any) => handleJobClick(jobs.id)}
             className={clsx(
               'cursor-pointer',

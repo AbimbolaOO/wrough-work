@@ -43,7 +43,7 @@ const Container = styled.div`
 `;
 
 const Checkbox = styled.input`
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const CheckboxWrapper = styled.div`
@@ -70,7 +70,7 @@ const CheckboxWrapper = styled.div`
 
     & > label input[type='checkbox'] ~ span {
       position: absolute;
-      left: 0px;
+      left: -2px;
     }
 
     & > * {
