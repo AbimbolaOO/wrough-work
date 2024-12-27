@@ -14,6 +14,7 @@ const ViewApplicantStackedImageCard: React.FC<
   ViewApplicantStackedImageCardProps
 > = ({ navUrl }) => {
   const navigate = useNavigate();
+
   return (
     <Container>
       <ImageStack count='+4'>

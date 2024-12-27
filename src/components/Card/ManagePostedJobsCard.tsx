@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
@@ -15,6 +16,8 @@ interface ManageJobsCardProps {
 }
 
 const ManagePostedJobsCard: React.FC<ManageJobsCardProps> = ({ job }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <ImageContainer>
@@ -42,6 +45,11 @@ const ManagePostedJobsCard: React.FC<ManageJobsCardProps> = ({ job }) => {
               {job.pay.formatCurrency()}/{salaryInterval[job.payInterval] ?? ''}
             </div>
           </CenterContentFooter>
+          <ViewApplicant
+            onClick={() => navigate(`/${DASHBOARD}/${MANAGE_POSTED_JOBS}/323`)}
+          >
+            View all applicants
+          </ViewApplicant>
         </CenterContentLowerPart>
       </CenterContent>
 
@@ -69,11 +77,30 @@ const Container = styled.div`
   box-shadow: 0px 20px 26px 0px rgba(186, 182, 182, 0.16);
   border-radius: 6px;
   padding: 25px 32px;
+
+  @media (max-width: 884px) {
+    align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 100px auto 32px;
+  }
+
+  @media (max-width: 540px) {
+    grid-template-columns: 50px auto 16px;
+    gap: 8px;
+    padding: 16px;
+  }
 `;
 
 const ImageContainer = styled.div`
   width: 100px;
   height: 100px;
+
+  @media (max-width: 540px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const CenterContent = styled.div`
@@ -91,6 +118,11 @@ const CenterContentText = styled.div`
   font-size: 24px;
   font-weight: 600;
   color: ${({ theme }) => theme.palette.blackBlack2};
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    font-weight: 500;
+  }
 `;
 
 const Description = styled.div`
@@ -105,6 +137,11 @@ const CenterContentFooter = styled.div`
   color: ${({ theme }) => theme.palette.greyGrey1};
   font-size: 14px;
   font-weight: 400;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    gap: 8px;
+  }
 `;
 
 const CenterContentLowerPart = styled.div`
@@ -127,6 +164,10 @@ const IconWrapper = styled.div`
 
 const StackedImages = styled.div`
   /* border: 1px solid red; */
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const DeleteIconWrapper = styled.div`
@@ -136,4 +177,10 @@ const DeleteIconWrapper = styled.div`
   place-content: center;
   cursor: pointer;
   height: fit-content;
+`;
+
+const ViewApplicant = styled.div`
+  color: ${({ theme }) => theme.palette.mainBlue};
+  font-size: 14px;
+  cursor: pointer;
 `;

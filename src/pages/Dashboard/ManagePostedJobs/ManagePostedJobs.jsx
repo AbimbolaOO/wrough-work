@@ -42,6 +42,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  @media (max-width: 480px) {
+    padding: 16px;
+  }
 `;
 
 const Box = styled.div`
@@ -73,4 +77,8 @@ const PaginationShell = styled.div`
   display: grid;
   place-content: center;
   grid-column: span 2;
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;
