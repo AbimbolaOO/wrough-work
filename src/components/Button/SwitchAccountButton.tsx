@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 interface ISwitchAccountButton {
   path: string;
@@ -9,7 +9,7 @@ interface ISwitchAccountButton {
 const SwitchAccountButton: React.FC<ISwitchAccountButton> = ({ path }) => {
   return (
     <Switches>
-      <button className="active">Locum</button>
+      <button className='active'>Locum</button>
       <button
         onClick={() => {
           window.location.href = path;
@@ -30,6 +30,17 @@ const Switches = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: auto auto;
+    width: fit-content;
+  }
+
   & > button {
     width: 238px;
     height: 54px;
@@ -43,12 +54,26 @@ const Switches = styled.div`
     font-weight: 500;
     color: #828282;
     cursor: pointer;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 
-    //mobile-specific styles
     @media (max-width: 768px) {
+      width: 100%;
       font-size: 16px;
-      width: 180px;
-      height: 47px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    @media (max-width: 480px) {
+      width: 100%;
+      font-size: 16px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (max-width: 390px) {
+      font-size: 14px;
     }
   }
 

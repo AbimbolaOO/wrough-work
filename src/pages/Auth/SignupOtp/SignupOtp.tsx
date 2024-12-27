@@ -69,7 +69,7 @@ const FieldBox = styled.div`
   flex-direction: column;
   justify-content: center;
   /* outline: 2px solid red; */
-  gap: 58px;
+  gap: 16px;
   width: fit-content;
 `;
 
@@ -82,13 +82,23 @@ const Label = styled.div`
   color: ${({ theme }) => theme.palette.greyGrey1};
 `;
 
-const P = styled.div`
+const P = styled.span`
   display: flex;
   gap: 4px;
   justify-content: center;
   font-size: 18px;
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-weight: 400;
+  width: 100%;
+  /* border: 1px solid red; */
+
+  @media (max-width: 370px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 340px) {
+    font-size: 14px;
+  }
 `;
 
 const Button = styled.div`

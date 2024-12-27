@@ -238,7 +238,7 @@ export const DateInputField: React.FC<IInputField> = ({
 // styles just for PasswordInputField
 const PasswordWrapper = styled.div`
   width: 100%;
-  max-width: 40rem;
+  /* max-width: 40rem; */
 `;
 
 const PasswordContainer = styled.div`
@@ -308,6 +308,14 @@ const CheckboxWrapper = styled.div`
   &.small-sc {
     @media (max-width: 480px) {
       font-size: 14px;
+    }
+  }
+
+  &.terms {
+    @media (max-width: 768px) {
+      display: flex;
+      font-size: 16px;
+      justify-self: flex-start;
     }
   }
 `;

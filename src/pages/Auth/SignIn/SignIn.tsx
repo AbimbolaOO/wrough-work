@@ -1,29 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import Formtainer from "../../../components/Authlayout/Formtainer";
-import ValidatingFormSubmitButton from "../../../components/Button/FormSubmitButton";
-import SwitchAccountButton from "../../../components/Button/SwitchAccountButton";
-import { FormComponent } from "../../../components/Form/FormComponent";
-import {
-  Checkbox,
-  PasswordInputField,
-  TextInputField,
-} from "../../../components/Form/FormField";
-import { InternalNavLink } from "../../../components/Link/Link";
-import { configSetting } from "../../../config";
-import useUserSignin from "../../../hooks/auth/useUserSignin";
+import Formtainer from '../../../components/Authlayout/Formtainer';
+import ValidatingFormSubmitButton from '../../../components/Button/FormSubmitButton';
+import SwitchAccountButton from '../../../components/Button/SwitchAccountButton';
+import { FormComponent } from '../../../components/Form/FormComponent';
+import { Checkbox, PasswordInputField, TextInputField } from '../../../components/Form/FormField';
+import { InternalNavLink } from '../../../components/Link/Link';
+import { configSetting } from '../../../config';
+import useUserSignin from '../../../hooks/auth/useUserSignin';
 import {
   LocumSignInDataType,
   locumSigninInitialValues,
   LocumSignInSchema,
-} from "../../../models/auth/signIn.model";
-import {
-  ACCOUNT,
-  FORGOT_PASSWORD,
-  SIGNUP,
-} from "../../../routes/routeConstants";
+} from '../../../models/auth/signIn.model';
+import { ACCOUNT, FORGOT_PASSWORD, SIGNUP } from '../../../routes/routeConstants';
 
 const SignIn = () => {
   const { signinUser, loading: userSiginLoading } = useUserSignin();
@@ -34,7 +26,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Formtainer header="SIGN INTO YOUR ACCOUNT" className="signin">
+      <Formtainer header='SIGN INTO YOUR ACCOUNT' className='signin'>
         <SwitchAccountButton
           path={`${configSetting.healthDashboardUrl}/account/signin/health-signin`}
         />
@@ -42,26 +34,27 @@ const SignIn = () => {
           initialValues={locumSigninInitialValues}
           schema={LocumSignInSchema}
           onSubmit={onSubmit}
-          className={"column"}
         >
           <TextInputField
-            label="Email Address"
-            name="email"
-            id="email"
-            type="email"
-            placeholder="Email"
+            label='Email Address'
+            name='email'
+            id='email'
+            type='email'
+            placeholder='Email'
           />
           <PasswordInputField
-            label="Password"
-            name="password"
-            type="password"
-            id="password"
-            placeholder="Password"
+            label='Password'
+            name='password'
+            type='password'
+            id='password'
+            placeholder='Password'
           />
           <RememberMeAndForgotPassword>
-            <Checkbox name="rememberMe">Remember me</Checkbox>
+            <Checkbox name='rememberMe' className='terms'>
+              Remember me
+            </Checkbox>
             <p
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               onClick={() => {
                 navigate(`/${ACCOUNT}/${FORGOT_PASSWORD}`);
               }}
@@ -70,7 +63,7 @@ const SignIn = () => {
             </p>
           </RememberMeAndForgotPassword>
           <ValidatingFormSubmitButton
-            className="fillParent"
+            className='fillParent'
             loading={userSiginLoading}
           >
             Login
@@ -78,11 +71,19 @@ const SignIn = () => {
         </FormComponent>
       </Formtainer>
       <P>
-        Don't have an account?{" "}
-        <InternalNavLink to={`/${ACCOUNT}/${SIGNUP}`} className="regular">
+        Don't have an account?{' '}
+        <InternalNavLink to={`/${ACCOUNT}/${SIGNUP}`} className='regular'>
           Sign Up
         </InternalNavLink>
       </P>
+      <ForgotPasswordMobile
+        style={{ cursor: 'pointer' }}
+        onClick={() => {
+          navigate(`/${ACCOUNT}/${FORGOT_PASSWORD}`);
+        }}
+      >
+        Forgot Password?
+      </ForgotPasswordMobile>
     </>
   );
 };
@@ -95,6 +96,12 @@ const RememberMeAndForgotPassword = styled.div`
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-weight: 500;
   font-size: 18px;
+
+  & > p {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 `;
 
 const P = styled.div`
@@ -105,8 +112,13 @@ const P = styled.div`
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-weight: 400;
 
-  //mobile-specific styles
-  @media (max-width: 768px) {
-    margin-top: 1.5rem;
+  @media (max-width: 480px) {
+    font-size: 16px;
+  }
+`;
+
+const ForgotPasswordMobile = styled(P)`
+  @media (min-width: 768px) {
+    display: none;
   }
 `;

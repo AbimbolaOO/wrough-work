@@ -65,7 +65,7 @@ const OTPInputField: React.FC<OTPInputFieldProps> = ({
         {Array.from({ length: 4 }).map((_, index) => (
           <OTPInput
             key={index}
-            type="text"
+            type='text'
             maxLength={1}
             value={field.value[index] || ''}
             onChange={(e) => handleChange(e, index)}
@@ -99,6 +99,10 @@ const OTPContainer = styled.div`
   display: flex;
   gap: 32px;
   justify-content: center;
+
+  @media (max-width: 480px) {
+    gap: 16px;
+  }
 `;
 
 const OTPInput = styled.input`

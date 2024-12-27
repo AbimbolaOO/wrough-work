@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 interface IFormtainer {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface IFormtainer {
 const Formtainer: React.FC<IFormtainer> = ({ children, header, className }) => {
   return (
     <Container className={className}>
-      <FormHeader>{header}</FormHeader>
+      <h1>{header}</h1>
       {children}
     </Container>
   );
@@ -21,9 +21,8 @@ export default Formtainer;
 const Container = styled.div`
   box-shadow: 0px 20px 26px 0px #bab6b629;
   width: 100%;
-  padding-bottom: 2rem;
-  max-width: 37rem;
-  max-height: 85rem;
+  padding-bottom: 32px;
+  width: 37rem;
   display: flex;
   gap: 2rem;
   padding: 45px;
@@ -36,25 +35,22 @@ const Container = styled.div`
   & > h1 {
     font-size: 24px;
     font-weight: 500;
-
-    //mobile-specific styles
-    @media (max-width: 768px) {
-      font-size: 18px;
-    }
+    color: ${({ theme }) => theme.palette.blackBlackMain};
   }
 
-  //mobile-specific styles
   @media (max-width: 768px) {
-    padding: 1rem;
-    height: 100vh;
-    justify-content: start;
-
-    &.signin {
-      height: 55vh;
+    & > h1 {
+      font-size: 20px;
     }
-  }
-`;
 
-const FormHeader = styled.h1`
-  color: ${({ theme }) => theme.palette.blackBlackMain};
+    width: 70%;
+
+    padding-left: 24px;
+    padding-right: 24px;
+    /* border: 1px solid red; */
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+  }
 `;
