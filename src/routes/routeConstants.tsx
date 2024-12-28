@@ -7,8 +7,7 @@ export const EMAIL_VERIFIED = 'email-verified';
 export const PASSWORD_RESET = 'password-reset';
 export const FORGOT_PASSWORD = 'forgot-password';
 export const FORGOT_PASSWORD_SUCCESS = 'forgot-password-success';
-export const LOCUM_SIGNUP = '/account/signup/locum-signup';
-export const HEALTH_SIGNUP = '/account/signup/health-signup';
+export const LOCUM_SIGNUP = '/account/signup';
 
 // Landing-page routes
 export const DASHBOARD = 'dashboard';

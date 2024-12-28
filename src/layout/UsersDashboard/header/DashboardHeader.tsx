@@ -19,7 +19,7 @@ const DashboardHeader: React.FC<IHeader> = ({ open, toggleNav }) => {
   return (
     <Container>
       <OptionalLogo>
-        <CompanyLogo />
+        <CompanyLogo goHome />
       </OptionalLogo>
       <HeaderModalButton>Post a Job</HeaderModalButton>
       <MenuButton onClick={() => toggleNav()}>

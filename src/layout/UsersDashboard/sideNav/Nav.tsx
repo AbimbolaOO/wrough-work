@@ -12,7 +12,7 @@ const Nav = () => {
   return (
     <Container>
       <div className='logo'>
-        <CompanyLogo />
+        <CompanyLogo goHome />
       </div>
 
       <NavBtnSection>
