@@ -287,6 +287,7 @@ const SegmentContainer = styled.div`
   @media (max-width: 480px) {
     width: 100%;
     max-height: fit-content;
+    gap: 16px;
 
     &.experiences {
       flex-direction: column;
