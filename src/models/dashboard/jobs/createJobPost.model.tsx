@@ -1,4 +1,3 @@
-import { isValid, parse } from 'date-fns';
 import * as Yup from 'yup';
 
 export const CreateJobPostSchema = Yup.object().shape({

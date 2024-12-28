@@ -5,7 +5,6 @@ import { CustomDatePicker } from '../../../../../../components/Form/CustomDatePi
 import CustomSelectField from '../../../../../../components/Form/CustomSelectField';
 import { FormComponent } from '../../../../../../components/Form/FormComponent';
 import {
-  DateInputField,
   TextAreaInputField,
   TextInputField,
 } from '../../../../../../components/Form/FormField';
