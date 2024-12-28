@@ -11,6 +11,7 @@ import {
   CreateJobPostSchema,
 } from '../../../models/dashboard/jobs/createJobPost.model';
 import FormSubmitButton from '../../Button/FormSubmitButton';
+import { CustomDatePicker } from '../../Form/CustomDatePicker';
 import { CustomTwoValDropDown } from '../../Form/CustomTwoValDropDown';
 import { FormComponent } from '../../Form/FormComponent';
 import { TextInputField } from '../../Form/FormField';
@@ -106,26 +107,46 @@ const PostJobModal = () => {
         />
 
         <Row className='four'>
-          <TextInputField
+          {/* <TextInputField
             label='Start Date'
             placeholder=''
             name='jobStartDate'
             id='jobStartDate'
             type='date'
+          /> */}
+          <CustomDatePicker
+            label='Start Date'
+            placeholder=''
+            name='jobStartDate'
+            id='jobStartDate'
           />
-          <TextInputField
+
+          {/* <TextInputField
             label='Stop Date'
             placeholder=''
             name='jobEndDate'
             id='jobEndDate'
             type='date'
+          /> */}
+          <CustomDatePicker
+            label='Stop Date'
+            placeholder=''
+            name='jobEndDate'
+            id='jobEndDate'
           />
-          <TextInputField
+          {/* <TextInputField
             label='Expiry Date'
             placeholder=''
             name='expiryDate'
             id='expiryDate'
             type='date'
+          /> */}
+
+          <CustomDatePicker
+            label='Expiry Date'
+            placeholder=''
+            name='expiryDate'
+            id='expiryDate'
           />
         </Row>
 
