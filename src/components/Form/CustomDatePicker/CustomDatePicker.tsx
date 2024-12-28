@@ -1,5 +1,13 @@
 import clsx from 'clsx';
-import { add, differenceInDays, endOfMonth, format, setDate, startOfMonth, sub } from 'date-fns';
+import {
+  add,
+  differenceInDays,
+  endOfMonth,
+  format,
+  setDate,
+  startOfMonth,
+  sub,
+} from 'date-fns';
 import { useField } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -26,15 +34,27 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   ...props
 }) => {
   const DateFieldRef = useRef<HTMLDivElement>(null);
+
   useOutsideClick(DateFieldRef, () => setDidTouchDateField(false));
   const [field, meta, helper] = useField(props);
   const [didTouchDateField, setDidTouchDateField] = useState<boolean>(false);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<string>();
+  const [submitableDateData, setSubmitableDateData] = useState<string>();
+
+  // help when form is been reset
+  useEffect(() => {
+    if (!field.value) {
+      setSelectedDate(undefined);
+      setSubmitableDateData('');
+    }
+  }, [field.value]);
 
   useEffect(() => {
     if (selectedDate) {
       helper.setValue(selectedDate);
+    } else {
+      setSubmitableDateData('');
     }
     // eslint-disable-next-line
   }, [selectedDate]);
@@ -61,8 +81,8 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   const handleDateSelected = (index: number) => {
     if (currentDate) {
       const date = setDate(currentDate, index);
-      // setSelectedDate(format(date, 'yyyy-MM-dd'));
-      setSelectedDate(format(date, 'dd/MM/yyyy'));
+      setSelectedDate(format(date, 'yyyy-MM-dd'));
+      setSubmitableDateData(format(date, 'dd/MM/yyyy'));
     }
   };
 
@@ -83,11 +103,12 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
           {...field}
           {...props}
           readOnly
+          value={submitableDateData || ''}
           placeholder={props.placeholder ?? ''}
           type='text'
           onClick={handleDateFieldClick}
+          onChange={() => setSubmitableDateData(submitableDateData)}
           className={didTouchDateField ? 'active' : ''}
-          // readOnly
         />
 
         <IconStyle onClick={handleIconClick}>
@@ -130,8 +151,8 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
               {/*  Day of current Month*/}
               {Array.from({ length: numOfDays + 1 }).map((_, index) => {
                 const setActive =
-                  // format(setDate(currentDate, index + 1), 'yyyy-MM-dd') ===
-                  format(setDate(currentDate, index + 1), 'dd/MM/yyyy') ===
+                  format(setDate(currentDate, index + 1), 'yyyy-MM-dd') ===
+                  // format(setDate(currentDate, index + 1), 'dd/MM/yyyy') ===
                   field.value;
                 return (
                   <div
