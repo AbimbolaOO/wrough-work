@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 import ValidatingFormSubmitButton from '../../../../../../components/Button/FormSubmitButton';
+import { CustomDatePicker } from '../../../../../../components/Form/CustomDatePicker';
 import CustomSelectField from '../../../../../../components/Form/CustomSelectField';
 import { FormComponent } from '../../../../../../components/Form/FormComponent';
 import {
@@ -80,10 +81,10 @@ const BasicInformation = () => {
           optionData={OccupationList}
         />
 
-        <DateInputField
+        <CustomDatePicker
           label='Date of birth'
-          type='date'
           name='birthday'
+          id='birthday'
           placeholder=''
         />
       </FieldGroups>

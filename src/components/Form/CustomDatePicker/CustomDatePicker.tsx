@@ -42,19 +42,20 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   const [selectedDate, setSelectedDate] = useState<string>();
   const [submitableDateData, setSubmitableDateData] = useState<string>();
 
-  // help when form is been reset
+  // help when form is been reset and case where we load in initial values
   useEffect(() => {
     if (!field.value) {
       setSelectedDate(undefined);
       setSubmitableDateData('');
+    } else {
+      setSelectedDate(format(field.value, 'yyyy-MM-dd'));
+      setSubmitableDateData(format(field.value, 'dd/MM/yyyy'));
     }
   }, [field.value]);
 
   useEffect(() => {
-    if (selectedDate) {
+    if (selectedDate && selectedDate !== field.value) {
       helper.setValue(selectedDate);
-    } else {
-      setSubmitableDateData('');
     }
     // eslint-disable-next-line
   }, [selectedDate]);

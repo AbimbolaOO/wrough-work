@@ -107,41 +107,18 @@ const PostJobModal = () => {
         />
 
         <Row className='four'>
-          {/* <TextInputField
-            label='Start Date'
-            placeholder=''
-            name='jobStartDate'
-            id='jobStartDate'
-            type='date'
-          /> */}
           <CustomDatePicker
             label='Start Date'
             placeholder=''
             name='jobStartDate'
             id='jobStartDate'
           />
-
-          {/* <TextInputField
-            label='Stop Date'
-            placeholder=''
-            name='jobEndDate'
-            id='jobEndDate'
-            type='date'
-          /> */}
           <CustomDatePicker
             label='Stop Date'
             placeholder=''
             name='jobEndDate'
             id='jobEndDate'
           />
-          {/* <TextInputField
-            label='Expiry Date'
-            placeholder=''
-            name='expiryDate'
-            id='expiryDate'
-            type='date'
-          /> */}
-
           <CustomDatePicker
             label='Expiry Date'
             placeholder=''
