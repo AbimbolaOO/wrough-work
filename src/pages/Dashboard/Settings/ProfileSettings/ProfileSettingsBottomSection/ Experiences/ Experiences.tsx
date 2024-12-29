@@ -18,6 +18,7 @@ const Experiences = () => {
           setEditExperienceForm={setEditExperienceForm}
           editExperienceForm
           formIndex={formIndex}
+          setFormIndex={setFormIndex}
         />
       </Container>
     );

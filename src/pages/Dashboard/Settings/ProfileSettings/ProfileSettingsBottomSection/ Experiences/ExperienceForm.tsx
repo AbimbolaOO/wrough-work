@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
 import ValidatingFormSubmitButton from '../../../../../../components/Button/FormSubmitButton';
@@ -22,15 +23,34 @@ interface ExperienceFormProps {
   setEditExperienceForm?: (...args: any) => void;
   editExperienceForm?: boolean;
   formIndex?: number;
+  setFormIndex?: (...args: any) => void;
 }
 
 const ExperienceForm: React.FC<ExperienceFormProps> = ({
   setEditExperienceForm,
   editExperienceForm,
   formIndex,
+  setFormIndex,
 }) => {
   const { authData } = useAppSelector((state) => state.auth);
   const { createExperience, loading } = useCreateExperience();
+  const [initialExperienceValue, setInitialExperienceValue] = useState(
+    experienceInitialValues
+  );
+
+  useEffect(() => {
+    if (
+      formIndex !== undefined &&
+      formIndex >= 0 &&
+      authData?.experiences?.[formIndex]
+    ) {
+      setInitialExperienceValue(authData.experiences[formIndex]);
+    } else {
+      setInitialExperienceValue(experienceInitialValues);
+    }
+
+    // eslint-disable-next-line
+  }, [formIndex]);
 
   const handleSubmit = async (values: ExperienceDataType, actions: any) => {
     createExperience(values, () => {
@@ -39,17 +59,17 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
     });
   };
 
-  let experienceInitialValuesDynamic = experienceInitialValues;
-
-  if (formIndex && formIndex >= 0) {
-    experienceInitialValuesDynamic = authData?.experiences[formIndex]
-      ? authData?.experiences[formIndex]
-      : experienceInitialValues;
+  if (!initialExperienceValue) {
+    return (
+      <div>
+        <LoadingOutlined />
+      </div>
+    );
   }
 
   return (
     <FormComponent
-      initialValues={experienceInitialValuesDynamic}
+      initialValues={initialExperienceValue}
       schema={ExperienceSchema}
       onSubmit={handleSubmit}
     >
@@ -127,9 +147,10 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({
       >
         {editExperienceForm && (
           <CancelBtn
-            onClick={() =>
-              setEditExperienceForm && setEditExperienceForm(false)
-            }
+            onClick={() => {
+              setEditExperienceForm && setEditExperienceForm(false);
+              setFormIndex && setFormIndex(-1);
+            }}
           >
             Cancel
           </CancelBtn>

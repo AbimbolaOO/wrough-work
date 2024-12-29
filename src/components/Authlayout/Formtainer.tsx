@@ -47,7 +47,6 @@ const Container = styled.div`
 
     padding-left: 24px;
     padding-right: 24px;
-    /* border: 1px solid red; */
   }
 
   @media (max-width: 480px) {

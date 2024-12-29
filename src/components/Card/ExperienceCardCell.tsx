@@ -2,12 +2,16 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import { ModalProvider } from '../../context/ModalContext';
 import {
   employmentTypeReversedDict,
   formatDate,
   formatExperienceDate,
   truncateTextByCharacters,
 } from '../../utils/utils';
+import { Modal } from '../Modals/Modal';
+import DeleteExperienceModal from '../Modals/ModalsActions/DeleteExperienceModal';
+import ModalTriggerContainer from '../Modals/ModalTriggerContainer';
 
 interface ExperienceCardCellProps {
   title: string;
@@ -57,7 +61,14 @@ const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
           >
             Edit
           </Button>
-          <Button className='delete'>Delete</Button>
+          <ModalProvider>
+            <ModalTriggerContainer>
+              <Button className='delete'>Delete</Button>
+            </ModalTriggerContainer>
+            <Modal>
+              <DeleteExperienceModal />
+            </Modal>
+          </ModalProvider>
         </ButtonPart>
       </TextAndButtonsArea>
     </Container>
