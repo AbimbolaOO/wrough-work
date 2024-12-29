@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import styled from '@emotion/styled';
 
 import ValidatingFormSubmitButton from '../../../../../../components/Button/FormSubmitButton';
+import { CustomDatePicker } from '../../../../../../components/Form/CustomDatePicker';
 import CustomFileUploader from '../../../../../../components/Form/CustomFileUploader';
 import CustomSelectField from '../../../../../../components/Form/CustomSelectField';
 import { FormComponent } from '../../../../../../components/Form/FormComponent';
@@ -14,16 +16,40 @@ import {
   experienceInitialValues,
   ExperienceSchema,
 } from '../../../../../../models/dashboard/settings/profileSettings/experience.model';
+import { useAppSelector } from '../../../../../../redux/store';
 
-const ExperienceForm = () => {
+interface ExperienceFormProps {
+  setEditExperienceForm?: (...args: any) => void;
+  editExperienceForm?: boolean;
+  formIndex?: number;
+}
+
+const ExperienceForm: React.FC<ExperienceFormProps> = ({
+  setEditExperienceForm,
+  editExperienceForm,
+  formIndex,
+}) => {
+  const { authData } = useAppSelector((state) => state.auth);
   const { createExperience, loading } = useCreateExperience();
 
-  const handleSubmit = async (values: ExperienceDataType) => {
-    createExperience(values);
+  const handleSubmit = async (values: ExperienceDataType, actions: any) => {
+    createExperience(values, () => {
+      actions.resetForm({ values: experienceInitialValues });
+      setEditExperienceForm && setEditExperienceForm(false);
+    });
   };
+
+  let experienceInitialValuesDynamic = experienceInitialValues;
+
+  if (formIndex && formIndex >= 0) {
+    experienceInitialValuesDynamic = authData?.experiences[formIndex]
+      ? authData?.experiences[formIndex]
+      : experienceInitialValues;
+  }
+
   return (
     <FormComponent
-      initialValues={experienceInitialValues}
+      initialValues={experienceInitialValuesDynamic}
       schema={ExperienceSchema}
       onSubmit={handleSubmit}
     >
@@ -40,6 +66,7 @@ const ExperienceForm = () => {
 
       <FieldGroups>
         <TextInputField label='Company Name' name='companyName' type='text' />
+
         <CustomFileUploader
           label='Qualification Certificate'
           name='qualificationCertificate'
@@ -55,10 +82,10 @@ const ExperienceForm = () => {
           placeholder='Click here to select'
         />
 
-        <TextInputField
+        <CustomDatePicker
           label='Year Of Qualification'
           name='yearOfQualification'
-          type='date'
+          id='yearOfQualification'
           placeholder='Year Of Qualification'
         />
       </FieldGroups>
@@ -74,17 +101,39 @@ const ExperienceForm = () => {
         <DateRangeArea>
           <Label>Period of employment</Label>
           <DateRange>
-            <TextInputField name='startDate' type='date' />
+            <CustomDatePicker
+              label=''
+              name='startDate'
+              id='startDate'
+              placeholder='Start Date'
+            />
             <Dash>&mdash;</Dash>
             <DotIcon>
               <ThreeDotVertical />
             </DotIcon>
-            <TextInputField name='endDate' type='date' label='' />
+
+            <CustomDatePicker
+              label=''
+              name='endDate'
+              id='endDate'
+              placeholder='End Date'
+            />
           </DateRange>
         </DateRangeArea>
       </FieldGroups>
 
-      <FieldGroups className='submit-btn'>
+      <FieldGroups
+        className={clsx('submit-btn', editExperienceForm ? '' : 'single')}
+      >
+        {editExperienceForm && (
+          <CancelBtn
+            onClick={() =>
+              setEditExperienceForm && setEditExperienceForm(false)
+            }
+          >
+            Cancel
+          </CancelBtn>
+        )}
         <ValidatingFormSubmitButton loading={loading} className='small'>
           Save
         </ValidatingFormSubmitButton>
@@ -106,11 +155,27 @@ const FieldGroups = styled.div`
 
   &.submit-btn {
     display: flex;
+    justify-content: space-between;
 
-    & > * {
+    &.single > * {
       margin-left: auto;
     }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr 1fr;
+
+      & > * {
+        padding: 8px 32px;
+        gap: 16px;
+      }
+    }
   }
+`;
+
+const DateRangeArea = styled.div`
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
 `;
 
 const DateRange = styled.div`
@@ -133,12 +198,6 @@ const DotIcon = styled.div`
   }
 `;
 
-const DateRangeArea = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Label = styled.div`
   font-size: 18px;
   font-weight: 400;
@@ -154,4 +213,17 @@ const Dash = styled.div`
   @media (max-width: 480px) {
     display: none;
   }
+`;
+
+const CancelBtn = styled.div`
+  background: ${({ theme }) => theme.palette.mainBlue};
+  color: white;
+  cursor: pointer;
+  width: fit-content;
+  border-radius: 4px;
+  display: flex;
+  justify-self: flex-start;
+  padding: 8px 48px;
+  font-weight: 500;
+  font-size: 14px;
 `;

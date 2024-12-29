@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 import styled from '@emotion/styled';
 
-import { truncateTextByCharacters } from '../../utils/utils';
 import FileIcon from '../Icons/FileIcon';
 import { FieldErrorInfo } from './FormField';
 
@@ -26,9 +25,14 @@ const CustomFileUploader: React.FC<CustomFileUploaderProps> = ({
   useEffect(() => {
     if (field.value) {
       const file = field.value as File;
-      setImageName(file.name);
+      if (typeof file === 'string') {
+        setImageName(file);
+      } else {
+        setImageName(file.name);
+      }
+    } else {
+      setImageName('');
     }
-
     // eslint-disable-next-line
   }, [field.value]);
 
@@ -51,19 +55,19 @@ const CustomFileUploader: React.FC<CustomFileUploaderProps> = ({
             type='file'
             accept='.pdf, image/*'
             onChange={handleChange}
-            // onBlur={() => handleBlur({ target: { name: name } })}
           />
+
           <IconStyle>
             <FileIcon />
           </IconStyle>
-        </InputContainer>
 
-        <PseudoFormField
-          tabIndex={0}
-          onClick={() => handleBlur({ target: { name: name } })}
-        >
-          {truncateTextByCharacters(imageName, 40)}
-        </PseudoFormField>
+          <PseudoFormField
+            tabIndex={0}
+            onClick={() => handleBlur({ target: { name: name } })}
+          >
+            {imageName}
+          </PseudoFormField>
+        </InputContainer>
       </InputLabel>
 
       {meta.touched && meta.error ? (
@@ -81,22 +85,23 @@ const FileInputField = styled.input`
 `;
 
 const PseudoFormField = styled.div`
-  border-radius: 4px;
-  padding: 15px;
   text-align: left;
   font-weight: 300;
   color: ${({ theme }) => theme.palette.blackBlack2};
   font-size: 16px;
-  border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   cursor: text;
-  height: 56px;
   overflow: auto;
 
-  /* appearance: none; */
+  display: grid;
+  width: calc(100% - 64px);
 
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.palette.greyGrey1};
+  margin: 12px;
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 
   &:hover {
@@ -120,13 +125,23 @@ export const InputContainer = styled.div`
   display: grid;
   height: fit-content;
   position: relative;
+  /* border: 1px solid red; */
+  border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
+  border-radius: 4px;
+  height: 56px;
 
   & > * {
     grid-column: 1;
     grid-row: 1;
   }
+
+  &:focus-within {
+    outline: none;
+    border-color: ${({ theme }) => theme.palette.greyGrey1};
+  }
+
   &:hover {
-    cursor: pointer;
+    cursor: url('/static/svg/file-cursor.svg'), copy;
   }
 `;
 
@@ -135,4 +150,5 @@ const IconStyle = styled.div`
   top: 17px;
   right: 18px;
   z-index: 1;
+  background-color: white;
 `;

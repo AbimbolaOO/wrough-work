@@ -120,7 +120,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
           <DateBox>
             <MonthLayout>
               <div className='control-chevron' onClick={prevYear}>
-                &lt; &lt;
+                &lt;
               </div>
               <div className='control-chevron' onClick={prevMonth}>
                 &lt;
@@ -132,7 +132,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
                 &gt;
               </div>
               <div className='control-chevron' onClick={nextYear}>
-                &gt; &gt;
+                &gt;
               </div>
 
               {/* Day Of The Week Label */}
@@ -201,7 +201,7 @@ export const InputContainer = styled.div`
 `;
 
 const DateFieldBox = styled(Input)`
-  padding-right: 36px;
+  width: 100%;
 
   &.active {
     border-color: ${({ theme }) => theme.palette.greyGrey1};
@@ -275,7 +275,7 @@ const MonthLayout = styled.div`
     }
 
     &.active-date {
-      background-color: black;
+      background-color: ${({ theme }) => theme.palette.mainBlue};
       color: white;
       font-weight: 500;
     }

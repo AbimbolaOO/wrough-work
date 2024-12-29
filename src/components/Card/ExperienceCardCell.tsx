@@ -16,6 +16,9 @@ interface ExperienceCardCellProps {
   location: string;
   startDate: string;
   endDate: string;
+  setEditExperienceForm?: (...args: any) => void;
+  setFormIndex?: (...args: any) => void;
+  index: number;
 }
 
 const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
@@ -25,6 +28,9 @@ const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
   location,
   startDate,
   endDate,
+  setEditExperienceForm,
+  setFormIndex,
+  index,
 }) => {
   return (
     <Container>
@@ -43,7 +49,14 @@ const ExperienceCardCell: React.FC<ExperienceCardCellProps> = ({
           </div>
         </TextPart>
         <ButtonPart>
-          <Button>Edit</Button>
+          <Button
+            onClick={() => {
+              setEditExperienceForm && setEditExperienceForm(true);
+              setFormIndex && setFormIndex(index);
+            }}
+          >
+            Edit
+          </Button>
           <Button className='delete'>Delete</Button>
         </ButtonPart>
       </TextAndButtonsArea>

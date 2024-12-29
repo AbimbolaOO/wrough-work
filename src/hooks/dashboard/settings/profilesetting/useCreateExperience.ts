@@ -21,16 +21,17 @@ const useCreateExperience = () => {
     );
   };
 
-  const onCreateExperienceSuccess = ({
+  const onCreateExperienceSuccess = (resetFormFn: (...args: any) => void) => ({
     data,
     message,
   }: SuccessHttpResponse<any>) => {
     toast.success(message);
     getUserData();
+    resetFormFn();
   };
 
 
-  const createExperience = (data: ExperienceDataType) => {
+  const createExperience = (data: ExperienceDataType, resetFormFn: (...args: any) => void) => {
     const formData = new FormData();
 
     if (data.otherQualification) {
@@ -72,7 +73,7 @@ const useCreateExperience = () => {
         "Content-Type": "multipart/form-data",
       },
     };
-    request(url, onCreateExperienceSuccess, setLoading, onCreateExperienceError);
+    request(url, onCreateExperienceSuccess(resetFormFn), setLoading, onCreateExperienceError);
   };
 
   return { createExperience, loading };
