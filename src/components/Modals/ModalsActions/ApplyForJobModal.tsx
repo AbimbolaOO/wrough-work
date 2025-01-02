@@ -98,6 +98,9 @@ const FormInputs = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   width: 100%;
-  /* border: 1px solid red; */
   gap: 8px;
+
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr;
+  }
 `;

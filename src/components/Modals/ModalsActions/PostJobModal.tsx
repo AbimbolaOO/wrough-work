@@ -32,6 +32,10 @@ const PostJobModal = () => {
   const { loading, createJobPost } = useCreateJobPost();
 
   const handleSubmit = (values: CreateJobPostDataType, actions: any) => {
+    if (String(values?.jobEndDate) === '') {
+      delete values['jobEndDate'];
+    }
+
     createJobPost(
       {
         ...values,

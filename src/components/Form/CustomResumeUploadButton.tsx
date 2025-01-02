@@ -70,6 +70,10 @@ const ImageUploaderLabel = styled.label`
   gap: 16px;
   width: fit-content;
   cursor: pointer;
+
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 `;
 
 const ImgInputField = styled.input`
@@ -79,12 +83,16 @@ const ImgInputField = styled.input`
 const ChangeImage = styled.div`
   font-weight: 400;
   font-size: 18px;
-  /* font-size: 14px;
-  line-height: 14px; */
   border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
   color: ${({ theme }) => theme.palette.blackBlack3};
   padding: 14px 32px;
   border-radius: 4px;
+
+  @media (max-width: 540px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 const ButtonArea = styled.div`
