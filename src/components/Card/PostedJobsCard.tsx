@@ -45,7 +45,9 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
               ? new Date(job.jobStartDate).toLocaleDateString()
               : 'N/A'}{' '}
             <span>&mdash;</span>{' '}
-            {job.jobEndDate
+            {job.expiryDate
+              ? new Date(job.expiryDate).toLocaleDateString()
+              : job.jobEndDate
               ? new Date(job.jobEndDate).toLocaleDateString()
               : 'N/A'}
           </BottomSectionData>

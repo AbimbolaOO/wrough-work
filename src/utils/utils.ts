@@ -98,7 +98,7 @@ export const expired = (date: string | Date): boolean => {
   return inputDate < currentDate;
 };
 
-export const formatDate = (dateString: string | Date | null, reverse: boolean = false, omitCurrentYear: boolean = false) => {
+export const formatDate = (dateString: string | Date | null, reverse: boolean = false) => {
   if (!dateString) return "";
 
   const date = new Date(dateString);
@@ -106,22 +106,22 @@ export const formatDate = (dateString: string | Date | null, reverse: boolean = 
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
 
-  const currentDate = new Date();
+  // const currentDate = new Date();
 
   if (reverse) {
-    if (omitCurrentYear && year === currentDate.getFullYear()) {
-      return `${day}-${month}`;
-    }
+    // if (omitCurrentYear && year === currentDate.getFullYear()) {
+    //   return `${day}-${month}`;
+    // }
     return `${day}-${month}-${year}`;
   }
 
-  if (omitCurrentYear && year === currentDate.getFullYear()) {
-    return `${day}-${month}`;
-  }
+  // if (omitCurrentYear && year === currentDate.getFullYear()) {
+  //   return `${day}-${month}`;
+  // }
   return `${year}-${month}-${day}`;
 };
 
-export function formatExperienceDate(dateString: string | Date | null, omitCurrentYear = false) {
+export function formatExperienceDate(dateString: string | Date | null) {
   if (!dateString) return "";
 
   const inputDate = new Date(dateString);
@@ -142,9 +142,9 @@ export function formatExperienceDate(dateString: string | Date | null, omitCurre
   const year = inputDate.getFullYear();
 
   // If the year is the current year and the flag is set, omit the year
-  if (omitCurrentYear && year === currentDate.getFullYear()) {
-    return `${day}-${month}`;
-  }
+  // if (omitCurrentYear && year === currentDate.getFullYear()) {
+  //   return `${day}-${month}`;
+  // }
 
   // Default format: DD-MM-YYYY
   return `${day}-${month}-${year}`;

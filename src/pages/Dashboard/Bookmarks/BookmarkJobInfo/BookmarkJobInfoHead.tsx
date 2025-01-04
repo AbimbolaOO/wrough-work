@@ -71,9 +71,7 @@ const BookmarkJobInfoHead: React.FC<IBookmarkJobInfoHead> = ({
       </IconContainer>
 
       <HeaderBottom>
-        <span>
-          {jobStartDate ? formatDate(jobStartDate, true, true) : 'N/A'}
-        </span>
+        <span>{jobStartDate ? formatDate(jobStartDate, true) : 'N/A'}</span>
 
         <span>&mdash;</span>
 

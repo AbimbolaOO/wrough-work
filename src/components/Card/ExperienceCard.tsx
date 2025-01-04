@@ -37,7 +37,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             {employmentTypeReversedDict[employmentType]}
           </div>
           <div className='title'>
-            {formatDate(startDate, true, true)} <span>&mdash;</span>{' '}
+            {formatDate(startDate, true)} <span>&mdash;</span>{' '}
             {formatExperienceDate(endDate)} |{' '}
             {truncateTextByCharacters(location, 30)}{' '}
           </div>

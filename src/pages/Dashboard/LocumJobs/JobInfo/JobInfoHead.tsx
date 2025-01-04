@@ -71,9 +71,7 @@ const JobInfoHead: React.FC<IJobInfoHead> = ({
       </IconContainer>
 
       <HeaderBottom className='larger-screens'>
-        <span>
-          {jobStartDate ? formatDate(jobStartDate, true, true) : 'N/A'}
-        </span>
+        <span>{jobStartDate ? formatDate(jobStartDate, true) : 'N/A'}</span>
 
         <span>&mdash;</span>
 

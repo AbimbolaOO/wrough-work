@@ -42,10 +42,12 @@ const ShiftCard: React.FC<ShiftCardProps> = ({ job }) => {
           <BottomSectionData>
             {job.job?.jobStartDate
               ? new Date(job.job?.jobStartDate).toLocaleDateString()
-              : 'N/A'}
+              : 'N/A'}{' '}
             <span>&mdash;</span>{' '}
-            {job.job?.jobEndDate
-              ? new Date(job.job?.jobEndDate).toLocaleDateString()
+            {job.job?.expiryDate
+              ? new Date(job.job?.expiryDate).toLocaleDateString()
+              : job?.job?.jobEndDate
+              ? new Date(job?.job?.jobEndDate).toLocaleDateString()
               : 'N/A'}
           </BottomSectionData>
           <BottomSectionData>
