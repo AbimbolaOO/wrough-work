@@ -3,12 +3,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IGetCreatedJobs } from '../../models/dashboard/jobs/getCreatedJobs.model';
-import { truncateText } from '../../utils/utils';
+import { extractTextFromHTML, truncateText } from '../../utils/utils';
 import Img from '../Img/Img';
-import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 import { ToggleButton } from '../ToggleButton/ToggleButton';
 
-// The component expects an array of jobs
 interface IPostedJobsCard {
   job: IGetCreatedJobs; // Change to accept a single job
 }
@@ -23,9 +21,12 @@ const PostedJobsCard: React.FC<IPostedJobsCard> = ({ job }) => {
         <div>
           <UpperSectionTitle>{job.title}</UpperSectionTitle>
           <UpperSectionDescription>
-            <RichTextDisplay
-              richTextContent={truncateText(job?.jobDescription.jobDescription)}
-            />
+            <span>
+              {truncateText(
+                extractTextFromHTML(job?.jobDescription.jobDescription),
+                20
+              )}
+            </span>
           </UpperSectionDescription>
         </div>
         <ToggleButton

@@ -35,11 +35,11 @@ const ActiveApplications = () => {
               className='activejobs'
               key={index}
               imgSrc={'/static/gif/happyAnimal.gif'} // TODO: Place a default image here
-              institutionName={job?.institutionName}
-              jobTitle={job.title}
-              yearsOfExperience={job.yearsOfExperience}
-              pay={job.pay}
-              jobId={job.id}
+              institutionName={job?.job?.institutionName ?? ''}
+              jobTitle={job?.job?.title ?? ''}
+              yearsOfExperience={job?.job?.yearsOfExperience ?? ''}
+              pay={job?.job?.pay ?? 0}
+              jobId={job?.job?.id ?? ''}
             />
           ))}
         </Container>

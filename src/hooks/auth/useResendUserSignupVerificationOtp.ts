@@ -27,7 +27,7 @@ const useResendUserSignupVerificationOtp = () => {
     const url: HttpConfig = {
       url: `auth-service/users/signup/resend-otp`,
       method: 'post',
-      data: { email },
+      data: { email: email.toLowerCase() },
     };
 
     request(

@@ -3,9 +3,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { IActiveShifts } from '../../models/dashboard/jobs/getActiveShifts.model';
-import { salaryIntervally, truncateText } from '../../utils/utils';
+import {
+  extractTextFromHTML,
+  salaryIntervally,
+  truncateText,
+} from '../../utils/utils';
 import Img from '../Img/Img';
-import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface ShiftCardProps {
   job: IActiveShifts;
@@ -21,11 +24,12 @@ const ShiftCard: React.FC<ShiftCardProps> = ({ job }) => {
         <div>
           <UpperSectionTitle>{job?.job?.title ?? ''}</UpperSectionTitle>
           <UpperSectionDescription>
-            <RichTextDisplay
-              richTextContent={truncateText(
-                job.job?.jobDescription?.jobDescription
+            <span>
+              {truncateText(
+                extractTextFromHTML(job.job?.jobDescription?.jobDescription),
+                20
               )}
-            />
+            </span>
           </UpperSectionDescription>
         </div>
       </UpperSection>

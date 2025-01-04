@@ -6,7 +6,11 @@ import Formtainer from '../../../components/Authlayout/Formtainer';
 import ValidatingFormSubmitButton from '../../../components/Button/FormSubmitButton';
 import SwitchAccountButton from '../../../components/Button/SwitchAccountButton';
 import { FormComponent } from '../../../components/Form/FormComponent';
-import { Checkbox, PasswordInputField, TextInputField } from '../../../components/Form/FormField';
+import {
+  Checkbox,
+  PasswordInputField,
+  TextInputField,
+} from '../../../components/Form/FormField';
 import { InternalNavLink } from '../../../components/Link/Link';
 import { configSetting } from '../../../config';
 import useUserSignin from '../../../hooks/auth/useUserSignin';
@@ -15,13 +19,17 @@ import {
   locumSigninInitialValues,
   LocumSignInSchema,
 } from '../../../models/auth/signIn.model';
-import { ACCOUNT, FORGOT_PASSWORD, SIGNUP } from '../../../routes/routeConstants';
+import {
+  ACCOUNT,
+  FORGOT_PASSWORD,
+  SIGNUP,
+} from '../../../routes/routeConstants';
 
 const SignIn = () => {
   const { signinUser, loading: userSiginLoading } = useUserSignin();
   const navigate = useNavigate();
   const onSubmit = async (values: LocumSignInDataType) => {
-    signinUser(values);
+    signinUser({ ...values, email: values.email.toLowerCase() });
   };
 
   return (

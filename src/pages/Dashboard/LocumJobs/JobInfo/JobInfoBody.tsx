@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import RichTextNormalDisplay from '../../../../components/RichTextDisplay/RichTextNormalDisplay';
+import RichTextDisplay from '../../../../components/RichTextDisplay/RichTextDisplay';
 
 interface IJobInfoBody {
   jobDescription?: string;
@@ -11,9 +11,7 @@ interface IJobInfoBody {
 const JobInfoBody: React.FC<IJobInfoBody> = ({ jobDescription }) => {
   return (
     <Container>
-      <RichTextNormalDisplay
-        richTextContent={jobDescription ? jobDescription : ''}
-      />
+      <RichTextDisplay richTextContent={jobDescription ? jobDescription : ''} />
     </Container>
   );
 };

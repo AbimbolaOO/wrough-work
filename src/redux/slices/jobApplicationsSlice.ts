@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ILocumJobs } from '../../models/dashboard/jobs/getLocumJobs.model';
+import { IActiveShifts } from '../../models/dashboard/jobs/getActiveShifts.model';
 
 interface IJobApplicationQuery {
     page: number;
     perPage: number;
-    jobData: ILocumJobs[];
+    jobData: IActiveShifts[];
 }
 
 const initialState: IJobApplicationQuery = {

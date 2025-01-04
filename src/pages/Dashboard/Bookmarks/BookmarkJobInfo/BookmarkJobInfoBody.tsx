@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import RichTextNormalDisplay from '../../../../components/RichTextDisplay/RichTextNormalDisplay';
+import RichTextDisplay from '../../../../components/RichTextDisplay/RichTextDisplay';
 
 interface IBookmarkJobInfoBody {
   jobDescription?: string;
@@ -13,9 +13,7 @@ const BookmarkJobInfoBody: React.FC<IBookmarkJobInfoBody> = ({
 }) => {
   return (
     <Container>
-      <RichTextNormalDisplay
-        richTextContent={jobDescription ? jobDescription : ''}
-      />
+      <RichTextDisplay richTextContent={jobDescription ? jobDescription : ''} />
     </Container>
   );
 };

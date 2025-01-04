@@ -1,4 +1,5 @@
 import { formatISO, parse } from 'date-fns';
+import DOMPurify from 'dompurify';
 
 export const phoneRegex = /^\+234\d{10}$/; // Regex pattern for Nigerian phone numbers starting with "+234"
 // export const phoneRegex = /^(\+?234|0)?[789]\d{10}$/; // Regex pattern for Nigerian phone numbers +234 or 080
@@ -19,12 +20,12 @@ export const truncateTextByCharacters = (text: string, charLimit: number): strin
 };
 
 // truncate text
-export const truncateText = (text: string) => {
+export const truncateText = (text: string, wordLimit = 10) => {
   const words = text.split(/\s+/); // Split text into words
-  if (words.length <= 9) {
-    return text; // If text has 9 words or fewer, return the original text
+  if (words.length <= wordLimit) {
+    return text; // If text has 20 words or fewer, return the original text
   }
-  return words.slice(0, 9).join(" ") + "..."; // Join the first 9 words and append '...'
+  return words.slice(0, wordLimit).join(" ") + "..."; // Join the first 9 words and append '...'
 };
 
 // export const formatNaira = (val: number) =>
@@ -213,4 +214,15 @@ export const calculateAge = (birthday: string): number => {
 export const convertToISO = (dateString: string) => {
   const parsedDate = parse(dateString, 'dd/MM/yyyy hh:mm a', new Date());
   return formatISO(parsedDate, { representation: 'complete' }); // Outputs in strict ISO 8601 format with Z
+};
+
+
+export const extractTextFromHTML = (html: any) => {
+  // Sanitize the HTML content
+  const sanitizedHTML = DOMPurify.sanitize(html);
+
+  // Parse HTML and extract text
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(sanitizedHTML, 'text/html');
+  return doc.body.textContent || '';
 };

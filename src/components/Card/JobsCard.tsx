@@ -2,12 +2,11 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { truncateText } from '../../utils/utils';
+import { extractTextFromHTML, truncateText } from '../../utils/utils';
 import { PrimaryButton } from '../Button';
 import BookmarkBoxIcon from '../Icons/BookmarkBoxIcon';
 import Img from '../Img/Img';
 import { ButtonLink } from '../Link/Link';
-import RichTextDisplay from '../RichTextDisplay/RichTextDisplay';
 
 interface IJobsCard {
   imgSrc?: string;
@@ -34,7 +33,7 @@ const JobsCard: React.FC<IJobsCard> = ({
         </IconContainer>
       </JobCardHeader>
       <JobCardDescription>
-        <RichTextDisplay richTextContent={truncateText(jobDescription)} />
+        <span>{truncateText(extractTextFromHTML(jobDescription), 20)}</span>
       </JobCardDescription>
       <ButtonLink to={link}>
         <PrimaryButton arrowIcon className='noBorder'>

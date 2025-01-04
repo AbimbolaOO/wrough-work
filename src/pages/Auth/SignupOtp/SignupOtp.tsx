@@ -17,7 +17,7 @@ import {
 
 const SignupOtp = () => {
   const location = useLocation();
-  const email = location?.state?.data;
+  const email: string = location?.state?.data;
 
   const { signupVerificationOtp, loading: otpLoading } =
     useSignupUserVerificationOtp();
@@ -26,11 +26,11 @@ const SignupOtp = () => {
     useResendUserSignupVerificationOtp();
 
   const onSubmit = (values: VerifySignUpOtpDataType) => {
-    signupVerificationOtp(values, email);
+    signupVerificationOtp(values, email?.toLowerCase());
   };
 
   const handleOtpResend = () => {
-    resendSignupVerificationOtp(email);
+    resendSignupVerificationOtp(email?.toLowerCase());
   };
 
   return (

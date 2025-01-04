@@ -4,7 +4,11 @@ import Formtainer from '../../../components/Authlayout/Formtainer';
 import ValidatingFormSubmitButton from '../../../components/Button/FormSubmitButton';
 import SwitchAccountButton from '../../../components/Button/SwitchAccountButton';
 import { FormComponent } from '../../../components/Form/FormComponent';
-import { Checkbox, PasswordInputField, TextInputField } from '../../../components/Form/FormField';
+import {
+  Checkbox,
+  PasswordInputField,
+  TextInputField,
+} from '../../../components/Form/FormField';
 import { ExternalLink, InternalNavLink } from '../../../components/Link/Link';
 import { configSetting } from '../../../config';
 import useUserSignup from '../../../hooks/auth/useUserSignup';
@@ -19,7 +23,7 @@ const Signup = () => {
   const { signupUser, loading: userSignUpLoading } = useUserSignup();
   const onSubmit = async (values: SignUpDataType) => {
     console.log(values);
-    signupUser(values);
+    signupUser({ ...values, email: values.email.toLowerCase() });
   };
 
   return (

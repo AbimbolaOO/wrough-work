@@ -32,7 +32,7 @@ const useSignupUserVerificationOtp = () => {
       url: 'auth-service/users/signup/otp',
       method: 'post',
       data: {
-        email,
+        email: email.toLowerCase(),
         ...data,
       },
     };

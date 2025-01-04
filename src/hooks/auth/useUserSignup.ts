@@ -4,11 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import { Signupdata } from '../../models/auth/signUp.model';
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from '../../models/https';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';
 import { ACCOUNT, SIGNUP_OTP } from '../../routes/routeConstants';
 import useHttps from '../useHttps';
 
@@ -19,11 +15,11 @@ const useUserSignup = () => {
 
   const onSigupSuccess =
     (email: string) =>
-    ({ data }: SuccessHttpResponse<any>) =>
-      navigate(`/${ACCOUNT}/${SIGNUP_OTP}`, {
-        replace: true,
-        state: { data: email },
-      });
+      ({ data }: SuccessHttpResponse<any>) =>
+        navigate(`/${ACCOUNT}/${SIGNUP_OTP}`, {
+          replace: true,
+          state: { data: email?.toLowerCase() },
+        });
 
   const onSignUpError = (err: AxiosError<ErrorHttpResponse>) => {
     console.log('onLoginError');
@@ -39,7 +35,7 @@ const useUserSignup = () => {
         lastName: data.lastName,
         email: data.email,
         password: data.password,
-        isTermsAccepted:data.isTermsAccepted,
+        isTermsAccepted: data.isTermsAccepted,
       },
     };
 

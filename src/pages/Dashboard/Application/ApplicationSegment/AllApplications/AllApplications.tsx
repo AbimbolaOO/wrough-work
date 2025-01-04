@@ -13,7 +13,6 @@ const AllApplications = () => {
   const { jobData, page } = useAppSelector((state) => state.jobApplications);
 
   useEffect(() => {
-    // console.log('jobData--><>>', jobData);
     //! Comeback here and look at this implementation
     if (!jobData.length) {
       getJobApplications();
@@ -34,11 +33,11 @@ const AllApplications = () => {
             <JobListCard
               key={index}
               imgSrc={'/static/gif/happyAnimal.gif'} // TODO: Place a default image here
-              institutionName={job?.institutionName}
-              jobTitle={job.title}
-              yearsOfExperience={job.yearsOfExperience}
-              pay={job.pay}
-              jobId={job.id}
+              institutionName={job?.job?.institutionName ?? ''}
+              jobTitle={job?.job?.title ?? ''}
+              yearsOfExperience={job?.job?.yearsOfExperience ?? ''}
+              pay={job?.job?.pay ?? 0}
+              jobId={job?.id ?? ''}
             />
           ))}
         </Container>
