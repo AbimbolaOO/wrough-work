@@ -45,9 +45,11 @@ const StatsArea = styled.div`
 const StatsCardContainer = styled.div`
   border-radius: 0.375rem;
   padding: 0.38rem 0.81rem;
+  /* border: 1px solid red; */
 
   @media (max-width: 480px) {
     width: 180px;
+    height: 96px;
   }
 
   &:nth-of-type(1) {

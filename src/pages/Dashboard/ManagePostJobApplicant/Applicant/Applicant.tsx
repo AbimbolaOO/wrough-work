@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
+import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
-import ApplicantCard from './ApplicantCard';
+import ApplicantCard from '../../../../components/Card/ApplicantCard';
+import useGetSingleJobApplicants from '../../../../hooks/dashboard/jobs/useGetSingleJobApplicants';
+import { IApplicantData } from '../../../../models/dashboard/jobs/singleJobApplicants.model';
 
-const Applicant = () => {
+interface ApplicantProps {
+  jobId: string;
+}
+const Applicant: React.FC<ApplicantProps> = ({ jobId }) => {
+  const { getSingleJobApplicant, loading, applicantData } =
+    useGetSingleJobApplicants();
+
+  useEffect(() => {
+    getSingleJobApplicant(jobId);
+    // eslint-disable-next-line
+  }, []);
+
+  if (!loading && !applicantData?.length) {
+    return <Container>No applicant yet</Container>;
+  }
+
   return (
     <Container>
-      {Array.from({ length: 4 }).map((data, index) => (
-        <ApplicantCard key={index} />
-      ))}
+      {loading ? (
+        <LoadingOutlined />
+      ) : (
+        applicantData?.map((data: IApplicantData, index: string) => (
+          <ApplicantCard key={index} {...data} />
+        ))
+      )}
     </Container>
   );
 };

@@ -47,9 +47,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  /* border: 1px solid red; */
 
   @media (max-width: 884px) {
     width: calc(100vw - 40px);
+    height: fit-content;
   }
 `;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
@@ -23,6 +23,7 @@ const segmentedControllerConfig = [
 
 const ManagePostJobApplicant = () => {
   const navigate = useNavigate();
+  const { jobId } = useParams();
 
   return (
     <Container>
@@ -47,13 +48,13 @@ const ManagePostJobApplicant = () => {
           />
           <SegmentedViewData>
             <div>
-              <Applicant />
+              <Applicant jobId={jobId ?? ''} />
             </div>
             <div>
-              <Screening />
+              <Screening jobId={jobId ?? ''} />
             </div>
             <div>
-              <Interview />
+              <Interview jobId={jobId ?? ''} />
             </div>
           </SegmentedViewData>
         </SegmentedView>

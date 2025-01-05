@@ -125,6 +125,7 @@ const SegmentedViewControllerWrapper = styled.div`
     padding-left: 22px;
     padding-right: 22px;
     border-bottom: 1px solid ${({ theme }) => theme.palette.greyGrey4};
+    height: 20px;
   }
 
   & > * {

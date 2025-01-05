@@ -46,7 +46,9 @@ const ManagePostedJobsCard: React.FC<ManageJobsCardProps> = ({ job }) => {
             </div>
           </CenterContentFooter>
           <ViewApplicant
-            onClick={() => navigate(`/${DASHBOARD}/${MANAGE_POSTED_JOBS}/323`)}
+            onClick={() =>
+              navigate(`/${DASHBOARD}/${MANAGE_POSTED_JOBS}/${job.id}`)
+            }
           >
             View all applicants
           </ViewApplicant>
@@ -55,7 +57,7 @@ const ManagePostedJobsCard: React.FC<ManageJobsCardProps> = ({ job }) => {
 
       <StackedImages>
         <ViewApplicantStackedImageCard
-          navUrl={`/${DASHBOARD}/${MANAGE_POSTED_JOBS}/323`}
+          navUrl={`/${DASHBOARD}/${MANAGE_POSTED_JOBS}/${job.id}`}
         />
       </StackedImages>
       <DeleteIconWrapper onClick={() => alert('delete')}>
@@ -183,4 +185,8 @@ const ViewApplicant = styled.div`
   color: ${({ theme }) => theme.palette.mainBlue};
   font-size: 14px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;

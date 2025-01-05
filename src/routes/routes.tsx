@@ -53,7 +53,7 @@ export default function Router() {
           element: <ManagePostedJobs />,
         },
         {
-          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}/:id`,
+          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}/:jobId`,
           element: <ManagePostJobApplicant />,
         },
 

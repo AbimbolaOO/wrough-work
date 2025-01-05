@@ -226,3 +226,30 @@ export const extractTextFromHTML = (html: any) => {
   const doc = parser.parseFromString(sanitizedHTML, 'text/html');
   return doc.body.textContent || '';
 };
+
+
+export const timeAgo = (dateString: string) => {
+  const inputDate: any = new Date(dateString);
+  const currentDate: any = new Date();
+
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const msPerMonth = 30 * msPerDay;
+  const msPerYear = 365 * msPerDay;
+
+  const elapsed = currentDate - inputDate;
+
+  if (elapsed < msPerDay) {
+    return "Today";
+  } else if (elapsed < msPerMonth) {
+    const days = Math.floor(elapsed / msPerDay);
+    return `${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (elapsed < msPerYear) {
+    const months = Math.floor(elapsed / msPerMonth);
+    return `${months} month${months > 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(elapsed / msPerYear);
+    return `${years} year${years > 1 ? 's' : ''} ago`;
+  }
+};

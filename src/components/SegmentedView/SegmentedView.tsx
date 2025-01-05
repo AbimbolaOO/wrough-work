@@ -135,6 +135,9 @@ const SegmentedViewControllerWrapper = styled.div`
     font-weight: 500;
     border-radius: 0.375rem;
     border: 1px solid ${({ theme }) => theme.palette.greyGrey3};
+    height: 44px;
+    display: grid;
+    place-content: center;
   }
 
   & > *:hover {
