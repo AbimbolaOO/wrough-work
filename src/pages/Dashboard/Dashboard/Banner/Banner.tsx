@@ -50,12 +50,17 @@ const Container = styled.section`
   background: rgba(122, 64, 242, 0.95);
   padding: 2.12rem 3.13rem;
   position: relative;
+
+  @media (max-width: 884px) {
+    /* border: 1px solid red; */
+  }
 `;
 
 const TextArea = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  max-width: 30rem;
+  width: 100%;
   font-size: 1.125rem;
   gap: 0.5rem;
 `;
@@ -77,4 +82,8 @@ const ImageArea = styled.div`
   position: absolute;
   right: 3.13rem;
   bottom: 0;
+
+  @media (max-width: 884px) {
+    display: none;
+  }
 `;
