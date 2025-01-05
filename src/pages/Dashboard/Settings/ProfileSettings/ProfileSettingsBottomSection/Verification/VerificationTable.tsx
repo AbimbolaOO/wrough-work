@@ -7,7 +7,15 @@ import { formatDate } from '../../../../../../utils/utils';
 
 const headerTitles = ['Action', 'Date', 'Status'];
 
-const VerificationTable = () => {
+interface VerificationTableProps {
+  setEditVerification?: (...args: any) => void;
+  // editVerification?: boolean;
+}
+
+const VerificationTable: React.FC<VerificationTableProps> = ({
+  setEditVerification,
+  // editVerification,
+}) => {
   const { authData } = useAppSelector((state) => state.auth);
   return (
     <Container>
@@ -29,7 +37,7 @@ const VerificationTable = () => {
       {authData?.verification?.status === 'Rejected' && (
         <EditButton
           onClick={() => {
-            alert('Loading...');
+            setEditVerification && setEditVerification(true);
           }}
         >
           Edit Verification

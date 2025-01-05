@@ -37,7 +37,7 @@ const ShowProfileModal = ({ children }: { children: React.ReactNode }) => {
 
 const HeaderDropDown = () => {
   const { logoutUser } = useOnLogout();
-  const { authData } = useAppSelector((state) => state.auth);
+  const { authData, accountTier } = useAppSelector((state) => state.auth);
 
   const profileImageSrc =
     authData?.profileImage ?? '/static/svg/profilePlaceholder.svg';
@@ -49,7 +49,7 @@ const HeaderDropDown = () => {
           <IconImg src={profileImageSrc} />
           <UserInfoArea>
             <p>{capitalize(authData?.firstName ?? '')}</p>
-            <Description>Tier 2 account</Description>
+            <Description>Tier {accountTier} account</Description>
           </UserInfoArea>
         </HoverDropDownContentCell>
 

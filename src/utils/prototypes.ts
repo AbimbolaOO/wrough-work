@@ -23,7 +23,8 @@ String.prototype.obfuscateEmail = function (): string {
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    throw new Error('Invalid email format');
+    // throw new Error('Invalid email format');
+    return email;
   }
 
   // Split the email into username and domain

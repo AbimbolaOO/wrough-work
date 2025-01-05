@@ -17,7 +17,7 @@ import {
 
 const SignupOtp = () => {
   const location = useLocation();
-  const email: string = location?.state?.data;
+  const email: string = location?.state?.data ?? '';
 
   const { signupVerificationOtp, loading: otpLoading } =
     useSignupUserVerificationOtp();
