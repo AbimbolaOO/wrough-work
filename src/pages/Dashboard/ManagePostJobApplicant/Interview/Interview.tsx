@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 
-import InterviewCard from '../../../../components/Card/InterviewCard';
 import useGetJobInterviews from '../../../../hooks/dashboard/jobs/useGetJobInterviews';
 import { IApplicantData } from '../../../../models/dashboard/jobs/singleJobApplicants.model';
+import InterviewCard from './InterviewCard';
 
 interface InterviewProps {
   jobId: string;
@@ -24,6 +24,17 @@ const Interview: React.FC<InterviewProps> = ({ jobId }) => {
 
   return (
     <Container>
+      {/* <InterviewCard
+        createdAt='olayemi'
+        email='olayemi'
+        firstName='olayemi'
+        id='olayemi'
+        lastName='olayemi'
+        resume='olayemi'
+        status='olayemi'
+        updatedAt='olayemi'
+        userId='olayemi'
+      /> */}
       {loading ? (
         <LoadingOutlined />
       ) : (

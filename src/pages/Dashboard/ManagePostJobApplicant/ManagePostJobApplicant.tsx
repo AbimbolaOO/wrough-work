@@ -5,21 +5,21 @@ import styled from '@emotion/styled';
 
 import LeftTriangleIcon from '../../../components/Icons/LeftTriangleIcon';
 import {
-  SegmentedView,
-  SegmentedViewController,
-  SegmentedViewData,
-} from '../../../components/SegmentedView/SegmentedView';
+  SegmentedViewControllerViaQueryString,
+  SegmentedViewDataViaQueryStrings,
+  SegmentedViewViaQueryString,
+} from '../../../components/SegmentedView/SegmentedViewViaQueryStrings';
 import { DASHBOARD, MANAGE_POSTED_JOBS } from '../../../routes/routeConstants';
 import Applicant from './Applicant/Applicant';
 import Interview from './Interview/Interview';
 import ManagePostJobHeader from './ManagePostJobHeader';
 import Screening from './Screening/Screening';
 
-const segmentedControllerConfig = [
-  { title: 'Applicants' },
-  { title: 'Screening' },
-  { title: 'Interview' },
-];
+const segmentedControllerConfig = {
+  Applicants: 'Applicants',
+  Screening: 'Screening',
+  Interview: 'Interview',
+};
 
 const ManagePostJobApplicant = () => {
   const navigate = useNavigate();
@@ -41,23 +41,25 @@ const ManagePostJobApplicant = () => {
         payInterval='HOURLY'
       />
       <Shell>
-        <SegmentedView>
-          <SegmentedViewController
+        <SegmentedViewViaQueryString queryString='Applicants'>
+          <SegmentedViewControllerViaQueryString
             className='hollow'
             segmentedViewControllerTitle={segmentedControllerConfig}
           />
-          <SegmentedViewData>
-            <div>
-              <Applicant jobId={jobId ?? ''} />
-            </div>
-            <div>
-              <Screening jobId={jobId ?? ''} />
-            </div>
-            <div>
-              <Interview jobId={jobId ?? ''} />
-            </div>
-          </SegmentedViewData>
-        </SegmentedView>
+          <SegmentedViewDataViaQueryStrings
+            segmentedViewControllerTitle={segmentedControllerConfig}
+          >
+            {/* <div> */}
+            <Applicant jobId={jobId ?? ''} />
+            {/* </div>
+            <div> */}
+            <Screening jobId={jobId ?? ''} />
+            {/* </div>
+            <div> */}
+            <Interview jobId={jobId ?? ''} />
+            {/* </div> */}
+          </SegmentedViewDataViaQueryStrings>
+        </SegmentedViewViaQueryString>
       </Shell>
     </Container>
   );

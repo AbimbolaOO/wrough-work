@@ -1,4 +1,4 @@
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 
 import styled from '@emotion/styled';
 
@@ -6,13 +6,16 @@ import CheckMarkIcon from '../Icons/CheckMarkIcon';
 import { IInputField } from './FormField';
 
 export const CustomCheckbox: React.FC<
-  Pick<IInputField, 'name' | 'id' | 'children' | 'className'>
-> = ({ children, className, ...props }) => {
+  Pick<IInputField, 'name' | 'id' | 'children' | 'className'> & {
+    submitOnClick?: boolean;
+  }
+> = ({ children, className, submitOnClick, ...props }) => {
   const [field, meta] = useField({ ...props, type: 'checkbox' });
+  const { submitForm } = useFormikContext();
 
   return (
     <CheckboxWrapper className={className}>
-      <label className={className}>
+      <label className={className} onClick={() => submitForm()}>
         <input type='checkbox' {...field} {...props} />
         {children}
         <span>
@@ -34,7 +37,7 @@ const CheckboxWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     color: black;
     user-select: none;

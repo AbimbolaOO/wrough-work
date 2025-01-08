@@ -2,15 +2,14 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { IApplicantData } from '../../models/dashboard/jobs/singleJobApplicants.model';
-import ApplicantCalendarModal from '../../pages/Dashboard/ManagePostJobApplicant/Applicant/ApplicantCalendarModal';
-import ShowApplicantModal from '../../pages/Dashboard/ManagePostJobApplicant/Applicant/ShowApplicantModal';
-import { DEFAULT_IMAGE_URL } from '../../utils/utils';
-import { ClickOutDropDown } from '../DropDown/ClickOutDropDown';
-import DeleteIcon from '../Icons/DeleteIcon';
-import DoubleCheckMark from '../Icons/DoubleCheckMark';
-import ThreeDotIcon from '../Icons/ThreeDotIcon';
-import Img from '../Img/Img';
+import { ClickOutDropDown } from '../../../../components/DropDown/ClickOutDropDown';
+import DeleteIcon from '../../../../components/Icons/DeleteIcon';
+import DoubleCheckMark from '../../../../components/Icons/DoubleCheckMark';
+import ThreeDotIcon from '../../../../components/Icons/ThreeDotIcon';
+import Img from '../../../../components/Img/Img';
+import { IApplicantData } from '../../../../models/dashboard/jobs/singleJobApplicants.model';
+import { DEFAULT_IMAGE_URL } from '../../../../utils/utils';
+import InterviewCardForm from './InterviewCardForm';
 
 const InterviewCardDropDown = () => {
   return (
@@ -66,11 +65,7 @@ const InterviewCard: React.FC<InterviewCardProps> = ({
         </MenuRegion>
       </Upper>
       <Bottom>
-        <IconBottom>
-          <ShowApplicantModal />
-          {/* <FolderIcon /> */}
-          <ApplicantCalendarModal />
-        </IconBottom>
+        <InterviewCardForm />
       </Bottom>
     </Container>
   );
@@ -109,15 +104,7 @@ const Bottom = styled.div`
   padding: 13px 16px;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-`;
-
-const IconBottom = styled.div`
-  width: fit-content;
-  display: grid;
-  grid-template-columns: repeat(2, 20px);
-  align-items: center;
-  gap: 32px;
+  gap: 16px;
 `;
 
 const Name = styled.div`
