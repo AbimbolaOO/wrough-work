@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
 import BackToJobListButton from '../../../components/BackToJobListButton/BackToJobListButton';
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
+import { BOOKMARKS } from '../../../routes/routeConstants';
 import JobInfo from './JobInfo/JobInfo';
 import JobSearchForm from './JobSearchForm/JobSearchForm';
 import JobsList from './JobsList/JobsList';
 
 const LocumJobs = () => {
+  const navigate = useNavigate();
   const [showMobileInfo, setShowMobileInfo] = useState<boolean>(false);
 
   return (
     <Shell>
       <JobSearchForm />
-      <BackToJobListButton
-        showMobileInfo={showMobileInfo}
-        setShowMobileInfo={setShowMobileInfo}
-      />
+
+      <NavArea>
+        <BackToJobListButton
+          showMobileInfo={showMobileInfo}
+          setShowMobileInfo={setShowMobileInfo}
+        />
+        <GoToBookmark onClick={() => navigate(`/${BOOKMARKS}`)}>
+          Go to Bookmarks
+        </GoToBookmark>
+      </NavArea>
       <Container>
         <JobViewArea>
           <JobsList
@@ -85,6 +94,24 @@ const PaginationShell = styled.div`
   grid-column: span 2;
 
   @media (max-width: 884px) {
+    display: none;
+  }
+`;
+
+const NavArea = styled.div`
+  display: flex;
+`;
+
+const GoToBookmark = styled.div`
+  /* border: 1px solid red; */
+  margin-left: auto;
+  font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2f80ed;
+  cursor: pointer;
+
+  @media (min-width: 885px) {
     display: none;
   }
 `;

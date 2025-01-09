@@ -90,7 +90,22 @@ const JobInfoHead: React.FC<IJobInfoHead> = ({
               {pay.formatCurrency()}/{salaryInterval[payInterval] ?? ''}
             </div>
           </CenterContentFooter>
+          <CenterContentFooter>
+            <IconWrapper>
+              <LocationIcon />
+              {location}
+            </IconWrapper>
+          </CenterContentFooter>
         </CenterContentLowerPart>
+      </HeaderBottom>
+
+      {/* Only on mobile view */}
+      <HeaderBottom className='smaller-screens'>
+        <span>{jobStartDate ? formatDate(jobStartDate, true) : 'N/A'}</span>
+
+        <span>&mdash;</span>
+
+        <span>{jobEndDate ? formatDate(jobEndDate, true) : 'N/A'}</span>
       </HeaderBottom>
     </Container>
   );

@@ -46,9 +46,9 @@ const SettingsBanner = styled.div`
   }
 
   @media (max-width: 884px) {
-    /* border: 1px solid red; */
-    width: 100%;
     margin: 0;
-    padding: 16px;
+    padding: 16px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
   }
 `;
