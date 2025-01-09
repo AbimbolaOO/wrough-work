@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import BackToJobListButton from '../../../components/BackToJobListButton/BackToJobListButton';
+import PageBanner from '../../../components/Banner/PageBanner';
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
 import { BOOKMARKS } from '../../../routes/routeConstants';
 import JobInfo from './JobInfo/JobInfo';
@@ -16,8 +17,12 @@ const LocumJobs = () => {
 
   return (
     <Shell>
-      <JobSearchForm />
-
+      <PageBanner
+        label='Job Feeds'
+        description='Here are your job feeds'
+        className={`onlyMobileScreens ${showMobileInfo ? 'hide' : ''}`}
+      />
+      <JobSearchForm showMobileInfo={showMobileInfo} />
       <NavArea>
         <BackToJobListButton
           showMobileInfo={showMobileInfo}
@@ -53,8 +58,8 @@ export default LocumJobs;
 const Shell = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin-top: 32px;
+  gap: 16px;
+  /* margin-top: 32px; */
   margin-bottom: 54px;
 `;
 
@@ -100,6 +105,7 @@ const PaginationShell = styled.div`
 
 const NavArea = styled.div`
   display: flex;
+  margin-top: 20px;
 `;
 
 const GoToBookmark = styled.div`

@@ -5,11 +5,16 @@ import styled from '@emotion/styled';
 interface PageBannerProps {
   label: string;
   description: string;
+  className?: string;
 }
 
-const PageBanner: React.FC<PageBannerProps> = ({ label, description }) => {
+const PageBanner: React.FC<PageBannerProps> = ({
+  label,
+  description,
+  className,
+}) => {
   return (
-    <SettingsBanner>
+    <SettingsBanner className={className}>
       <div className='label'>{label}</div>
       <div className='description'>{description}</div>
     </SettingsBanner>
@@ -25,6 +30,16 @@ const SettingsBanner = styled.div`
   margin-left: -54px;
   margin-right: -54px;
   padding: 18px 54px;
+
+  &.onlyMobileScreens {
+    @media (min-width: 885px) {
+      display: none;
+    }
+  }
+
+  &.hide {
+    display: none;
+  }
 
   & > .label {
     color: ${({ theme }) => theme.palette.blackBlackMain};
