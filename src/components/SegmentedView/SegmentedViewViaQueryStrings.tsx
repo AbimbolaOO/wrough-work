@@ -16,13 +16,18 @@ interface ISegmentedViewController extends ISegmentedViewData {
 }
 
 export const SegmentedViewViaQueryString: React.FC<
-  Pick<ISegmentedViewData, 'children'> & { queryString: string }
-> = ({ children, queryString }) => {
+  Pick<ISegmentedViewData, 'children'> & {
+    queryString: string;
+    tabName: string;
+  }
+> = ({ children, queryString, tabName }) => {
   const [queryParams, setQueryParams] = useQueryString();
-  const [tabQueryString, setTabQueryString] = useState(queryString);
+  const [tabQueryString, setTabQueryString] = useState(
+    () => queryParams.get(tabName) ?? queryString
+  );
 
   useEffect(() => {
-    setQueryParams({ applicationState: tabQueryString });
+    setQueryParams({ [tabName]: tabQueryString });
 
     // eslint-disable-next-line
   }, [tabQueryString]);
@@ -38,11 +43,13 @@ export const SegmentedViewViaQueryString: React.FC<
           return React.cloneElement(child, {
             ...child.props,
             queryParams,
+            tabName,
             handleStateChange,
           });
         } else if (child.type === SegmentedViewDataViaQueryStrings) {
           return React.cloneElement(child, {
             ...child.props,
+            tabName,
             tabQueryString,
             queryParams,
           });
@@ -53,10 +60,14 @@ export const SegmentedViewViaQueryString: React.FC<
 };
 
 export const SegmentedViewControllerViaQueryString: React.FC<
-  Omit<ISegmentedViewController, 'children'> & { queryParams?: any }
+  Omit<ISegmentedViewController, 'children'> & {
+    queryParams?: any;
+    tabName?: string;
+  }
 > = ({
   segmentedViewControllerTitle,
   queryParams,
+  tabName,
   handleStateChange,
   className,
 }) => {
@@ -66,9 +77,7 @@ export const SegmentedViewControllerViaQueryString: React.FC<
         return (
           <div
             className={clsx(
-              title === queryParams.get('applicationState')
-                ? 'activeSegment'
-                : '',
+              title === queryParams.get(tabName) ? 'activeSegment' : '',
               className
             )}
             onClick={() => handleStateChange!(title)}
@@ -85,15 +94,16 @@ export const SegmentedViewControllerViaQueryString: React.FC<
 export const SegmentedViewDataViaQueryStrings: React.FC<
   Omit<ISegmentedViewData, 'handleStateChange'> & {
     queryParams?: any;
+    tabName?: string;
     segmentedViewControllerTitle: Record<string, any>;
   }
-> = ({ children, queryParams, segmentedViewControllerTitle }) => {
+> = ({ children, queryParams, tabName, segmentedViewControllerTitle }) => {
   return (
     <SegmentData>
       {React.Children.map(children, (child: any, index) => {
         const isActive =
           Object.keys(segmentedViewControllerTitle)[index] ===
-          queryParams?.get('applicationState');
+          queryParams?.get(tabName);
 
         if (isActive) {
           return React.cloneElement(child, {

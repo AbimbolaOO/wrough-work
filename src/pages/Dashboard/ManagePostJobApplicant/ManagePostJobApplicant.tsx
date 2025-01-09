@@ -41,7 +41,10 @@ const ManagePostJobApplicant = () => {
         payInterval='HOURLY'
       />
       <Shell>
-        <SegmentedViewViaQueryString queryString='Applicants'>
+        <SegmentedViewViaQueryString
+          queryString='Applicants'
+          tabName='applicationStage'
+        >
           <SegmentedViewControllerViaQueryString
             className='hollow'
             segmentedViewControllerTitle={segmentedControllerConfig}
