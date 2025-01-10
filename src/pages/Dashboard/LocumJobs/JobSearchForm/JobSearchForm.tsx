@@ -57,11 +57,8 @@ interface JobSearchFormProps {
 }
 
 const JobSearchForm: React.FC<JobSearchFormProps> = ({ showMobileInfo }) => {
-  if (showMobileInfo) {
-    return <></>;
-  }
   return (
-    <Container>
+    <Container className={showMobileInfo ? 'hideMobileScreen' : ''}>
       <FormComponent
         initialValues={mailingListInitialValues}
         schema={MailingListSchema}
@@ -105,6 +102,10 @@ const Container = styled.div`
 
   @media (max-width: 884px) {
     margin-top: 0px;
+
+    &.hideMobileScreen {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
