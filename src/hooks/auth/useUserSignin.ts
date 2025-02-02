@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { ILocumUserData, LocumSignInDataType } from '../../models/auth/signIn.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';

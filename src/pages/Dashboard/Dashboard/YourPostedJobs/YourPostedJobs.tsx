@@ -1,10 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import EmptyableCard from '../../../../components/Card/EmptyableCard';
 import PostedJobsCard from '../../../../components/Card/PostedJobsCard';
 import { IGetCreatedJobs } from '../../../../models/dashboard/jobs/getCreatedJobs.model';
 import { useAppSelector } from '../../../../redux/store';
-import { DASHBOARD, MANAGE_POSTED_JOBS } from '../../../../routes/routeConstants';
+import {
+  DASHBOARD,
+  MANAGE_POSTED_JOBS,
+} from '../../../../routes/routeConstants';
 
 const YourPostedJobs = () => {
   const navigate = useNavigate();

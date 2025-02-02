@@ -3,12 +3,10 @@ import './utils/prototypes';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import { Global, ThemeProvider } from '@emotion/react';
 
 import App from './App';
-import ErrorBoundary from './components/ErrorBoundary';
 import GlobalStyles, { theme } from './globalStyles';
 import { interceptors } from './interceptors';
 import store from './redux/store';
@@ -20,15 +18,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <HelmetProvider>
-    <ErrorBoundary>
-      <Provider store={store}>
-        <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <Global styles={GlobalStyles} />
-            <App />
-          </ThemeProvider>
-        </BrowserRouter>
-      </Provider>
-    </ErrorBoundary>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Global styles={GlobalStyles} />
+        <App />
+      </ThemeProvider>
+    </Provider>
   </HelmetProvider>
 );

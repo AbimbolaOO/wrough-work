@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { ILocumUserData } from '../../models/auth/signIn.model';
 import { SuccessHttpResponse } from '../../models/https';

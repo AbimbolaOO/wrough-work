@@ -1,4 +1,4 @@
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink } from 'react-router';
 
 import styled from '@emotion/styled';
 

@@ -1,5 +1,5 @@
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { authActions } from '../../redux/slices/authSlice';
 import { useAppDisPatch } from '../../redux/store';

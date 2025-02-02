@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';

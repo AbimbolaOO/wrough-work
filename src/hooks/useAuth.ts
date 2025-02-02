@@ -1,28 +1,16 @@
-import { AxiosError } from "axios";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { AxiosError } from 'axios';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
-import { IPasswordReset } from "../models/auth/resetPassword.model";
-
-import {
-  ILocumUserData,
-  LocumSignInDataType,
-} from "../models/auth/signIn.model";
-import { ISignupData } from "../models/auth/signUp.model";
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from "../models/https";
-import { authActions } from "../redux/slices/authSlice";
-import { useAppDisPatch } from "../redux/store";
-import {
-  ACCOUNT,
-  PASSWORD_RESET,
-  USERS_DASHBOARD,
-} from "../routes/routeConstants";
-import useHttps from "./useHttps";
+import { IPasswordReset } from '../models/auth/resetPassword.model';
+import { ILocumUserData, LocumSignInDataType } from '../models/auth/signIn.model';
+import { ISignupData } from '../models/auth/signUp.model';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../models/https';
+import { authActions } from '../redux/slices/authSlice';
+import { useAppDisPatch } from '../redux/store';
+import { ACCOUNT, PASSWORD_RESET, USERS_DASHBOARD } from '../routes/routeConstants';
+import useHttps from './useHttps';
 
 const useAuth = () => {
   const [loading, setLoading] = useState(false);

@@ -4,7 +4,7 @@ import ManagePostedJobsCard from '../../../components/Card/ManagePostedJobsCard'
 import { useAppSelector } from '../../../redux/store';
 import PaginationControl from '../../../components/PaginationControl/PaginationControl';
 import LeftTriangleIcon from '../../../components/Icons/LeftTriangleIcon';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { DASHBOARD } from '../../../routes/routeConstants';
 
 export default function ManagePostedJobs() {

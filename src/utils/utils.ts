@@ -13,10 +13,13 @@ export const formatPhoneNumber = (phoneNumber: string): string => {
 };
 
 export const truncateTextByCharacters = (text: string, charLimit: number): string => {
-  if (text.length <= charLimit) {
+  if (!text) {
+    return text;
+  }
+  if (text?.length <= charLimit) {
     return text; // If the text length is within the limit, return as is
   }
-  return text.slice(0, charLimit) + "..."; // Truncate and append '...'
+  return text?.slice(0, charLimit) + "..."; // Truncate and append '...'
 };
 
 // truncate text

@@ -1,5 +1,7 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router';
 
+import { ErrorBoundary } from '../components/ErrorBoundary';
+// import ErrorBoundary from '../components/ErrorBoundary';
 import AuthLayout from '../layout/Auth/AuthLayout';
 import DashboardLayout from '../layout/UsersDashboard/DashboardLayout';
 import EnterNewPassword from '../pages/Auth/ForgotPassword/EnterNewPassWord';
@@ -35,49 +37,53 @@ import {
   USERS_SETTINGS,
 } from './routeConstants';
 
-export default function Router() {
-  return useRoutes([
-    {
-      path: '/',
-      element: <DashboardLayout />,
-      children: [
-        { path: '/', element: <Navigate to={DASHBOARD} /> },
-        { path: DASHBOARD, element: <DashboardHome /> },
-        { path: LOCUMJOBS, element: <LocumJobs /> },
-        { path: APPLICATION, element: <Application /> },
-        { path: USERS_SETTINGS, element: <Settings /> },
-        { path: NOTIFICATIONS, element: <Notifications /> },
-        { path: BOOKMARKS, element: <Bookmarks /> },
-        {
-          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}`,
-          element: <ManagePostedJobs />,
-        },
-        {
-          path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}/:jobId`,
-          element: <ManagePostJobApplicant />,
-        },
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <DashboardLayout />,
+    errorElement: <ErrorBoundary />,
+    children: [
+      { path: '/', element: <Navigate to={DASHBOARD} /> },
+      { path: DASHBOARD, element: <DashboardHome /> },
+      { path: LOCUMJOBS, element: <LocumJobs /> },
+      { path: APPLICATION, element: <Application /> },
+      { path: USERS_SETTINGS, element: <Settings /> },
+      { path: NOTIFICATIONS, element: <Notifications /> },
+      { path: BOOKMARKS, element: <Bookmarks /> },
+      {
+        path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}`,
+        element: <ManagePostedJobs />,
+      },
+      {
+        path: `${DASHBOARD}/${MANAGE_POSTED_JOBS}/:jobId`,
+        element: <ManagePostJobApplicant />,
+      },
 
-        { path: NOTFOUND, element: <NotFound404 /> },
-        { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },
-      ],
-    },
+      { path: NOTFOUND, element: <NotFound404 /> },
+      { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },
+    ],
+  },
 
-    {
-      path: ACCOUNT,
-      element: <AuthLayout />,
-      children: [
-        { path: SIGNIN, element: <SignIn /> },
-        { path: SIGNUP, element: <SignUp /> },
-        { path: SIGNUP_OTP, element: <SignupOtp /> },
+  {
+    path: ACCOUNT,
+    element: <AuthLayout />,
+    errorElement: <ErrorBoundary />,
+    children: [
+      { path: SIGNIN, element: <SignIn /> },
+      { path: SIGNUP, element: <SignUp /> },
+      { path: SIGNUP_OTP, element: <SignupOtp /> },
 
-        { path: FORGOT_PASSWORD, element: <ForgotPassword /> },
-        { path: FORGOT_PASSWORD_SUCCESS, element: <ForgotPasswordSuccess /> },
-        { path: PASSWORD_RESET, element: <EnterNewPassword /> },
+      { path: FORGOT_PASSWORD, element: <ForgotPassword /> },
+      { path: FORGOT_PASSWORD_SUCCESS, element: <ForgotPasswordSuccess /> },
+      { path: PASSWORD_RESET, element: <EnterNewPassword /> },
 
-        { path: NOTFOUND, element: <NotFound404 /> },
-        { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },
-      ],
-    },
-    { path: '*', element: <NotFound404 /> },
-  ]);
-}
+      { path: NOTFOUND, element: <NotFound404 /> },
+      { path: '*', element: <Navigate to={`/${NOTFOUND}`} replace /> },
+    ],
+  },
+  {
+    path: '*',
+    errorElement: <ErrorBoundary />,
+    element: <NotFound404 />,
+  },
+]);

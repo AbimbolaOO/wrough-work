@@ -1,12 +1,12 @@
-import React from "react";
-import { Toaster } from "react-hot-toast";
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
+import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router';
 
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import { ToastWrapper } from "./components/ToastWrapper/ToastWrapper";
-import { interceptors } from "./interceptors";
-import Router from "./routes/routes";
-import store from "./redux/store";
-import { Provider } from "react-redux";
+import { ToastWrapper } from './components/ToastWrapper/ToastWrapper';
+import { interceptors } from './interceptors';
+import store from './redux/store';
+import { router } from './routes/routes';
 
 interceptors.errorInterceptor();
 
@@ -14,11 +14,11 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <ScrollToTop />
         <ToastWrapper>
-          <Toaster position="top-center" reverseOrder={false} />
+          <Toaster position='top-center' reverseOrder={false} />
         </ToastWrapper>
-        <Router />
+
+        <RouterProvider router={router} />
       </Provider>
     </>
   );

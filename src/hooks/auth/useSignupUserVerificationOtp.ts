@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { VerifySignUpOtpDataType } from '../../models/auth/verifySignUpOtp.model';
 import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';

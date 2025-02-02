@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import EmptyableCard from '../../../../components/Card/EmptyableCard';
 import ShiftCard from '../../../../components/Card/ShiftCard';

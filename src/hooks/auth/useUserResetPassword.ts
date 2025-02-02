@@ -1,14 +1,10 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { ResetPaswdDataType } from '../../models/auth/resetPassword.model';
-import {
-  ErrorHttpResponse,
-  HttpConfig,
-  SuccessHttpResponse,
-} from '../../models/https';
+import { ErrorHttpResponse, HttpConfig, SuccessHttpResponse } from '../../models/https';
 import { ACCOUNT, FORGOT_PASSWORD_SUCCESS } from '../../routes/routeConstants';
 import useHttps from '../useHttps';
 
